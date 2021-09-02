@@ -64,27 +64,79 @@ classdef jam_analysis
 
                         for i=1:nComponents
                             label = strsplit(info.Groups(i).Name,'/');
-                            comp = label{4};                
-
+                            comp = label{4};   
+                            
                             nForce = length(info.Groups(i).Groups);
 
                             for j=1:nForce
                                 label = strsplit(info.Groups(i).Groups(j).Name,'/');
                                 force = label{5}; 
+                            
+                                if (contains(comp,'Smith2018ArticularContactForce'))
+                                    mesh1_label = strsplit(info.Groups(i).Groups(j).Groups(1).Name,'/');
+                                    mesh2_label = strsplit(info.Groups(i).Groups(j).Groups(2).Name,'/');
+                                    mesh_names{1} = mesh1_label{6};
+                                    mesh_names{2} = mesh2_label{6};
 
+                                    for m=1:2
+                                        mesh = mesh_names{m}; 
+                                        
+                                        %Regional Vec3
+                                        nRegVec3 = length(info.Groups(i).Groups(j).Groups(m).Groups);
+                                        
+                                        for v = 1:nRegVec3
+                                            param_label = strsplit(info.Groups(i).Groups(j).Groups(m).Groups(v).Name,'/');
+                                            param = param_label{7}; 
+                                            for r = 1:6
+                                                region = info.Groups(i).Groups(j).Groups(m).Groups(v).Datasets(r).Name;
+                                                data_set_name = [ info.Groups(i).Groups(j).Groups(m).Groups(v).Name '/' region];
+                                                if(n==1)
+                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                                end
+                                                obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = h5read(h5_file,data_set_name);
+                                                
+                                            end
+                                        end
+                                        
 
-                                nDataSet = length(info.Groups(i).Groups(j).Datasets);
+                                        nDataSet = length(info.Groups(i).Groups(j).Groups(m).Datasets);
 
-                                for k=1:nDataSet
-                                    param = info.Groups(i).Groups(j).Datasets(k).Name;
-                                    data_set_name = [ info.Groups(i).Groups(j).Name '/' param];
-
-                                    if(n==1)
-                                        obj.forceset.(comp).(force).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                        for k=1:nDataSet
+                                            param = info.Groups(i).Groups(j).Groups(m).Datasets(k).Name;
+                                            data_set_name = [ info.Groups(i).Groups(j).Groups(m).Name '/' param];                                            
+                                            
+                                            if(contains(param,'regional'))
+                                                for r = 1:6
+%                                                     region = info.Groups(i).Groups(j).Groups(m).Groups(v).Datasets(r).Name;
+%                                                     data_set_name = [ info.Groups(i).Groups(j).Groups(m).Groups(v).Name '/' region];
+                                                    data = h5read(h5_file,data_set_name);
+                                                    if(n==1)
+                                                        obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = data(r,:);
+                                                    end
+                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = data(r,:);
+                                                end
+                                            else
+                                            if(n==1)
+                                                obj.forceset.(comp).(force).(mesh).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                            end
+                                            obj.forceset.(comp).(force).(mesh).(param)(:,:,n) = h5read(h5_file,data_set_name);
+                                        
+                                            end
+                                        end
+                                        
                                     end
-                                    obj.forceset.(comp).(force).(param)(:,:,n) = h5read(h5_file,data_set_name);
-%                                     a = h5read(h5_file,data_set_name);
-                                
+                                else % all other forces
+                                    nDataSet = length(info.Groups(i).Groups(j).Datasets);
+
+                                    for k=1:nDataSet
+                                        param = info.Groups(i).Groups(j).Datasets(k).Name;
+                                        data_set_name = [ info.Groups(i).Groups(j).Name '/' param];
+
+                                        if(n==1)
+                                            obj.forceset.(comp).(force).(param)(:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                        end
+                                        obj.forceset.(comp).(force).(param)(:,n) = h5read(h5_file,data_set_name);
+                                    end                                    
                                 end
                             end
                         end
