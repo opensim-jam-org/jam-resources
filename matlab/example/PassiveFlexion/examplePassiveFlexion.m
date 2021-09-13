@@ -3,7 +3,7 @@ clear; close all;
 import org.opensim.modeling.*
 Logger.setLevelString('Info');
 
-model_file = '../models/healthy/lenhart2015/lenhart2015.osim';
+model_file = '../../../models/knee_healthy/lenhart2015/lenhart2015.osim';
 results_basename = 'passive_flexion';
 forsim_result_dir = './results/forsim';
 jnt_mech_result_dir = './results/joint-mechanics';
@@ -107,7 +107,7 @@ forsim.set_use_visualizer(true);
 forsim.print('./inputs/forsim_settings.xml');
 
 disp('Running Forsim Tool...')
-forsim.run();
+% forsim.run();
 %% Perform Analysis with JointMechanicsTool
 
 jnt_mech = JointMechanicsTool();
@@ -131,6 +131,7 @@ jnt_mech.set_write_vtp_files(true);
 jnt_mech.set_write_h5_file(true);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
+
 jnt_mech.print('./inputs/joint_mechanics_settings.xml');
 
 disp('Running JointMechanicsTool...');

@@ -91,9 +91,9 @@ classdef jam_analysis
                                                 region = info.Groups(i).Groups(j).Groups(m).Groups(v).Datasets(r).Name;
                                                 data_set_name = [ info.Groups(i).Groups(j).Groups(m).Groups(v).Name '/' region];
                                                 if(n==1)
-                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name)';
                                                 end
-                                                obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = h5read(h5_file,data_set_name);
+                                                obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = h5read(h5_file,data_set_name)';
                                                 
                                             end
                                         end

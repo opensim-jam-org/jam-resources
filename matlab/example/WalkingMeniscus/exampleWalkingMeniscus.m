@@ -1,9 +1,9 @@
 %% Setup Environment and Folders
 clear;
 import org.opensim.modeling.*
-Logger.setLevelString('Info');
+Logger.setLevelString('Debug');
 
-model_file = '../models/healthy/smith2019/smith2019.osim';
+model_file = '../../../models/knee_healthy/smith2019/smith2019.osim';
 results_basename = 'walking_meniscus';
 ik_result_dir = './results/comak-inverse-kinematics';
 comak_result_dir = './results/comak';
@@ -267,11 +267,11 @@ disp('Running COMAKInverseKinematicsTool...')
 comak = COMAKTool();
 comak.set_model_file(model_file);
 comak.set_coordinates_file('./results/comak-inverse-kinematics/overground_17_ik.mot');
-comak.set_external_loads_file('../models/healthy/experimental_data/motion_analysis/overground_17_ext_loads.xml'),
+comak.set_external_loads_file('.../../../models/knee_healthy/experimental_data/motion_analysis/overground_17_ext_loads.xml'),
 comak.set_results_directory(comak_result_dir);
 comak.set_results_prefix(results_basename);
 comak.set_replace_force_set(false);
-comak.set_force_set_file('../models/healthy/smith2019/smith2019_reserve_actuators.xml');
+comak.set_force_set_file('../../../models/knee_healthy/smith2019/smith2019_reserve_actuators.xml');
 comak.set_start_time(1.16);
 comak.set_stop_time(2.32);
 % comak.set_stop_time(1.26);
@@ -471,7 +471,7 @@ comak.set_verbose(2);
 comak.print('./inputs/comak_settings.xml');
 
 disp('Running COMAK Tool...')
-% comak.run();
+%  comak.run();
 
 %% Perform Joint Mechanics Analysis
 jnt_mech = JointMechanicsTool();
@@ -500,9 +500,9 @@ jnt_mech.set_attached_geometry_bodies(0,'all');
 
 jnt_mech.set_output_orientation_frame('ground');
 jnt_mech.set_output_position_frame('ground');
-jnt_mech.set_write_vtp_files(true);
+jnt_mech.set_write_vtp_files(fasl);
 jnt_mech.set_vtp_file_format('binary');
-jnt_mech.set_write_h5_file(false);
+jnt_mech.set_write_h5_file(true);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
 jnt_mech.set_write_transforms_file(false);

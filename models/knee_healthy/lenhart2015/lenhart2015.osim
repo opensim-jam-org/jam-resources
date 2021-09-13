@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <OpenSimDocument Version="40000">
 	<Model name="lenhart2015">
-		<defaults>
-			<Millard2012EquilibriumMuscle name="default">
-				<!--The set of points defining the path of the actuator.-->
-				<GeometryPath>
-					<!--Default appearance attributes for this GeometryPath-->
-					<Appearance>
-						<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
-						<color>0.80000000000000004 0.10000000000000001 0.10000000000000001</color>
-					</Appearance>
-				</GeometryPath>
-				<!--Optimal length of the muscle fibers-->
-				<optimal_fiber_length>0</optimal_fiber_length>
-				<!--Angle between tendon and fibers at optimal fiber length expressed in radians-->
-				<pennation_angle_at_optimal>0</pennation_angle_at_optimal>
-				<!--Maximum contraction velocity of the fibers, in optimal fiberlengths/second-->
-				<max_contraction_velocity>10</max_contraction_velocity>
-				<!--Compute muscle dynamics ignoring tendon compliance. Tendon is assumed to be rigid.-->
-				<ignore_tendon_compliance>false</ignore_tendon_compliance>
-				<!--Compute muscle dynamics ignoring activation dynamics. Activation is equivalent to excitation.-->
-				<ignore_activation_dynamics>false</ignore_activation_dynamics>
-				<!--Assumed initial activation level if none is assigned.-->
-				<default_activation>0.010000000000000004</default_activation>
-				<!--Assumed initial fiber length if none is assigned.-->
-				<default_fiber_length>0.10000000000000001</default_fiber_length>
-				<!--Activation time constant (in seconds).-->
-				<activation_time_constant>0.01</activation_time_constant>
-				<!--Deactivation time constant (in seconds).-->
-				<deactivation_time_constant>0.029999999999999999</deactivation_time_constant>
-			</Millard2012EquilibriumMuscle>
-		</defaults>
 		<!--List of components that this component owns and serializes.-->
 		<components />
 		<!--The model's ground reference frame.-->
@@ -5497,10 +5467,9 @@
 							<!--Rotation or translation axis for the transform.-->
 							<axis>0 0 1</axis>
 							<!--Transform function of the generalized coordinates used to        represent the amount of displacement along a specified axis.-->
-							<SimmSpline name="function">
-								<x> -6.28319 6.28319</x>
-								<y> 6.28319 -6.28319</y>
-							</SimmSpline>
+							<LinearFunction name="function">
+								<coefficients> -1 0</coefficients>
+							</LinearFunction>
 						</TransformAxis>
 						<TransformAxis name="rotation2">
 							<!--Names of the coordinates that serve as the independent variables         of the transform function.-->
@@ -5624,10 +5593,9 @@
 							<!--Rotation or translation axis for the transform.-->
 							<axis>-0.105014035676 -0.17402205911900001 -0.97912633263100002</axis>
 							<!--Transform function of the generalized coordinates used to        represent the amount of displacement along a specified axis.-->
-							<SimmSpline name="function">
-								<x> -6.28319 6.28319</x>
-								<y> 6.28319 -6.28319</y>
-							</SimmSpline>
+							<LinearFunction name="function">
+								<coefficients> -1 0</coefficients>
+							</LinearFunction>
 						</TransformAxis>
 						<TransformAxis name="rotation2">
 							<!--Rotation or translation axis for the transform.-->
@@ -5736,10 +5704,9 @@
 							<!--Rotation or translation axis for the transform.-->
 							<axis>0.78718002085600003 0.60474701602299996 0.120949003205</axis>
 							<!--Transform function of the generalized coordinates used to        represent the amount of displacement along a specified axis.-->
-							<SimmSpline name="function">
-								<x> -6.28319 6.28319</x>
-								<y> 6.28319 -6.28319</y>
-							</SimmSpline>
+							<LinearFunction name="function">
+								<coefficients> -1 0</coefficients>
+							</LinearFunction>
 						</TransformAxis>
 						<TransformAxis name="rotation2">
 							<!--Rotation or translation axis for the transform.-->
@@ -5848,10 +5815,9 @@
 							<!--Rotation or translation axis for the transform.-->
 							<axis>0.58095418526300002 0 0.81393625955899995</axis>
 							<!--Transform function of the generalized coordinates used to        represent the amount of displacement along a specified axis.-->
-							<SimmSpline name="function">
-								<x> -6.28319 6.28319</x>
-								<y> 6.28319 -6.28319</y>
-							</SimmSpline>
+							<LinearFunction name="function">
+								<coefficients> -1 0</coefficients>
+							</LinearFunction>
 						</TransformAxis>
 						<TransformAxis name="rotation2">
 							<!--Rotation or translation axis for the transform.-->

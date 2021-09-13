@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MarkerSet>
+	<objects>
+		<Marker name="Oglobal">
+			<body> ground </body>
+			<location> 0.000000000000 0.000000000000 0.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Xglobal">
+			<body> ground </body>
+			<location> 1.000000000000 0.000000000000 0.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Yglobal">
+			<body> ground </body>
+			<location> 0.000000000000 1.000000000000 0.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Zglobal">
+			<body> ground </body>
+			<location> 0.000000000000 0.000000000000 1.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="femur_scale">
+			<body> ground </body>
+			<location> 1.000000000000 1.000000000000 0.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="tibia_scale">
+			<body> ground </body>
+			<location> 1.000000000000 1.000000000000 0.000000000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Sacral">
+			<body> pelvis </body>
+			<location> -0.181544000000 0.012642000000 -0.002238000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Asis">
+			<body> pelvis </body>
+			<location> 0.029207000000 0.018711000000 0.136961000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Psis">
+			<body> pelvis </body>
+			<location> -0.182008000000 0.013051000000 0.036254000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Asis">
+			<body> pelvis </body>
+			<location> 0.024094000000 0.006655000000 -0.134059000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Psis">
+			<body> pelvis </body>
+			<location> -0.181081000000 0.012233000000 -0.040730000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Sternum">
+			<body> torso </body>
+			<location> 0.044922000000 0.360414000000 0.008453000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Xiphoid">
+			<body> torso </body>
+			<location> 0.116039000000 0.202091000000 0.019072000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Thoracic">
+			<body> torso </body>
+			<location> -0.154569000000 0.184977000000 -0.006181000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Lumbar">
+			<body> torso </body>
+			<location> -0.089189000000 -0.000321000000 -0.014647000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="Neck">
+			<body> torso </body>
+			<location> -0.125737000000 0.393871000000 0.009924000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Shoulder">
+			<body> torso </body>
+			<location> -0.035431000000 0.365808000000 0.179933000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.ShoulderAnterior">
+			<body> torso </body>
+			<location> 0.020297000000 0.311915000000 0.158159000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.ShoulderPosterior">
+			<body> torso </body>
+			<location> -0.091207000000 0.313070000000 0.195723000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Shoulder">
+			<body> torso </body>
+			<location> -0.046233000000 0.363853000000 -0.164982000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.ShoulderAnterior">
+			<body> torso </body>
+			<location> 0.015397000000 0.317276000000 -0.142308000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.ShoulderPosterior">
+			<body> torso </body>
+			<location> -0.104460000000 0.305912000000 -0.169738000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Elbow">
+			<body> humerus_r </body>
+			<location> -0.002232000000 -0.312486000000 0.037628000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.ElbowMedial">
+			<body> humerus_r </body>
+			<location> -0.016828000000 -0.296808000000 -0.053571000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Wrist">
+			<body> radius_r </body>
+			<location> -0.036159000000 -0.265098000000 0.011780000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Ulna">
+			<body> radius_r </body>
+			<location> -0.032441000000 -0.256098000000 -0.034169000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Radius">
+			<body> radius_r </body>
+			<location> 0.004872000000 -0.256876000000 0.027647000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Elbow">
+			<body> humerus_l </body>
+			<location> 0.011145000000 -0.319785000000 -0.041225000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.ElbowMedial">
+			<body> humerus_l </body>
+			<location> -0.025993000000 -0.304036000000 0.042876000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Wrist">
+			<body> radius_l </body>
+			<location> -0.029418000000 -0.264892000000 -0.007872000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Ulna">
+			<body> radius_l </body>
+			<location> -0.057526000000 -0.245586000000 0.024773000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Radius">
+			<body> radius_l </body>
+			<location> 0.014706000000 -0.250901000000 0.006387000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Knee.Lateral">
+			<body> femur_r </body>
+			<location> 0.014489000000 -0.398031000000 0.049518000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Knee.Medial">
+			<body> femur_r </body>
+			<location> -0.579721000000 -0.957485000000 0.325136000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Thigh.Superior">
+			<body> femur_r </body>
+			<location> -0.005525000000 -0.120497000000 0.092733000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Thigh.Inferior">
+			<body> femur_r </body>
+			<location> 0.008977000000 -0.329640000000 0.054344000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Thigh.Lateral">
+			<body> femur_r </body>
+			<location> 0.085281000000 -0.270160000000 0.008635000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R_HJC">
+			<body> femur_r </body>
+			<location> 0.010157000000 -0.018568000000 0.107786000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Ankle.Lateral">
+			<body> tibia_r </body>
+			<location> -0.022927000000 -0.411956000000 0.050459000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="RankleMedial">
+			<body> tibia_r </body>
+			<location> -0.004209000000 -0.395443000000 -0.035087000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Shank.Superior">
+			<body> tibia_r </body>
+			<location> -0.043055000000 -0.106486000000 0.063642000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Shank.Inferior">
+			<body> tibia_r </body>
+			<location> -0.022753000000 -0.311148000000 0.048959000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Shank.Lateral">
+			<body> tibia_r </body>
+			<location> 0.029163000000 -0.186138000000 -0.015747000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Patella">
+			<body> patella_r </body>
+			<location> 0.027006000000 0.030145000000 -0.020732000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Toe">
+			<body> calcn_r </body>
+			<location> 0.265255000000 -0.005811000000 0.013131000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.ToeMedial">
+			<body> calcn_r </body>
+			<location> 0.234574000000 -0.013071000000 -0.034541000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.ToeLateral">
+			<body> calcn_r </body>
+			<location> 0.221568000000 -0.024052000000 0.056842000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Midfoot.Medial">
+			<body> calcn_r </body>
+			<location> 0.191846000000 -0.023436000000 -0.047923000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Midfoot.Lateral">
+			<body> calcn_r </body>
+			<location> 0.172412000000 -0.034411000000 0.067205000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Midfoot.Superior">
+			<body> calcn_r </body>
+			<location> 0.123380000000 0.057285000000 0.007638000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Heel">
+			<body> calcn_r </body>
+			<location> -0.034198000000 -0.003095000000 -0.011775000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="R.Hindfoot">
+			<body> calcn_r </body>
+			<location> 0.062751000000 -0.038720000000 0.046320000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Knee.Lateral">
+			<body> femur_l </body>
+			<location> -0.001040000000 -0.403403000000 -0.043941000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Knee.Medial">
+			<body> femur_l </body>
+			<location> -0.004259000000 -0.405038000000 0.085341000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Thigh.Superior">
+			<body> femur_l </body>
+			<location> 0.027185000000 -0.106794000000 -0.089055000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Thigh.Inferior">
+			<body> femur_l </body>
+			<location> 0.034298000000 -0.326583000000 -0.040475000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Thigh.Lateral">
+			<body> femur_l </body>
+			<location> 0.086951000000 -0.237038000000 -0.014373000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L_HJC">
+			<body> femur_l </body>
+			<location> 0.003750000000 -0.003632000000 -0.029329000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Ankle.Lateral">
+			<body> tibia_l </body>
+			<location> -0.015457000000 -0.398233000000 -0.049661000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Ankle.Medial">
+			<body> tibia_l </body>
+			<location> -0.006677000000 -0.388830000000 0.039881000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Shank.Superior">
+			<body> tibia_l </body>
+			<location> -0.005966000000 -0.051199000000 -0.052526000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Shank.Inferior">
+			<body> tibia_l </body>
+			<location> -0.024749000000 -0.321734000000 -0.050091000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Shank.Lateral">
+			<body> tibia_l </body>
+			<location> 0.017856000000 -0.195174000000 0.019163000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Patella">
+			<body> patella_l </body>
+			<location> 0.014990000000 0.027532000000 0.022671000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Toe">
+			<body> calcn_l </body>
+			<location> 0.263659000000 0.002235000000 -0.014394000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.ToeMedial">
+			<body> calcn_l </body>
+			<location> 0.226791000000 -0.012365000000 0.031533000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.ToeLateral">
+			<body> calcn_l </body>
+			<location> 0.225234000000 -0.019096000000 -0.064988000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Midfoot.Medial">
+			<body> calcn_l </body>
+			<location> 0.184127000000 -0.018062000000 0.038607000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Midfoot.Lateral">
+			<body> calcn_l </body>
+			<location> 0.169344000000 -0.023233000000 -0.074799000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Midfoot.Superior">
+			<body> calcn_l </body>
+			<location> 0.123940000000 0.063309000000 -0.016790000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Heel">
+			<body> calcn_l </body>
+			<location> -0.036862000000 0.002487000000 -0.005087000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+		<Marker name="L.Hindfoot">
+			<body> calcn_l </body>
+			<location> 0.061900000000 -0.030217000000 -0.062294000000 </location>
+			<fixed> false </fixed>
+		</Marker>
+	</objects>
+</MarkerSet>
