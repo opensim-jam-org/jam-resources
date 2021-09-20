@@ -21,17 +21,23 @@ classdef jam_analysis
     end
     methods
         function obj = jam_analysis(model_name,h5_file_list)
-            obj.model_name = model_name;
-            
+                        
             obj.h5_file_list = h5_file_list;
             obj.nFiles = length(h5_file_list);
             
-            forceset_path = ['/' model_name '/forceset'];
-            coordset_path = ['/' model_name '/coordinateset'];
+            if iscell(model_name)
+                obj.model_name = model_name;
+            else
+                obj.model_name = cell(nFiles,1);
+                obj.model_name(:) = {model_name};
+            end                    
             
             % Read h5 file
             for n = 1:length(h5_file_list)
                 h5_file = h5_file_list{n};
+                
+                forceset_path = ['/' model_name{n} '/forceset'];
+                coordset_path = ['/' model_name{n} '/coordinateset'];
                 
                 %Read h5 file
                 if (exist(h5_file,'file') ~=2)
@@ -49,7 +55,7 @@ classdef jam_analysis
                     obj.time = h5read(h5_file,'/time');
                 end
             
-                h5_info = h5info(h5_file,['/' obj.model_name]);
+                h5_info = h5info(h5_file,['/' obj.model_name{n}]);
                 h5_grp = {h5_info.Groups.Name};
                 n_h5_grp = length(h5_grp);
 
