@@ -16,7 +16,10 @@ classdef jam_analysis
         coordinateset
         model_name
         time
+        num_time_steps
         comak
+        num_missing_files = 0
+        missing_files
         %states
     end
     methods
@@ -28,7 +31,7 @@ classdef jam_analysis
             if iscell(model_name)
                 obj.model_name = model_name;
             else
-                obj.model_name = cell(nFiles,1);
+                obj.model_name = cell(obj.nFiles,1);
                 obj.model_name(:) = {model_name};
             end                    
             
@@ -36,13 +39,16 @@ classdef jam_analysis
             for n = 1:length(h5_file_list)
                 h5_file = h5_file_list{n};
                 
-                forceset_path = ['/' model_name{n} '/forceset'];
-                coordset_path = ['/' model_name{n} '/coordinateset'];
+                forceset_path = ['/' obj.model_name{n} '/forceset'];
+                coordset_path = ['/' obj.model_name{n} '/coordinateset'];
                 
                 %Read h5 file
                 if (exist(h5_file,'file') ~=2)
-                    fprintf('File: %s',h5_file);
-                    error('File does not exist!\n')                
+                    fprintf('File does not exist:\n')
+                    fprintf('%s\n',h5_file);
+                    obj.num_missing_files = obj.num_missing_files+1;
+                    obj.missing_files(obj.num_missing_files) = n;
+                    continue;                
                 end
 
                 [pathstr,name,ext] = fileparts(h5_file);
@@ -51,8 +57,9 @@ classdef jam_analysis
                     error('File is not .h5 format!\n')
                 end
                 
-                if(n==1)
+                if n==1
                     obj.time = h5read(h5_file,'/time');
+                    obj.num_time_steps = length(obj.time);
                 end
             
                 h5_info = h5info(h5_file,['/' obj.model_name{n}]);
@@ -96,10 +103,12 @@ classdef jam_analysis
                                             for r = 1:6
                                                 region = info.Groups(i).Groups(j).Groups(m).Groups(v).Datasets(r).Name;
                                                 data_set_name = [ info.Groups(i).Groups(j).Groups(m).Groups(v).Name '/' region];
+                                                data = h5read(h5_file,data_set_name)';
+                                                [nRow, nCol] = size(data);
                                                 if(n==1)
-                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name)';
+                                                    obj.forceset.(comp).(force).(mesh).region(r).(param) = nan(nRow,nCol,obj.nFiles);%h5read(h5_file,data_set_name)';
                                                 end
-                                                obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = h5read(h5_file,data_set_name)';
+                                                obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = data;
                                                 
                                             end
                                         end
@@ -117,16 +126,24 @@ classdef jam_analysis
 %                                                     data_set_name = [ info.Groups(i).Groups(j).Groups(m).Groups(v).Name '/' region];
                                                     data = h5read(h5_file,data_set_name);
                                                     if(n==1)
-                                                        obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,obj.nFiles) = data(r,:);
+                                                        [nCol, nRow] = size(data(r,:));
+                                                        obj.forceset.(comp).(force).(mesh).region(r).(param) = nan(nRow,obj.nFiles);
                                                     end
-                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,:,n) = data(r,:);
+                                                    obj.forceset.(comp).(force).(mesh).region(r).(param)(:,n) = data(r,:);
                                                 end
                                             else
-                                            if(n==1)
-                                                obj.forceset.(comp).(force).(mesh).(param)(:,:,obj.nFiles) = h5read(h5_file,data_set_name);
-                                            end
-                                            obj.forceset.(comp).(force).(mesh).(param)(:,:,n) = h5read(h5_file,data_set_name);
-                                        
+                                                [nCol, nRow] = size(h5read(h5_file,data_set_name));
+                                                if nRow ==1
+                                                    if(n==1)                                                    
+                                                        obj.forceset.(comp).(force).(mesh).(param) = nan(nCol,obj.nFiles);
+                                                    end
+                                                    obj.forceset.(comp).(force).(mesh).(param)(:,n) = h5read(h5_file,data_set_name)';
+                                                else
+                                                    if(n==1)                                                    
+                                                        obj.forceset.(comp).(force).(mesh).(param) = nan(nRow,nCol,obj.nFiles);
+                                                    end
+                                                    obj.forceset.(comp).(force).(mesh).(param)(:,:,n) = h5read(h5_file,data_set_name)';
+                                                end
                                             end
                                         end
                                         
@@ -139,7 +156,7 @@ classdef jam_analysis
                                         data_set_name = [ info.Groups(i).Groups(j).Name '/' param];
 
                                         if(n==1)
-                                            obj.forceset.(comp).(force).(param)(:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                            obj.forceset.(comp).(force).(param) = nan(obj.num_time_steps,obj.nFiles);
                                         end
                                         obj.forceset.(comp).(force).(param)(:,n) = h5read(h5_file,data_set_name);
                                     end                                    
@@ -167,7 +184,7 @@ classdef jam_analysis
                                 data_set_name = [ info.Groups(i).Name '/' param];
                                 
                                 if(n==1)
-                                    obj.coordinateset.(coord).(param)(:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                    obj.coordinateset.(coord).(param) = nan(obj.num_time_steps,obj.nFiles);%h5read(h5_file,data_set_name);
                                 end
                                 
                                 obj.coordinateset.(coord).(param)(:,n) = h5read(h5_file,data_set_name);
@@ -188,7 +205,8 @@ classdef jam_analysis
                             data_set_name = [ info.Groups(id).Name '/' param];
 
                             if(n==1)
-                                obj.comak.(param)(:,obj.nFiles) = h5read(h5_file,data_set_name);
+                                nSteps = length(h5read(h5_file,data_set_name));
+                                obj.comak.(param) = nan(nSteps,obj.nFiles);
                             end
 
                             obj.comak.(param)(:,n) = h5read(h5_file,data_set_name);
