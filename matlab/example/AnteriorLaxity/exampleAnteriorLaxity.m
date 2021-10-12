@@ -140,11 +140,12 @@ force_table = osimTableFromStruct(force_data);
 force_table.addTableMetaDataString(...
     'header','Anterior Tibial External Force')
 
-STOFileAdapter.write(force_table,['./inputs/' external_loads_sto_file]);
+%STOFileAdapter.write(force_table,['./inputs/' external_loads_sto_file]);
+STOFileAdapter.write(force_table,[external_loads_sto_file]);
 
 % write .xml file
-external_loads_xml_file = './inputs/external_loads.xml';
-
+% external_loads_xml_file = './inputs/external_loads.xml';
+external_loads_xml_file = 'external_loads.xml';
 ext_force = ExternalForce();
 ext_force.setName('AnteriorForce');
 ext_force.set_applied_to_body('tibia_proximal_r');
@@ -223,13 +224,13 @@ forsim.set_unconstrained_coordinates(8,'/jointset/pf_r/pf_tx_r');
 forsim.set_unconstrained_coordinates(9,'/jointset/pf_r/pf_ty_r');
 forsim.set_unconstrained_coordinates(10,'/jointset/pf_r/pf_tz_r');
 forsim.set_prescribed_coordinates_file(prescribed_coordinates_file);
-%forsim.set_external_loads_file(external_loads_xml_file);
+forsim.set_external_loads_file(external_loads_xml_file);
 forsim.set_use_visualizer(useVisualizer);
 forsim.print('./inputs/healthy_forsim_settings.xml');
 
 
 disp('Running Forsim Tool...')
-forsim.run();
+% forsim.run();
 
 % ACL Deficient 
 acld_forsim_result_dir = './results/acld_forsim';
@@ -241,7 +242,7 @@ forsim.set_results_file_basename(acld_basename);
 forsim.print('./inputs/acld_forsim_settings.xml');
 
 disp('Running Forsim Tool...')
-forsim.run();
+% forsim.run();
 %% Perform Analysis with JointMechanicsTool
 %Healthy
 healthy_jnt_mech_result_dir = './results/healthy_joint_mechanics';
@@ -264,7 +265,7 @@ jnt_mech.set_attached_geometry_bodies(1,'/bodyset/tibia_proximal_r');
 jnt_mech.set_attached_geometry_bodies(2,'/bodyset/patella_r');
 jnt_mech.set_output_orientation_frame('ground');
 jnt_mech.set_output_position_frame('ground');
-jnt_mech.set_write_vtp_files(true);
+jnt_mech.set_write_vtp_files(false);
 jnt_mech.set_write_h5_file(true);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
@@ -273,7 +274,7 @@ jnt_mech.set_use_visualizer(useVisualizer);
 jnt_mech.print('./inputs/healthy_joint_mechanics_settings.xml');
 
 disp('Running JointMechanicsTool...');
-jnt_mech.run();
+ jnt_mech.run();
 
 % ACL Deficient 
 jnt_mech.setModel(acld_model);
@@ -285,5 +286,48 @@ jnt_mech.print('./inputs/acld_joint_mechanics_settings.xml');
 
 
 disp('Running JointMechanicsTool...');
-jnt_mech.run();
+ jnt_mech.run();
 
+%% Plot Results
+
+healthy_jam = jam_analysis('smith2019',{[healthy_forsim_result_dir '/' healthy_basename '.h5']});
+acld_jam = jam_analysis('smith2019',{[acld_forsim_result_dir '/' acld_basename '.h5']});
+
+% Plot Knee Kinematics
+coords = {'knee_flex_r','knee_rot_r','knee_tx_r'};
+num_coords = length(coords);
+figure('name','Knee Kinematics')
+
+for i = 1:num_coords
+    subplot(1,num_coords,i); hold on
+    
+    plot(healthy_jam.coordinateset.(coords{i}).value);
+    plot(healthy_jam.coordinateset.(coords{i}).value);
+
+    legend('Healthy','ACLd')
+end
+        
+% Plot ACL Forces 
+ligament_names = {'ACLam','ACLpl'};
+output_params = {'total_force','strain'};
+num_output_params = length(output_params);
+figure('name','ACL Loading');hold on
+
+for j = 1:num_output_params
+        subplot(1,num_output_params,j);hold on;
+    for i = 1:length(ligament_names)
+
+        fiber_names = fieldnames(comak_results.forceset.Blankevoort1991Ligament);
+        fibers = fiber_names(contains(fiber_names,ligament_names{i}));       
+        
+        data = 0;
+        for k = 1:length(fibers)
+            data = data + comak_results.forceset.Blankevoort1991Ligament.(fibers{k}).(output_params{j})(:,n);
+
+        end
+        plot(data,line_type{n})
+        title(output_params{j})
+        
+    end
+    legend(sim_names)
+end

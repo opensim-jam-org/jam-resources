@@ -1,12 +1,4 @@
-%% exampleTKAAlignment
-%==========================================================================
-%
-%
-%
-%
-%
-%
-%
+%% example TKA Alignment
 %==========================================================================
 
 %% Setup Environment and Folders
@@ -16,10 +8,9 @@ close all
 import org.opensim.modeling.*
 Logger.setLevelString('info');
 
-useVisualizer = true;
+useVisualizer = false;
 
 model_file = '../../../models/knee_tka/grand_challenge/DM/DM.osim';
-
 geometry_path='../../../models/knee_tka/grand_challenge/DM/Geometry';
 
 ModelVisualizer.addDirToGeometrySearchPaths(geometry_path);
@@ -45,11 +36,6 @@ end
 sim_names = {'nominal','valgus_3','varus_3','valgus_6','varus_6',};
 femur_x_rot = [0 0 0 0 0] * pi/180;
 tibia_x_rot = [0 3 -3 6 -6] * pi/180;
-% sim_names = {'nominal','varus_2','varus_4','valgus_2','valgus_4','varus_4_MCL'};
-% femur_x_rot = [0 1 2 -1 -2 2] * pi/180;
-% tibia_x_rot = [0 -1 -2 1 2 -2] * pi/180;
-% femur_x_rot = [0 0 0 0 0];
-% tibia_x_rot = [0 -1 -2 1 2] * pi/180;
 nSim = length(sim_names);
 
 %% Setup outputs
@@ -92,8 +78,7 @@ if(true)
 %                 end
 %             end
 %         end
-        model.print(new_model_file);
-        
+        model.print(new_model_file);      
 
 
         % COMAK Inverse Kinematics
@@ -120,7 +105,7 @@ if(true)
         comak_ik.set_secondary_constraint_sim_sweep_time(1.0);
         comak_ik.set_secondary_coupled_coordinate_start_value(0);
         comak_ik.set_secondary_coupled_coordinate_stop_value(100);
-        comak_ik.set_secondary_constraint_sim_integrator_accuracy(1e-3);
+        comak_ik.set_secondary_constraint_sim_integrator_accuracy(1e-4);
         comak_ik.set_secondary_constraint_sim_internal_step_limit(10000);
         comak_ik.set_secondary_constraint_function_file(...
             [ik_result_dir{i} '/secondary_coordinate_constraint_functions.xml']);
@@ -197,28 +182,11 @@ if(true)
           comak_ik.run();
 
 
-        jmt_settle = JointMechanicsTool();        
-        jmt_settle.set_model_file(new_model_file);
-        jmt_settle.set_input_states_file([ik_result_dir{i} '/' results_basename '_secondary_constraint_settle_states.sto']);
-        jmt_settle.set_use_muscle_physiology(false);
-        jmt_settle.set_results_file_basename([results_basename '_secondary_constraint_settle']);
-        jmt_settle.set_results_directory(ik_result_dir{i});
-        jmt_settle.set_normalize_to_cycle(false);
-        jmt_settle.set_contacts(0,'all');
-        jmt_settle.set_contact_outputs(0,'all');
-        jmt_settle.set_ligaments(0,'all');
-        jmt_settle.set_ligament_outputs(0,'total_force');
-        jmt_settle.set_ligament_outputs(1,'strain');
-        jmt_settle.set_muscles(0,'all');
-        jmt_settle.set_muscle_outputs(0,'all');
-        jmt_settle.set_write_vtp_files(false);
-        jmt_settle.set_write_h5_file(true);
-        jmt_settle.set_h5_kinematics_data(true);
-        jmt_settle.set_h5_states_data(false);
-        jmt_settle.set_use_visualizer(useVisualizer);
-%           jmt_settle.run();
-
-        jmt_sweep = jmt_settle;
+        jmt_sweep = JointMechanicsTool();        
+        jmt_sweep.set_model_file(new_model_file);
+        jmt_sweep.set_use_muscle_physiology(false);
+        jmt_sweep.set_results_directory(ik_result_dir{i});
+        jmt_sweep.set_normalize_to_cycle(false);
         jmt_sweep.set_input_states_file([ik_result_dir{i} '/' results_basename '_secondary_constraint_sweep_states.sto']);
         jmt_sweep.set_results_file_basename([results_basename '_secondary_constraint_sweep']);
         jmt_sweep.set_start_time(-1);
@@ -231,15 +199,13 @@ if(true)
         jmt_sweep.set_muscles(0,'none');
         jmt_sweep.set_muscle_outputs(0,'all');
         jmt_sweep.set_write_vtp_files(true);
-            jmt_sweep.run();
+        jmt_sweep.set_h5_kinematics_data(true);
+        jmt_sweep.set_h5_states_data(false);
+        jmt_sweep.set_write_h5_file(true);
+        jmt_sweep.set_use_visualizer(useVisualizer);
+        jmt_sweep.run();
         
-        jmt_ik = jmt_settle;
-        jmt_ik.set_input_states_file([ik_result_dir{i} '/DM_Smooth1_ik.sto']);
-        jmt_ik.set_results_file_basename(['DM_Smooth1_ik']);
-                jmt_sweep.set_start_time(-1);
-        jmt_sweep.set_stop_time(-1);
-%            jmt_ik.run();
-        
+       
         %% Perform COMAK Simulation
 
         comak = COMAKTool();
@@ -430,93 +396,77 @@ end
 %% Analyze the results
 close all;
 
-if true
-    for i = 1:nSim
-        model_name{i} = ['DM_' sim_names{i}];
-%         settle_files{i} = [ ik_result_dir{i} '/' results_basename '_secondary_constraint_settle.h5'];
-         sweep_files{i} = [ik_result_dir{i} '/' results_basename '_secondary_constraint_sweep.h5'];
-%         ik_files{i} = [ik_result_dir{i} '/DM_Smooth1_ik.h5'];
-        comak_files{i} = [ jnt_mech_result_dir{i} '/' results_basename '.h5'];    
-    end
 
-%     settle = jam_analysis(model_name,settle_files);
-%     sweep_results = jam_analysis(model_name,sweep_files);
-%     ik_results = jam_analysis(model_name,ik_files);
-     comak_results = jam_analysis(model_name,comak_files);
+for i = 1:nSim
+    model_name{i} = ['DM_' sim_names{i}];
+    sweep_files{i} = [ik_result_dir{i} '/' results_basename '_secondary_constraint_sweep.h5'];
+    comak_files{i} = [ jnt_mech_result_dir{i} '/' results_basename '.h5'];    
 end
 
-    line_type = {'-','-.','-.','-','-','.'};
-    % Plot COMAK IK Settle Simulations
-    sec_coords = {...
-        'knee_flex_r','knee_add_r','knee_rot_r',...
-        'knee_tx_r','knee_ty_r','knee_tz_r',...
-        'pf_flex_r','pf_rot_r','pf_tilt_r',...
-        'pf_tx_r','pf_ty_r','pf_tz_r',...
-        };
+sweep_results = jam_analysis(model_name,sweep_files);
+comak_results = jam_analysis(model_name,comak_files);
 
-    % for i = 1:length(sec_coords)
-    %     figure('name',sec_coords{i})
-    %     hold on
-    %     for n=1:settle.nFiles
-    %         plot(settle.coordinateset.(sec_coords{i}).value(:,n));
-    %     end
-    % end
 
-    % Plot COMAK IK Sweep Simulations 
-    % for i = 1:length(sec_coords)
-    %     figure('name',sec_coords{i})
-    %     hold on
-    %     for n=1:sweep.nFiles
-    %         plot(sweep.coordinateset.(sec_coords{i}).value(:,n));
-    %     end
-    % end
-    % Plot COMAK IK Joint Angles
+line_type = {'-','-.','-.','-*','-*'};
+% Plot COMAK IK Settle Simulations
+sec_coords = {...
+    'knee_flex_r','knee_add_r','knee_rot_r',...
+    'knee_tx_r','knee_ty_r','knee_tz_r',...
+    'pf_flex_r','pf_rot_r','pf_tilt_r',...
+    'pf_tx_r','pf_ty_r','pf_tz_r',...
+    };
 
-    % Plot COMAK Secondary Kinematics
-    if true
-        for i = 1:length(sec_coords)
-            figure('name',sec_coords{i})
-            hold on
-            for n=1:comak_results.nFiles
-%                 plot([n n])
-                plot(comak_results.coordinateset.(sec_coords{i}).value(:,n),line_type{n});
-            end
+% Plot COMAK IK Sweep Simulations 
+% for i = 1:length(sec_coords)
+%     figure('name',sec_coords{i})
+%     hold on
+%     for n=1:sweep.nFiles
+%         plot(sweep.coordinateset.(sec_coords{i}).value(:,n));
+%     end
+% end
+% Plot COMAK IK Joint Angles
 
-            legend(sim_names)
-        end
+% Plot COMAK Secondary Kinematics
+
+for i = 1:length(sec_coords)
+    figure('name',sec_coords{i})
+    hold on
+    for n=1:comak_results.nFiles
+        plot(comak_results.coordinateset.(sec_coords{i}).value(:,n),line_type{n});
     end
-    
-    if true
+
+    legend(sim_names)
+end
         
-    % Plot COMAK Ligament Forces 
-    ligament_names = {...
-        'MCLd','MCLs'...
-        'LCL',...
-        'ACLam','ACLpl',...
-        'PCLal','PCLpm',...
-        'PT',...
-        'ITB',...
-        'pCAP'...
-        };
+% Plot COMAK Ligament Forces 
+ligament_names = {...
+    'MCLd','MCLs'...
+    'LCL',...
+    'ACLam','ACLpl',...
+    'PCLal','PCLpm',...
+    'PT',...
+    'ITB',...
+    'pCAP'...
+    };
 
-    for i = 1:length(ligament_names)
-        figure('name',ligament_names{i});hold on
+for i = 1:length(ligament_names)
+    figure('name',ligament_names{i});hold on
 
-        fiber_names = fieldnames(comak_results.forceset.Blankevoort1991Ligament);
+    fiber_names = fieldnames(comak_results.forceset.Blankevoort1991Ligament);
 
-        fibers = fiber_names(contains(fiber_names,ligament_names{i}));
-        for n=1:comak_results.nFiles
-            data = 0;
-            for k = 1:length(fibers)
-                data = data + comak_results.forceset.Blankevoort1991Ligament.(fibers{k}).total_force(:,n);
+    fibers = fiber_names(contains(fiber_names,ligament_names{i}));
+    for n=1:comak_results.nFiles
+        data = 0;
+        for k = 1:length(fibers)
+            data = data + comak_results.forceset.Blankevoort1991Ligament.(fibers{k}).total_force(:,n);
 
-            end
-            plot(data,line_type{n})
-            title([ligament_names{i} ' force'])
         end
-        legend(sim_names)
+        plot(data,line_type{n})
+        title([ligament_names{i} ' force'])
     end
-    end
+    legend(sim_names)
+end
+
     
     % Plot COMAK Muscle Forces
 if true

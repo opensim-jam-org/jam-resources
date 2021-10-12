@@ -1,19 +1,6 @@
 %% exampleWalkingTKA
 %==========================================================================
-% DM_bouncy5 trial 
-% (start at 1.876 sec with right heelstrike on force plate 1 and 
-% end at 3.075 with the following right heelstrike) 
-%
-% DM_smooth1 trial 
-%(start at 2.53 sec with right heelstrike on force plate 1 and end at 3.775
-%
-% DM_ngait_og1_new
-% start: 2.405
-% stop : 3.565
-%
-% DM_ngait_og3_new
-% start: 4.928
-% stop : 6.283
+
 %% Setup Environment and Folders
 clear;
 import org.opensim.modeling.*
@@ -22,7 +9,7 @@ Logger.setLevelString('info');
 useVisualizer = true;
 
 model_file = '../../../models/knee_tka/grand_challenge/DM/DM.osim';
-trial = 'DM_ngait_og9';
+trial = 'DM_smooth1';
 
 if(strcmp(trial,'DM_smooth1'))
     start_time = 2.53;
@@ -126,62 +113,62 @@ comak_ik.set_ik_constraint_weight(100);
 comak_ik.set_ik_accuracy(1e-5);
 comak_ik.set_use_visualizer(useVisualizer);
 
-    tasks(1).Name = 'Sacral'; tasks(1).Weight = 20;    
-    tasks(2).Name = 'R_Asis'; tasks(2).Weight = 30;    
-    tasks(3).Name = 'L_Asis'; tasks(3).Weight = 30;    
-    tasks(4).Name = 'R_Psis'; tasks(4).Weight = 20;    
-    tasks(5).Name = 'L_Psis'; tasks(5).Weight = 20;    
-    tasks(6).Name = 'R_Shoulder'; tasks(6).Weight = 1;    
-    tasks(7).Name = 'L_Shoulder'; tasks(7).Weight = 1;    
-    tasks(8).Name = 'R_Elbow'; tasks(8).Weight = 1;    
-    tasks(9).Name = 'R_Wrist'; tasks(9).Weight = 1;    
-    tasks(10).Name = 'L_Elbow'; tasks(10).Weight = 1;    
-    tasks(11).Name = 'L_Wrist'; tasks(11).Weight = 1;    
-    tasks(12).Name = 'R_Patella'; tasks(12).Weight = 1;    
-    tasks(13).Name = 'R_Thigh_Superior'; tasks(13).Weight = 1;    
-    tasks(14).Name = 'R_Thigh_Inferior'; tasks(14).Weight = 1;        
-    tasks(15).Name = 'R_Thigh_Lateral'; tasks(15).Weight = 1;    
-    tasks(16).Name = 'R_Shank_Superior'; tasks(16).Weight = 1;    
-    tasks(17).Name = 'R_Shank_Inferior'; tasks(17).Weight = 1;    
-    tasks(18).Name = 'R_Shank_Lateral'; tasks(18).Weight = 1;    
-    tasks(19).Name = 'R_Midfoot_Medial'; tasks(19).Weight = 1;    
-    tasks(20).Name = 'R_Midfoot_Lateral'; tasks(20).Weight = 1;    
-    tasks(21).Name = 'R_Hindfoot'; tasks(21).Weight = 1;    
-    tasks(22).Name = 'R_Midfoot_Superior'; tasks(22).Weight = 1;    
-    tasks(23).Name = 'R_ToeMedial'; tasks(23).Weight = 1;    
-    tasks(24).Name = 'R_ToeLateral'; tasks(24).Weight = 1;    
-    tasks(25).Name = 'R_Toe'; tasks(25).Weight = 1;    
-    tasks(26).Name = 'R_Heel'; tasks(26).Weight = 1;    
-    tasks(27).Name = 'L_Patella'; tasks(27).Weight = 1;    
-    tasks(28).Name = 'L_Thigh_Superior'; tasks(28).Weight = 1;    
-    tasks(29).Name = 'L_Thigh_Inferior'; tasks(29).Weight = 1;    
-    tasks(30).Name = 'L_Thigh_Lateral'; tasks(30).Weight = 1;    
-    tasks(31).Name = 'L_Shank_Superior'; tasks(31).Weight = 1;    
-    tasks(32).Name = 'L_Shank_Inferior'; tasks(32).Weight = 1;    
-    tasks(33).Name = 'L_Shank_Lateral'; tasks(33).Weight = 1;    
-    tasks(34).Name = 'L_Midfoot_Medial'; tasks(34).Weight = 1;    
-    tasks(35).Name = 'L_Midfoot_Lateral'; tasks(35).Weight = 1;    
-    tasks(36).Name = 'L_Hindfoot'; tasks(36).Weight = 1;    
-    tasks(37).Name = 'L_Midfoot_Superior'; tasks(37).Weight = 1;    
-    tasks(38).Name = 'L_ToeMedial'; tasks(38).Weight = 1;    
-    tasks(39).Name = 'L_ToeLateral'; tasks(39).Weight = 1;    
-    tasks(40).Name = 'L_Toe'; tasks(40).Weight = 1;        
-    tasks(41).Name = 'L_Heel'; tasks(41).Weight = 1;
+tasks(1).Name = 'Sacral'; tasks(1).Weight = 20;    
+tasks(2).Name = 'R_Asis'; tasks(2).Weight = 30;    
+tasks(3).Name = 'L_Asis'; tasks(3).Weight = 30;    
+tasks(4).Name = 'R_Psis'; tasks(4).Weight = 20;    
+tasks(5).Name = 'L_Psis'; tasks(5).Weight = 20;    
+tasks(6).Name = 'R_Shoulder'; tasks(6).Weight = 1;    
+tasks(7).Name = 'L_Shoulder'; tasks(7).Weight = 1;    
+tasks(8).Name = 'R_Elbow'; tasks(8).Weight = 1;    
+tasks(9).Name = 'R_Wrist'; tasks(9).Weight = 1;    
+tasks(10).Name = 'L_Elbow'; tasks(10).Weight = 1;    
+tasks(11).Name = 'L_Wrist'; tasks(11).Weight = 1;    
+tasks(12).Name = 'R_Patella'; tasks(12).Weight = 1;    
+tasks(13).Name = 'R_Thigh_Superior'; tasks(13).Weight = 1;    
+tasks(14).Name = 'R_Thigh_Inferior'; tasks(14).Weight = 1;        
+tasks(15).Name = 'R_Thigh_Lateral'; tasks(15).Weight = 1;    
+tasks(16).Name = 'R_Shank_Superior'; tasks(16).Weight = 1;    
+tasks(17).Name = 'R_Shank_Inferior'; tasks(17).Weight = 1;    
+tasks(18).Name = 'R_Shank_Lateral'; tasks(18).Weight = 1;    
+tasks(19).Name = 'R_Midfoot_Medial'; tasks(19).Weight = 1;    
+tasks(20).Name = 'R_Midfoot_Lateral'; tasks(20).Weight = 1;    
+tasks(21).Name = 'R_Hindfoot'; tasks(21).Weight = 1;    
+tasks(22).Name = 'R_Midfoot_Superior'; tasks(22).Weight = 1;    
+tasks(23).Name = 'R_ToeMedial'; tasks(23).Weight = 1;    
+tasks(24).Name = 'R_ToeLateral'; tasks(24).Weight = 1;    
+tasks(25).Name = 'R_Toe'; tasks(25).Weight = 1;    
+tasks(26).Name = 'R_Heel'; tasks(26).Weight = 1;    
+tasks(27).Name = 'L_Patella'; tasks(27).Weight = 1;    
+tasks(28).Name = 'L_Thigh_Superior'; tasks(28).Weight = 1;    
+tasks(29).Name = 'L_Thigh_Inferior'; tasks(29).Weight = 1;    
+tasks(30).Name = 'L_Thigh_Lateral'; tasks(30).Weight = 1;    
+tasks(31).Name = 'L_Shank_Superior'; tasks(31).Weight = 1;    
+tasks(32).Name = 'L_Shank_Inferior'; tasks(32).Weight = 1;    
+tasks(33).Name = 'L_Shank_Lateral'; tasks(33).Weight = 1;    
+tasks(34).Name = 'L_Midfoot_Medial'; tasks(34).Weight = 1;    
+tasks(35).Name = 'L_Midfoot_Lateral'; tasks(35).Weight = 1;    
+tasks(36).Name = 'L_Hindfoot'; tasks(36).Weight = 1;    
+tasks(37).Name = 'L_Midfoot_Superior'; tasks(37).Weight = 1;    
+tasks(38).Name = 'L_ToeMedial'; tasks(38).Weight = 1;    
+tasks(39).Name = 'L_ToeLateral'; tasks(39).Weight = 1;    
+tasks(40).Name = 'L_Toe'; tasks(40).Weight = 1;        
+tasks(41).Name = 'L_Heel'; tasks(41).Weight = 1;
 
-    ik_task_set = IKTaskSet();
-    ik_task = IKMarkerTask();
+ik_task_set = IKTaskSet();
+ik_task = IKMarkerTask();
 
-    for j = 1:length(tasks)
-        ik_task.setName(tasks(j).Name);
-        ik_task.setWeight(tasks(j).Weight);
-        ik_task_set.cloneAndAppend(ik_task);
-    end
+for j = 1:length(tasks)
+    ik_task.setName(tasks(j).Name);
+    ik_task.setWeight(tasks(j).Weight);
+    ik_task_set.cloneAndAppend(ik_task);
+end
 
 comak_ik.set_IKTaskSet(ik_task_set);
 comak_ik.print(['./inputs/' trial '/comak_inverse_kinematics_settings.xml']);
 
 disp('Running COMAKInverseKinematicsTool...')
-%  comak_ik.run();
+comak_ik.run();
 %% Perform COMAK Simulation
 
 comak = COMAKTool();
