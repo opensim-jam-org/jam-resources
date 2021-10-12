@@ -6,28 +6,82 @@
 %
 % DM_smooth1 trial 
 %(start at 2.53 sec with right heelstrike on force plate 1 and end at 3.775
-
+%
+% DM_ngait_og1_new
+% start: 2.405
+% stop : 3.565
+%
+% DM_ngait_og3_new
+% start: 4.928
+% stop : 6.283
 %% Setup Environment and Folders
 clear;
 import org.opensim.modeling.*
-Logger.setLevelString('debug');
+Logger.setLevelString('info');
 
 useVisualizer = true;
 
 model_file = '../../../models/knee_tka/grand_challenge/DM/DM.osim';
-results_basename = 'walking_tka';
-ik_result_dir = './results/comak-inverse-kinematics';
-comak_result_dir = './results/comak';
-jnt_mech_result_dir = './results/joint-mechanics';
+trial = 'DM_ngait_og9';
+
+if(strcmp(trial,'DM_smooth1'))
+    start_time = 2.53;
+    stop_time = 3.775;
+elseif(strcmp(trial,'DM_bouncy5'))
+    start_time = 1.876;
+    stop_time = 3.075; 
+elseif(strcmp(trial,'DM_ngait_og1'))
+    start_time = 4.928;
+    stop_time = 6.283; 
+elseif(strcmp(trial,'DM_ngait_og3'))
+    start_time = 2.478;
+    stop_time = 3.737; 
+elseif(strcmp(trial,'DM_ngait_og4'))
+    start_time = 3.081;
+    stop_time = 4.288; 
+elseif(strcmp(trial,'DM_ngait_og5'))
+    start_time = 2.188;
+    stop_time = 3.428; 
+elseif(strcmp(trial,'DM_ngait_og6'))
+    start_time = 2.976;
+    stop_time = 4.183; 
+elseif(strcmp(trial,'DM_ngait_og7'))
+    start_time = 1.136;
+    stop_time = 2.337;
+elseif(strcmp(trial,'DM_ngait_og9'))
+    start_time = 3.214;
+    stop_time = 4.45;
+end
+
+results_basename = trial;
+ik_result_dir = ['./results/' trial '/comak-inverse-kinematics'];
+comak_result_dir = ['./results/' trial '/comak'];
+jnt_mech_result_dir = ['./results/' trial '/joint-mechanics'];
+experimental_data_dir = ...
+    '../../../models/knee_tka/grand_challenge/DM/experimental_data/motion_analysis';
+
+marker_file = ...
+    [experimental_data_dir '/' trial '_new.trc'];
+
+ik_output_motion_file = [trial '_ik.sto'];
+
+external_loads_file = ...
+    [experimental_data_dir '/' trial '_external_loads.xml'];
 
 if(exist('./inputs','dir')~=7)
     mkdir('./inputs')
 end
+if(exist(['./inputs/' trial],'dir')~=7)
+    mkdir(['./inputs/' trial])
+end
 if(exist('./results','dir')~=7)
     mkdir('./results')
 end
-if(exist('./results/graphics','dir')~=7)
-    mkdir('./results/graphics')
+if(exist(['./results/' trial],'dir')~=7)
+    mkdir(['./results/' trial])
+end
+if(exist(['./results/' trial '/graphics'],'dir')~=7)
+    mkdir(['./results/' trial '/graphics'])
 end
 
 %% Perform Inverse Kinematics
@@ -35,7 +89,7 @@ comak_ik = COMAKInverseKinematicsTool();
 comak_ik.set_model_file(model_file);
 comak_ik.set_results_directory(ik_result_dir);
 comak_ik.set_results_prefix(results_basename);
-comak_ik.set_perform_secondary_constraint_sim(true);
+comak_ik.set_perform_secondary_constraint_sim(false);
 comak_ik.set_secondary_coordinates(0,'/jointset/knee_r/knee_add_r');
 comak_ik.set_secondary_coordinates(1,'/jointset/knee_r/knee_rot_r');
 comak_ik.set_secondary_coordinates(2,'/jointset/knee_r/knee_tx_r');
@@ -61,203 +115,85 @@ comak_ik.set_constraint_function_num_interpolation_points(20);
 comak_ik.set_print_secondary_constraint_sim_results(true);
 comak_ik.set_constrained_model_file('./results/comak-inverse-kinematics/ik_constrained_model.osim');
 comak_ik.set_perform_inverse_kinematics(true);
-comak_ik.set_marker_file('../../../models/knee_tka/grand_challenge/DM/experimental_data/motion_analysis/DM_smooth1_new.trc');
+comak_ik.set_marker_file(marker_file);
 
-comak_ik.set_output_motion_file('DM_smooth1_ik.sto');
-comak_ik.set_time_range(0, 2.2);
-comak_ik.set_time_range(1, 3.775);
+comak_ik.set_output_motion_file(ik_output_motion_file);
+comak_ik.set_time_range(0, start_time - 0.2);
+comak_ik.set_time_range(1, stop_time);
 comak_ik.set_report_errors(true);
 comak_ik.set_report_marker_locations(false);
 comak_ik.set_ik_constraint_weight(100);
 comak_ik.set_ik_accuracy(1e-5);
 comak_ik.set_use_visualizer(useVisualizer);
 
+    tasks(1).Name = 'Sacral'; tasks(1).Weight = 20;    
+    tasks(2).Name = 'R_Asis'; tasks(2).Weight = 30;    
+    tasks(3).Name = 'L_Asis'; tasks(3).Weight = 30;    
+    tasks(4).Name = 'R_Psis'; tasks(4).Weight = 20;    
+    tasks(5).Name = 'L_Psis'; tasks(5).Weight = 20;    
+    tasks(6).Name = 'R_Shoulder'; tasks(6).Weight = 1;    
+    tasks(7).Name = 'L_Shoulder'; tasks(7).Weight = 1;    
+    tasks(8).Name = 'R_Elbow'; tasks(8).Weight = 1;    
+    tasks(9).Name = 'R_Wrist'; tasks(9).Weight = 1;    
+    tasks(10).Name = 'L_Elbow'; tasks(10).Weight = 1;    
+    tasks(11).Name = 'L_Wrist'; tasks(11).Weight = 1;    
+    tasks(12).Name = 'R_Patella'; tasks(12).Weight = 1;    
+    tasks(13).Name = 'R_Thigh_Superior'; tasks(13).Weight = 1;    
+    tasks(14).Name = 'R_Thigh_Inferior'; tasks(14).Weight = 1;        
+    tasks(15).Name = 'R_Thigh_Lateral'; tasks(15).Weight = 1;    
+    tasks(16).Name = 'R_Shank_Superior'; tasks(16).Weight = 1;    
+    tasks(17).Name = 'R_Shank_Inferior'; tasks(17).Weight = 1;    
+    tasks(18).Name = 'R_Shank_Lateral'; tasks(18).Weight = 1;    
+    tasks(19).Name = 'R_Midfoot_Medial'; tasks(19).Weight = 1;    
+    tasks(20).Name = 'R_Midfoot_Lateral'; tasks(20).Weight = 1;    
+    tasks(21).Name = 'R_Hindfoot'; tasks(21).Weight = 1;    
+    tasks(22).Name = 'R_Midfoot_Superior'; tasks(22).Weight = 1;    
+    tasks(23).Name = 'R_ToeMedial'; tasks(23).Weight = 1;    
+    tasks(24).Name = 'R_ToeLateral'; tasks(24).Weight = 1;    
+    tasks(25).Name = 'R_Toe'; tasks(25).Weight = 1;    
+    tasks(26).Name = 'R_Heel'; tasks(26).Weight = 1;    
+    tasks(27).Name = 'L_Patella'; tasks(27).Weight = 1;    
+    tasks(28).Name = 'L_Thigh_Superior'; tasks(28).Weight = 1;    
+    tasks(29).Name = 'L_Thigh_Inferior'; tasks(29).Weight = 1;    
+    tasks(30).Name = 'L_Thigh_Lateral'; tasks(30).Weight = 1;    
+    tasks(31).Name = 'L_Shank_Superior'; tasks(31).Weight = 1;    
+    tasks(32).Name = 'L_Shank_Inferior'; tasks(32).Weight = 1;    
+    tasks(33).Name = 'L_Shank_Lateral'; tasks(33).Weight = 1;    
+    tasks(34).Name = 'L_Midfoot_Medial'; tasks(34).Weight = 1;    
+    tasks(35).Name = 'L_Midfoot_Lateral'; tasks(35).Weight = 1;    
+    tasks(36).Name = 'L_Hindfoot'; tasks(36).Weight = 1;    
+    tasks(37).Name = 'L_Midfoot_Superior'; tasks(37).Weight = 1;    
+    tasks(38).Name = 'L_ToeMedial'; tasks(38).Weight = 1;    
+    tasks(39).Name = 'L_ToeLateral'; tasks(39).Weight = 1;    
+    tasks(40).Name = 'L_Toe'; tasks(40).Weight = 1;        
+    tasks(41).Name = 'L_Heel'; tasks(41).Weight = 1;
 
-ik_task_set = IKTaskSet();
+    ik_task_set = IKTaskSet();
+    ik_task = IKMarkerTask();
 
-ik_task=IKMarkerTask();
-
-ik_task.setName('Sacral');
-ik_task.setWeight(20);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Asis');
-ik_task.setWeight(30);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Asis');
-ik_task.setWeight(30);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Psis');
-ik_task.setWeight(20);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Psis');
-ik_task.setWeight(20);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Shoulder');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Shoulder');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Elbow');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Wrist');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Elbow');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Wrist');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Patella');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Thigh_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Thigh_Inferior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Thigh_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Shank_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Shank_Inferior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Shank_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Midfoot_Medial');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Midfoot_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Hindfoot');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Midfoot_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_ToeMedial');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_ToeLateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Toe');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('R_Heel');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Patella');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Thigh_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Thigh_Inferior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Thigh_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Shank_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Shank_Inferior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Shank_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Midfoot_Medial');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Midfoot_Lateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Hindfoot');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Midfoot_Superior');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_ToeMedial');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_ToeLateral');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Toe');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
-
-ik_task.setName('L_Heel');
-ik_task.setWeight(1);
-ik_task_set.cloneAndAppend(ik_task);
+    for j = 1:length(tasks)
+        ik_task.setName(tasks(j).Name);
+        ik_task.setWeight(tasks(j).Weight);
+        ik_task_set.cloneAndAppend(ik_task);
+    end
 
 comak_ik.set_IKTaskSet(ik_task_set);
-comak_ik.print('./inputs/comak_inverse_kinematics_settings.xml');
+comak_ik.print(['./inputs/' trial '/comak_inverse_kinematics_settings.xml']);
 
 disp('Running COMAKInverseKinematicsTool...')
-% comak_ik.run();
+%  comak_ik.run();
 %% Perform COMAK Simulation
 
 comak = COMAKTool();
 comak.set_model_file(model_file);
-comak.set_coordinates_file('./results/comak-inverse-kinematics/DM_smooth1_ik.sto');
-comak.set_external_loads_file('../../../models/knee_tka/grand_challenge/DM/experimental_data/motion_analysis/DM_smooth1_external_loads.xml'),
+comak.set_coordinates_file([ik_result_dir '/' ik_output_motion_file]);
+comak.set_external_loads_file(external_loads_file),
 comak.set_results_directory(comak_result_dir);
 comak.set_results_prefix(results_basename);
 comak.set_replace_force_set(false);
 comak.set_force_set_file('../../../models/knee_tka/grand_challenge/DM/DM_reserve_actuators.xml');
-comak.set_start_time(2.5);
-comak.set_stop_time(3.775);
+comak.set_start_time(start_time - 0.1);
+comak.set_stop_time(stop_time);
 comak.set_time_step(0.01);
 comak.set_lowpass_filter_frequency(6);
 comak.set_print_processed_input_kinematics(false);
@@ -365,7 +301,7 @@ secondary_coord_set.cloneAndAppend(secondary_coord);
 comak.set_COMAKSecondaryCoordinateSet(secondary_coord_set);
 
 comak.set_settle_secondary_coordinates_at_start(true);
-comak.set_settle_threshold(1e-3);
+comak.set_settle_threshold(1e-4);
 comak.set_settle_accuracy(1e-3);
 comak.set_settle_internal_step_limit(10000);
 comak.set_print_settle_sim_results(true);
@@ -390,7 +326,7 @@ comak.set_non_muscle_actuator_weight(1000);
 comak.set_model_assembly_accuracy(1e-12);
 comak.set_use_visualizer(useVisualizer);
 
-comak.print('./inputs/comak_settings.xml');
+comak.print(['./inputs/' trial '/comak_settings.xml']);
 
 disp('Running COMAK Tool...')
 comak.run();
@@ -402,41 +338,26 @@ jnt_mech.set_input_states_file([comak_result_dir '/' results_basename '_states.s
 jnt_mech.set_use_muscle_physiology(false);
 jnt_mech.set_results_file_basename(results_basename);
 jnt_mech.set_results_directory(jnt_mech_result_dir);
-jnt_mech.set_start_time(2.53);
-jnt_mech.set_stop_time(3.775);
-jnt_mech.set_resample_step_size(-1);
+jnt_mech.set_start_time(start_time);
+jnt_mech.set_stop_time(stop_time);
 jnt_mech.set_normalize_to_cycle(true);
-jnt_mech.set_lowpass_filter_frequency(-1);
-jnt_mech.set_print_processed_kinematics(false);
 jnt_mech.set_contacts(0,'all');
 jnt_mech.set_contact_outputs(0,'all');
 jnt_mech.set_contact_mesh_properties(0,'none');
-jnt_mech.set_ligaments(0,'all');
+jnt_mech.set_ligaments(0,'none');
 jnt_mech.set_ligament_outputs(0,'all');
-jnt_mech.set_muscles(0,'all');
+jnt_mech.set_muscles(0,'none');
 jnt_mech.set_muscle_outputs(0,'all');
-
-jnt_mech.set_attached_geometry_bodies(0,'all');
-
-jnt_mech.set_output_orientation_frame('ground');
-jnt_mech.set_output_position_frame('ground');
+jnt_mech.set_attached_geometry_bodies(0,'none');
+jnt_mech.set_output_orientation_frame('/bodyset/tibia_r/tibia_implant');
+jnt_mech.set_output_position_frame('/bodyset/tibia_r/tibia_implant');
 jnt_mech.set_write_vtp_files(true);
 jnt_mech.set_vtp_file_format('binary');
 jnt_mech.set_write_h5_file(false);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
-jnt_mech.set_write_transforms_file(false);
-jnt_mech.set_output_transforms_file_type('sto');
 jnt_mech.set_use_visualizer(useVisualizer);
-
-analysis_set = AnalysisSet();
-
-frc_reporter = ForceReporter();
-frc_reporter.setName('ForceReporter');
-
-analysis_set.cloneAndAppend(frc_reporter);
-jnt_mech.set_AnalysisSet(analysis_set);
-jnt_mech.print('./inputs/joint_mechanics_settings.xml');
+jnt_mech.print(['./inputs/' trial '/joint_mechanics_settings.xml']);
 
 disp('Running JointMechanicsTool...');
 jnt_mech.run();

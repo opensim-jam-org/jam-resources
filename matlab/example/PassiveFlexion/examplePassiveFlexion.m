@@ -1,7 +1,9 @@
 %% Setup Environment and Folders
 clear; close all;
 import org.opensim.modeling.*
-Logger.setLevelString('Info');
+Logger.setLevelString('debug');
+
+useVisualizer = true;
 
 model_file = '../../../models/knee_healthy/lenhart2015/lenhart2015.osim';
 results_basename = 'passive_flexion';
@@ -88,8 +90,8 @@ forsim.set_start_time(-1);
 forsim.set_stop_time(-1);
 forsim.set_integrator_accuracy(1e-2); %Note this should be 1e-6 for research
 forsim.set_constant_muscle_control(0.02); %Set all muscles to 2% activation to represent passive state
-forsim.set_ignore_activation_dynamics(true);
-forsim.set_ignore_tendon_compliance(true);
+forsim.set_ignore_activation_dynamics(false);
+forsim.set_ignore_tendon_compliance(false);
 forsim.set_unconstrained_coordinates(0,'/jointset/knee_r/knee_add_r');
 forsim.set_unconstrained_coordinates(1,'/jointset/knee_r/knee_rot_r');
 forsim.set_unconstrained_coordinates(2,'/jointset/knee_r/knee_tx_r');
@@ -102,12 +104,11 @@ forsim.set_unconstrained_coordinates(8,'/jointset/pf_r/pf_tx_r');
 forsim.set_unconstrained_coordinates(9,'/jointset/pf_r/pf_ty_r');
 forsim.set_unconstrained_coordinates(10,'/jointset/pf_r/pf_tz_r');
 forsim.set_prescribed_coordinates_file(prescribed_coord_file);
-forsim.set_verbose(5);
-forsim.set_use_visualizer(true);
+forsim.set_use_visualizer(useVisualizer);
 forsim.print('./inputs/forsim_settings.xml');
 
 disp('Running Forsim Tool...')
-% forsim.run();
+forsim.run();
 %% Perform Analysis with JointMechanicsTool
 
 jnt_mech = JointMechanicsTool();
@@ -131,10 +132,89 @@ jnt_mech.set_write_vtp_files(true);
 jnt_mech.set_write_h5_file(true);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
+jnt_mech.set_use_visualizer(useVisualizer);
 
 jnt_mech.print('./inputs/joint_mechanics_settings.xml');
 
 disp('Running JointMechanicsTool...');
-jnt_mech.run();
+% jnt_mech.run();
 
+%% Analyze Simulation Results
+results = jam_analysis('lenhart2015',{[jnt_mech_result_dir '/' results_basename '.h5']});
 
+% Secondary Kinematics
+sec_coords = {...
+    'knee_flex_r','knee_add_r','knee_rot_r',...
+    'knee_tx_r','knee_ty_r','knee_tz_r',...
+    'pf_flex_r','pf_rot_r','pf_tilt_r',...
+    'pf_tx_r','pf_ty_r','pf_tz_r'
+    };
+
+figure('name','Secondary Coordinates')
+for i = 1:length(sec_coords)
+    subplot(4,3,i)
+    hold on
+    plot(results.coordinateset.(sec_coords{i}).value);    
+end
+
+% Ligament Forces
+ligament_names = {...
+    'MCLd','MCLs'...
+    'LCL',...
+    'ACLam','ACLpl',...
+    'PCLal','PCLpm',...
+    'PT',...
+    'ITB',...
+    
+    };
+
+figure('name','Ligament Forces')
+for i = 1:length(ligament_names)
+    subplot(3,3,i);hold on;
+    
+    fiber_names = fieldnames(results.forceset.Blankevoort1991Ligament);
+    
+    fibers = fiber_names(contains(fiber_names,ligament_names{i}));
+    
+    data = 0;
+    for k = 1:length(fibers)
+        data = data + results.forceset.Blankevoort1991Ligament.(fibers{k}).total_force;
+
+    end
+    plot(data)
+    title([ligament_names{i} ' force'])
+    
+end
+
+% Muscle Forces
+% muscle_names = {...
+%     'vasint_r',...
+%     'vaslat_r',...
+%     'vasmed_r',...
+%     'recfem_r',...
+%     'gaslat_r',...
+%     'gasmed_r',...
+%     'bflh_r',...
+%     'bfsh_r',...
+%     'semimem_r',...
+%     'semiten_r',...
+%     'sart_r',...
+%     'tfl_r'
+%     };
+% 
+% for i = 1:length(muscle_names)
+%     subplot(3,4,i);hold on;
+%     
+%     muscle_names = fieldnames(results.forceset.Muscle);
+%     
+%     msls = fiber_names(contains(muscle_names,ligament_names{i}));
+%     
+%     data = 0;
+%     for k = 1:length(msls)
+%         data = data + results.forceset.Blankevoort1991Ligament.(msls{k}).actuation;
+% 
+%     end
+%     plot(data)
+%     title([ligament_names{i} ' force'])
+%     
+% end

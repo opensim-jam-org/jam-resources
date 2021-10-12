@@ -1,3 +1,5 @@
+%% Example Anterior Laxity
+%==========================================================================
 close all; clear
 
 import org.opensim.modeling.*
@@ -13,7 +15,7 @@ if(exist('./results/graphics','dir')~=7)
     mkdir('./results/graphics')
 end
 
-model_file = '../models/healthy/current/full_body_healthy_knee.osim';
+model_file = '../healthy/models/smith2019/smith2019.osim';
 
 force_magnitude = 100; % 100 N anterior force, similar to KT-1000 arthrometer
 force_point_height = -0.1; %Apply at the tibial tuberosity height

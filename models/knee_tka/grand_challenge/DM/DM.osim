@@ -16018,37 +16018,37 @@
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_flex_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>2</viscosity>
+					<viscosity>0.5</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_rot_r">
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_rot_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>2</viscosity>
+					<viscosity>0.5</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_tilt_r">
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_tilt_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>2</viscosity>
+					<viscosity>0.5</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_tx_r">
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_tx_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>10</viscosity>
+					<viscosity>5</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_ty_r">
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_ty_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>10</viscosity>
+					<viscosity>5</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_tz_r">
 					<!--Name of the coordinate to which this force is applied.-->
 					<coordinate>pf_tz_r</coordinate>
 					<!--Damping constant.-->
-					<viscosity>10</viscosity>
+					<viscosity>5</viscosity>
 				</SpringGeneralizedForce>
 				<Smith2018ArticularContactForce name="knee_contact">
 					<!--Path to a Component that satisfies the Socket 'target_mesh' of type Smith2018ContactMesh (description: Target mesh for collision detection.).-->
@@ -16609,7 +16609,7 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>Femoral Component contact.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>4630000</elastic_modulus>
+					<elastic_modulus>46300000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
 					<poissons_ratio>0.46000000000000002</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
@@ -16625,7 +16625,7 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>Tibial Insert contact.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>4630000</elastic_modulus>
+					<elastic_modulus>46300000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
 					<poissons_ratio>0.46000000000000002</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
@@ -16641,7 +16641,7 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>Patellar Button contact.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>4630000</elastic_modulus>
+					<elastic_modulus>46300000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
 					<poissons_ratio>0.46000000000000002</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
