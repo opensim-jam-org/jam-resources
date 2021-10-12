@@ -5,6 +5,8 @@ close all; clear
 import org.opensim.modeling.*
 Logger.setLevelString('Info');
 
+useVisualizer = false;
+
 if(exist('./inputs','dir')~=7)
     mkdir('./inputs')
 end
@@ -15,10 +17,7 @@ if(exist('./results/graphics','dir')~=7)
     mkdir('./results/graphics')
 end
 
-model_file = '../healthy/models/smith2019/smith2019.osim';
-
-force_magnitude = 100; % 100 N anterior force, similar to KT-1000 arthrometer
-force_point_height = -0.1; %Apply at the tibial tuberosity height
+model_file = '../../../models/knee_healthy/smith2019/smith2019.osim';
 
 %% Simulation Time
 % Simulation consists of four phases:
@@ -114,6 +113,8 @@ saveas(coord_fig,'./results/graphics/prescribed_coordinates.png')
 
 % External Loads Files
 %---------------------
+force_magnitude = 100; % 100 N anterior force, similar to KT-1000 arthrometer
+force_point_height = -0.1; %Apply at the tibial tuberosity height
 
 % write .sto file
 external_loads_sto_file = 'external_loads.sto';
@@ -222,8 +223,8 @@ forsim.set_unconstrained_coordinates(8,'/jointset/pf_r/pf_tx_r');
 forsim.set_unconstrained_coordinates(9,'/jointset/pf_r/pf_ty_r');
 forsim.set_unconstrained_coordinates(10,'/jointset/pf_r/pf_tz_r');
 forsim.set_prescribed_coordinates_file(prescribed_coordinates_file);
-forsim.set_external_loads_file('external_loads.xml');%external_loads_xml_file);
-forsim.set_use_visualizer(true);
+%forsim.set_external_loads_file(external_loads_xml_file);
+forsim.set_use_visualizer(useVisualizer);
 forsim.print('./inputs/healthy_forsim_settings.xml');
 
 
@@ -244,6 +245,7 @@ forsim.run();
 %% Perform Analysis with JointMechanicsTool
 %Healthy
 healthy_jnt_mech_result_dir = './results/healthy_joint_mechanics';
+acld_jnt_mech_result_dir = './results/acld_joint_mechanics';
 
 jnt_mech = JointMechanicsTool();
 jnt_mech.setModel(model);
@@ -266,7 +268,12 @@ jnt_mech.set_write_vtp_files(true);
 jnt_mech.set_write_h5_file(true);
 jnt_mech.set_h5_kinematics_data(true);
 jnt_mech.set_h5_states_data(true);
+
+jnt_mech.set_use_visualizer(useVisualizer);
 jnt_mech.print('./inputs/healthy_joint_mechanics_settings.xml');
+
+disp('Running JointMechanicsTool...');
+jnt_mech.run();
 
 % ACL Deficient 
 jnt_mech.setModel(acld_model);
