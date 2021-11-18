@@ -24,7 +24,7 @@
 		<!--Credits (e.g., model author names) associated with the model.-->
 		<credits>Lenhart, R. L., Kaiser, J., Smith, C. R., Thelen, D. G. Details of the model development are listed in the publications. This model extends the lenhart2015 model to include meniscii. The knee model with 6 DOF tibiofemoral, patellofemoral, and tibia-meniscii joints was built from MRI. Ligaments as well as cartilage-cartilage and cartilage-meniscus contact are explicitly represented with force components. The knee model is integrated into a full body model based on the Arnold, Ann Biomed Eng, 2011 model. Some modifications to the lower extremity muscle paths and properties were made to improve computaitonal performance and enable simulations of dynamic tasks. In the SIMM to OpenSim conversion, the two patella frames were replaced with a single frame located at the patella COM.</credits>
 		<!--Publications and references associated with the model.-->
-		<publications>Smith, C. R., Brandon, S. C., & Thelen, D. G. (2019). Can altered neuromuscular coordination restore soft tissue loading patterns in anterior cruciate ligament and menisci deficient knees during walking?. Journal of biomechanics, 82, 124-133. Lenhart, R. L., Kaiser, J., Smith, C. R., Thelen, D. G. (2015). Prediction and validation of load-dependent behavior of the tibiofemoral and patellofemoral joints during movement. Annals of biomedical engineering, 43(11), 2675-2685.</publications>
+		<publications>Smith, C. R., Brandon, S. C.,  Thelen, D. G. (2019). Can altered neuromuscular coordination restore soft tissue loading patterns in anterior cruciate ligament and menisci deficient knees during walking?. Journal of biomechanics, 82, 124-133. Lenhart, R. L., Kaiser, J., Smith, C. R., Thelen, D. G. (2015). Prediction and validation of load-dependent behavior of the tibiofemoral and patellofemoral joints during movement. Annals of biomedical engineering, 43(11), 2675-2685.</publications>
 		<!--Units for all lengths.-->
 		<length_units>m</length_units>
 		<!--Units for all forces.-->
@@ -880,11 +880,11 @@
 						<groups />
 					</WrapObjectSet>
 					<!--The mass of the body (kg)-->
-					<mass>0.1</mass>
+					<mass>0.10000000000000001</mass>
 					<!--The location (Vec3) of the mass center in the body frame.-->
-					<mass_center>0.001 -0.02 0.022</mass_center>
+					<mass_center>0.001 -0.02 0.021999999999999999</mass_center>
 					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
-					<inertia>5e-6 5e-6 5e-6 0 0 0</inertia>
+					<inertia>5.0000000000000004e-06 5.0000000000000004e-06 5.0000000000000004e-06 0 0 0</inertia>
 				</Body>
 				<Body name="meniscus_medial_r">
 					<!--List of components that this component owns and serializes.-->
@@ -899,8 +899,6 @@
 								<!--Scale factors in X, Y, Z directions respectively.-->
 								<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
 							</FrameGeometry>
-							<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
-
 							<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
 							<socket_parent>..</socket_parent>
 							<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
@@ -942,11 +940,11 @@
 						<groups />
 					</WrapObjectSet>
 					<!--The mass of the body (kg)-->
-					<mass>0.1</mass>
+					<mass>0.10000000000000001</mass>
 					<!--The location (Vec3) of the mass center in the body frame.-->
 					<mass_center>-0.001 -0.02 -0.016</mass_center>
 					<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
-					<inertia>5e-6 5e-6 5e-6 0 0 0</inertia>
+					<inertia>5.0000000000000004e-06 5.0000000000000004e-06 5.0000000000000004e-06 0 0 0</inertia>
 				</Body>
 				<Body name="tibia_r">
 					<!--The geometry used to display the axes of this Frame.-->
@@ -7550,9 +7548,7 @@
 		</ControllerSet>
 		<!--Constraints in the model.-->
 		<ConstraintSet name="constraintset">
-			<objects>
-
-			</objects>
+			<objects />
 		</ConstraintSet>
 		<!--Forces in the model (includes Actuators).-->
 		<ForceSet name="forceset">
@@ -8558,7 +8554,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="gaslat_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="gaslat_r_TendonForceLengthCurve">
@@ -8636,7 +8633,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="gasmed_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="gasmed_r_TendonForceLengthCurve">
@@ -10194,7 +10192,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="recfem_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="recfem_r_TendonForceLengthCurve">
@@ -10486,7 +10485,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="soleus_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="soleus_r_TendonForceLengthCurve">
@@ -10799,7 +10799,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vasint_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vasint_r_TendonForceLengthCurve">
@@ -10881,7 +10882,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vaslat_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vaslat_r_TendonForceLengthCurve">
@@ -10963,7 +10965,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vasmed_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vasmed_r_TendonForceLengthCurve">
@@ -13930,7 +13933,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.011180670000000  -0.019820300000000   0.015807100000000</location>
+									<location>-0.01118067 -0.019820299999999999 0.015807100000000001</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -13965,7 +13968,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.001618080000000  -0.021255680000000   0.037506800000000</location>
+									<location>-0.00161808 -0.021255679999999999 0.0375068</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14000,7 +14003,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.018001430000000  -0.019756364000000   0.024173130000000</location>
+									<location>0.018001429999999999 -0.019756363999999998 0.024173130000000001</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14035,7 +14038,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.015500430616455  -0.019400363998699   0.015943442657755</location>
+									<location>0.015500430616455001 -0.019400363998698999 0.015943442657754998</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14070,7 +14073,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.014000430000000  -0.019600364000000   0.017000131000000</location>
+									<location>0.014000429999999999 -0.019600363999999999 0.017000131000000002</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14105,7 +14108,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.004562874372235  -0.015500299828339   0.007708598942641</location>
+									<location>-0.0045628743722350004 -0.015500299828339 0.0077085989426409996</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14140,7 +14143,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.005678107293823  -0.015958092584240   0.007694400538280</location>
+									<location>-0.0056781072938229997 -0.01595809258424 0.0076944005382800001</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14175,7 +14178,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.020182000000000  -0.019625900000000  -0.019384200000000</location>
+									<location>0.020181999999999999 -0.019625900000000002 -0.019384200000000001</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14210,7 +14213,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.001043400000000  -0.022911660000000  -0.029635800000000</location>
+									<location>-0.0010434000000000001 -0.02291166 -0.0296358</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14245,7 +14248,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.016946100000000  -0.022899450000000  -0.012177750000000</location>
+									<location>-0.016946099999999999 -0.022899449999999998 -0.012177749999999999</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14280,7 +14283,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.021550000000000  -0.018499900000000  -0.009220200000000</location>
+									<location>0.02155 -0.0184999 -0.0092201999999999996</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14315,7 +14318,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.019750000000000  -0.018499900000000  -0.008690200000000</location>
+									<location>0.01975 -0.0184999 -0.0086902000000000004</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14350,7 +14353,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.008267005932865  -0.020000452011490  -0.005386900573443</location>
+									<location>-0.0082670059328649997 -0.020000452011489998 -0.0053869005734429997</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14385,7 +14388,7 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>-0.009135805725550  -0.019507840446102  -0.003602975913682</location>
+									<location>-0.0091358057255500006 -0.019507840446102001 -0.0036029759136819999</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14414,13 +14417,13 @@
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_lateral_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.017787268416698  -0.019500363992739   0.020984645257322</location>
+									<location>0.017787268416698001 -0.019500363992738998 0.020984645257322</location>
 								</PathPoint>
 								<PathPoint name="men_TRANSVLIG-P2">
 									<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
 									<socket_parent_frame>/bodyset/meniscus_medial_r</socket_parent_frame>
 									<!--The fixed location of the path point expressed in its parent frame.-->
-									<location>0.023091527986648  -0.018499899953270  -0.009317803293137</location>
+									<location>0.023091527986648 -0.018499899953270001 -0.0093178032931370003</location>
 								</PathPoint>
 							</objects>
 						</PathPointSet>
@@ -14473,7 +14476,7 @@
 					<!--Combine the thickness and the average material properties between the Smith2018ContactMeshes for both meshes and use Bei & Fregly 2003 lumped parameter Elastic Foundation model.-->
 					<use_lumped_contact_model>true</use_lumped_contact_model>
 				</Smith2018ArticularContactForce>
-				<Smith2018ArticularContactForce name="femur_meniscus_medial_contact">
+				<Smith2018ArticularContactForce name="mf_med">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
@@ -14481,7 +14484,7 @@
 					<!--Path to a Component that satisfies the Socket 'target_mesh' of type Smith2018ContactMesh (description: Target mesh for collision detection.).-->
 					<socket_target_mesh>/contactgeometryset/femur_cartilage</socket_target_mesh>
 					<!--Path to a Component that satisfies the Socket 'casting_mesh' of type Smith2018ContactMesh (description: Ray casting mesh for collision detection.).-->
-					<socket_casting_mesh>/contactgeometryset/meniscus_medial_superior</socket_casting_mesh>
+					<socket_casting_mesh>/contactgeometryset/meniscus_med_sup</socket_casting_mesh>
 					<!--The minimum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection. Note this can be negative if proximity maps should include triangles that are not in contact.Default value set to 0.0 meters.-->
 					<min_proximity>0</min_proximity>
 					<!--The maximum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection.Default value set to 0.01 meters.-->
@@ -14491,7 +14494,7 @@
 					<!--Combine the thickness and the average material properties between the Smith2018ContactMeshes for both meshes and use Bei & Fregly 2003 lumped parameter Elastic Foundation model.-->
 					<use_lumped_contact_model>true</use_lumped_contact_model>
 				</Smith2018ArticularContactForce>
-				<Smith2018ArticularContactForce name="tibia_meniscus_medial_contact">
+				<Smith2018ArticularContactForce name="mt_med">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
@@ -14499,7 +14502,7 @@
 					<!--Path to a Component that satisfies the Socket 'target_mesh' of type Smith2018ContactMesh (description: Target mesh for collision detection.).-->
 					<socket_target_mesh>/contactgeometryset/tibia_cartilage</socket_target_mesh>
 					<!--Path to a Component that satisfies the Socket 'casting_mesh' of type Smith2018ContactMesh (description: Ray casting mesh for collision detection.).-->
-					<socket_casting_mesh>/contactgeometryset/meniscus_medial_inferior</socket_casting_mesh>
+					<socket_casting_mesh>/contactgeometryset/meniscus_med_inf</socket_casting_mesh>
 					<!--The minimum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection. Note this can be negative if proximity maps should include triangles that are not in contact.Default value set to 0.0 meters.-->
 					<min_proximity>0</min_proximity>
 					<!--The maximum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection.Default value set to 0.01 meters.-->
@@ -14509,7 +14512,7 @@
 					<!--Combine the thickness and the average material properties between the Smith2018ContactMeshes for both meshes and use Bei & Fregly 2003 lumped parameter Elastic Foundation model.-->
 					<use_lumped_contact_model>true</use_lumped_contact_model>
 				</Smith2018ArticularContactForce>
-				<Smith2018ArticularContactForce name="femur_meniscus_lateral_contact">
+				<Smith2018ArticularContactForce name="mf_lat">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
@@ -14517,7 +14520,7 @@
 					<!--Path to a Component that satisfies the Socket 'target_mesh' of type Smith2018ContactMesh (description: Target mesh for collision detection.).-->
 					<socket_target_mesh>/contactgeometryset/femur_cartilage</socket_target_mesh>
 					<!--Path to a Component that satisfies the Socket 'casting_mesh' of type Smith2018ContactMesh (description: Ray casting mesh for collision detection.).-->
-					<socket_casting_mesh>/contactgeometryset/meniscus_lateral_superior</socket_casting_mesh>
+					<socket_casting_mesh>/contactgeometryset/meniscus_lat_sup</socket_casting_mesh>
 					<!--The minimum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection. Note this can be negative if proximity maps should include triangles that are not in contact.Default value set to 0.0 meters.-->
 					<min_proximity>0</min_proximity>
 					<!--The maximum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection.Default value set to 0.01 meters.-->
@@ -14527,7 +14530,7 @@
 					<!--Combine the thickness and the average material properties between the Smith2018ContactMeshes for both meshes and use Bei & Fregly 2003 lumped parameter Elastic Foundation model.-->
 					<use_lumped_contact_model>true</use_lumped_contact_model>
 				</Smith2018ArticularContactForce>
-				<Smith2018ArticularContactForce name="tibia_meniscus_lateral_contact">
+				<Smith2018ArticularContactForce name="mt_lat">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Flag indicating whether the force is applied or not. If true the forceis applied to the MultibodySystem otherwise the force is not applied.NOTE: Prior to OpenSim 4.0, this behavior was controlled by the 'isDisabled' property, where 'true' meant that force was not being applied. Thus, if 'isDisabled' is true, then 'appliesForce` is false.-->
@@ -14535,7 +14538,7 @@
 					<!--Path to a Component that satisfies the Socket 'target_mesh' of type Smith2018ContactMesh (description: Target mesh for collision detection.).-->
 					<socket_target_mesh>/contactgeometryset/tibia_cartilage</socket_target_mesh>
 					<!--Path to a Component that satisfies the Socket 'casting_mesh' of type Smith2018ContactMesh (description: Ray casting mesh for collision detection.).-->
-					<socket_casting_mesh>/contactgeometryset/meniscus_lateral_inferior</socket_casting_mesh>
+					<socket_casting_mesh>/contactgeometryset/meniscus_lat_inf</socket_casting_mesh>
 					<!--The minimum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection. Note this can be negative if proximity maps should include triangles that are not in contact.Default value set to 0.0 meters.-->
 					<min_proximity>0</min_proximity>
 					<!--The maximum proximity that is valid between contacting meshes to limit the search distance along the casting_mesh normal ray used for collision detection.Default value set to 0.01 meters.-->
@@ -15272,11 +15275,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-femur-cartilage.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>5e6</elastic_modulus>
+					<elastic_modulus>5000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>true</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15316,11 +15319,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-tibia-cartilage.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>5e6</elastic_modulus>
+					<elastic_modulus>5000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>true</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15360,11 +15363,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-patella-cartilage.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>5e6</elastic_modulus>
+					<elastic_modulus>5000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>true</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15376,7 +15379,7 @@
 					<!--[x,y,z] scale factors applied to vertex locations of the mesh_file and mesh_back_file meshes.-->
 					<scale_factors>1 1 1</scale_factors>
 				</Smith2018ContactMesh>
-				<Smith2018ContactMesh name="meniscus_medial_superior">
+				<Smith2018ContactMesh name="meniscus_med_sup">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Path to a Component that satisfies the Socket 'frame' of type PhysicalFrame (description: The frame to which this geometry is attached.).-->
@@ -15404,11 +15407,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-medial-meniscus-superior.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>1e6</elastic_modulus>
+					<elastic_modulus>1000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>false</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15420,7 +15423,7 @@
 					<!--[x,y,z] scale factors applied to vertex locations of the mesh_file and mesh_back_file meshes.-->
 					<scale_factors>1 1 1</scale_factors>
 				</Smith2018ContactMesh>
-				<Smith2018ContactMesh name="meniscus_medial_inferior">
+				<Smith2018ContactMesh name="meniscus_med_inf">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Path to a Component that satisfies the Socket 'frame' of type PhysicalFrame (description: The frame to which this geometry is attached.).-->
@@ -15448,11 +15451,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-medial-meniscus-inferior.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>1e6</elastic_modulus>
+					<elastic_modulus>1000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>false</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15464,7 +15467,7 @@
 					<!--[x,y,z] scale factors applied to vertex locations of the mesh_file and mesh_back_file meshes.-->
 					<scale_factors>1 1 1</scale_factors>
 				</Smith2018ContactMesh>
-				<Smith2018ContactMesh name="meniscus_lateral_superior">
+				<Smith2018ContactMesh name="meniscus_lat_sup">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Path to a Component that satisfies the Socket 'frame' of type PhysicalFrame (description: The frame to which this geometry is attached.).-->
@@ -15492,11 +15495,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-lateral-meniscus-superior.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>1e6</elastic_modulus>
+					<elastic_modulus>1000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>false</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->
@@ -15508,7 +15511,7 @@
 					<!--[x,y,z] scale factors applied to vertex locations of the mesh_file and mesh_back_file meshes.-->
 					<scale_factors>1 1 1</scale_factors>
 				</Smith2018ContactMesh>
-				<Smith2018ContactMesh name="meniscus_lateral_inferior">
+				<Smith2018ContactMesh name="meniscus_lat_inf">
 					<!--List of components that this component owns and serializes.-->
 					<components />
 					<!--Path to a Component that satisfies the Socket 'frame' of type PhysicalFrame (description: The frame to which this geometry is attached.).-->
@@ -15536,11 +15539,11 @@
 					<!--Path to triangle mesh geometry file representing the contact surface (supports .obj, .stl, .vtp).-->
 					<mesh_file>smith2019-R-lateral-meniscus-inferior.stl</mesh_file>
 					<!--Uniform Elastic Modulus value for every triangle in mesh. The default value is 1000000.0 Pa.-->
-					<elastic_modulus>1e6</elastic_modulus>
+					<elastic_modulus>1000000</elastic_modulus>
 					<!--Uniform Poissons Ratio value for every triangle in mesh. The default value is 0.5.-->
-					<poissons_ratio>0.45</poissons_ratio>
+					<poissons_ratio>0.45000000000000001</poissons_ratio>
 					<!--Uniform thickness of elastic layer for entire mesh. The default value is 0.005 meters-->
-					<thickness>0.003</thickness>
+					<thickness>0.0030000000000000001</thickness>
 					<!--Compute the local thickness for each triangle in mesh_file by calculating the distance along a normal ray cast from the center of each triangle in the mesh_file to intersection with the mesh_back_file. If use_variable_thickness is true, mesh_back_file must be defined and the 'thickness' property value is not used.The Default value is false.-->
 					<use_variable_thickness>false</use_variable_thickness>
 					<!--Path to traingle mesh geometry file representing the backside of contact surface elastic layer (bone / backside of artifical component) mesh geometry file (supports .obj, .stl, .vtp). -->

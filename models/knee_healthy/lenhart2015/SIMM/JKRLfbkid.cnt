@@ -1,0 +1,54 @@
+useGPUcompute 0
+
+begincontact mesh_mesh
+model deanonlinear
+name tf
+elastic_modulus        5000000.000000
+poissons_ratio               0.450000
+normal_damping               0.000000
+damping                      0.000000
+min_penetration              0.000001
+max_penetration              0.010000
+min_thickness                0.001000   //single mesh thickness, only affects variable cartilage thickness
+max_thickness                0.006000   //single mesh thickness, only affects variable cartilage thickness
+full_damping_depth           0.000500
+cartilage_thickness          0.006000
+friction_coefficient         0.000000
+friction_transvel            0.010000
+mesh1 femur_distal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\07_27_2015\asc\ACLC01-R-femur-cart.asc
+mesh1back femur_distal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\ACLC01-R-femur-060914.asc
+mesh2 tibia_proximal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\07_27_2015\asc\ACLC01-R-tibia-cart.asc
+mesh2back tibia_proximal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\ACLC01-R-tibia-111214.asc
+//mesh2_var_prop C:\simtk\uwmodels_2\projects\fbknee\data\benchmarks\walking\model\tibia.vmp
+scale1         1.000000000000   1.000000000000   1.000000000000
+scale2         1.000000000000   1.000000000000   1.000000000000
+offset1         0.000000000000   0.000000000000   0.000000000000
+offset2         0.000000000000   0.000000000000   0.000000000000
+gencoords knee_tx_r knee_ty_r knee_tz_r knee_flex_r knee_add_r knee_rot_r
+endcontact
+
+begincontact mesh_mesh
+model deanonlinear
+name pf
+elastic_modulus        5000000.000000
+poissons_ratio               0.450000
+normal_damping               0.000000
+damping                      0.000000
+min_penetration              0.000001
+max_penetration              0.010000
+min_thickness                0.001000   //single mesh thickness, only affects variable cartilage thickness
+max_thickness                0.006000   //single mesh thickness, only affects variable cartilage thickness
+full_damping_depth           0.000500
+cartilage_thickness          0.007000
+friction_coefficient         0.000000
+friction_transvel            0.010000
+mesh1 femur_distal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\07_27_2015\asc\ACLC01-R-femur-cart.asc
+mesh1back femur_distal_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\ACLC01-R-femur-060914.asc
+mesh2 patella_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\07_27_2015\asc\ACLC01-R-patella-cart.asc
+mesh2back patella_r C:\simtk\uwmodels_2\projects\fbknee\model\geometry\ACLC01\ACLC01-R-patella-060914.asc
+scale1         1.000000000000   1.000000000000   1.000000000000
+scale2         1.000000000000   1.000000000000   1.000000000000
+offset1         0.000000000000   0.000000000000   0.000000000000
+offset2         0.000000000000   0.000000000000   0.000000000000
+gencoords pf_tx_r pf_ty_r pf_tz_r pf_flex_r pf_tilt_r pf_rot_r
+endcontact

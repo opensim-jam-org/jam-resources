@@ -1,0 +1,218 @@
+/* Passive Joint Torque File
+  This file describes the parameters of passive torques acting about joint axes of
+  specified generalized coordinates. 
+  Passive torques are calculated according to the following equation
+  	T = k0 + k1*exp(r1(q-phi1)) + k2*exp(r2(q-phi2)) - damping*u
+  	where
+  		q is the generalized coordinate in radians
+  		u is the corresponding generalized speed in rad/sec
+  		phi1, phi2 are given in radians
+*/
+
+
+ 
+/* ======================================================== */
+/* HIP JOINT */
+/* ======================================================== */
+
+
+beginpassivetorque hip_flex_r
+k0	0.0
+k1	0.0 /* -1.0 */
+r1	5	
+phi1	1.5	/* 101.9 deg */
+k2	0.0
+r2	-50.0
+phi2	0.0	/* 12.8 */
+damping	0.1 /* 0.1 */
+endpassivetorque
+
+beginpassivetorque hip_add_r
+k0	0.0
+k1	0.0
+r1	5	
+phi1	1.5
+k2	0.0
+r2	-50.0
+phi2	0.0
+damping	0.1
+endpassivetorque
+
+beginpassivetorque hip_rot_r
+k0	0.0
+k1	0.0
+r1	5	
+phi1	1.5
+k2	0.0
+r2	-50.0
+phi2	0.0
+damping	0.1
+endpassivetorque
+
+/* ======================================================== */
+/* KNEE JOINT */
+/* ======================================================== */
+
+beginpassivetorque knee_flex_r
+k0	0.0
+k1	0.0 /* -1.0 */
+r1	5	
+phi1	1.5	/* 101.9 deg */
+k2	0.0
+r2	-50.0
+phi2	0.0	/* 12.8 */
+damping	0.1 /* 0.1 */
+endpassivetorque
+
+beginpassivetorque knee_add_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping 4.0	/* 2.0 */
+endpassivetorque
+
+beginpassivetorque knee_rot_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping 5.0 /* 2.0 */
+endpassivetorque
+
+beginpassivetorque knee_tx_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	300.0 /* 200. */
+endpassivetorque
+
+beginpassivetorque knee_ty_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	300. /* 200. */
+endpassivetorque
+
+beginpassivetorque knee_tz_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	300. /* 200. */
+endpassivetorque
+
+
+beginpassivetorque pf_tx_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	50.0 /* 100.0 */
+endpassivetorque
+
+
+beginpassivetorque pf_ty_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	50.0 /* 100.0 */
+endpassivetorque
+
+beginpassivetorque pf_tz_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	50.0 /* 100.0 */
+endpassivetorque
+
+
+beginpassivetorque pf_rot_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	10.0 /* 2.0 */
+endpassivetorque
+
+
+beginpassivetorque pf_tilt_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	10.0 /* 2.0 */
+endpassivetorque
+
+beginpassivetorque pf_flex_r
+k0	0.0
+k1	0.0
+r1	1.0	
+phi1	1.0
+k2	0.0
+r2	1.0
+phi2	0.0
+damping	0.2 /* 1.0 */
+endpassivetorque
+
+/* ======================================================== */
+/* ANKLE JOINT */
+/* ======================================================== */
+
+beginpassivetorque ankle_flex_r
+k0	0.0
+k1	0.0 /* -1.0 */
+r1	0.	
+phi1	0.
+k2	0.0
+r2	0.0
+phi2	0.0
+damping	0.1
+endpassivetorque
+
+/*
+beginpassivetorque subt_angle_r
+k0	0.0
+k1	0.0
+r1	0.	
+phi1	0.
+k2	0.0
+r2	0.0
+phi2	0.0
+damping	0.5
+endpassivetorque
+*/

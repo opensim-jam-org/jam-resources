@@ -11,7 +11,9 @@ Created on Tue Sep  7 09:34:41 2021
 # =============================================================================
 
 import os
-os.add_dll_directory("C:\\Users\\csmith\\Downloads\\opensim-core-4.3.1-2021-09-15-483b312fc-win\\opensim-core-4.3.1-2021-09-15-483b312fc\\bin")
+#os.add_dll_directory("C:\\Users\\csmith\\Downloads\\opensim-core-4.3.1-2021-09-15-483b312fc-win\\opensim-core-4.3.1-2021-09-15-483b312fc\\bin")
+os.add_dll_directory("C:\\Users\\csmith\\github\\opensim-core-jam\\source-install\\bin")
+
 import opensim as osim
 import numpy as np
 
@@ -114,8 +116,8 @@ forsim.set_start_time(-1)
 forsim.set_stop_time(-1)
 forsim.set_integrator_accuracy(1e-2) # Note this should be 1e-6 for research
 forsim.set_constant_muscle_control(0.02) # Set all muscles to 2% activation to represent passive state
-forsim.set_ignore_activation_dynamics(True)
-forsim.set_ignore_tendon_compliance(True)
+# forsim.set_ignore_activation_dynamics(True)
+# forsim.set_ignore_tendon_compliance(True)
 forsim.set_unconstrained_coordinates(0,'/jointset/knee_r/knee_add_r')
 forsim.set_unconstrained_coordinates(1,'/jointset/knee_r/knee_rot_r')
 forsim.set_unconstrained_coordinates(2,'/jointset/knee_r/knee_tx_r')
@@ -132,7 +134,7 @@ forsim.set_use_visualizer(True)
 forsim.printToXML('./inputs/forsim_settings.xml')
 
 print('Running Forsim Tool...')
-# forsim.run();
+#forsim.run();
 
 ### Perform Analysis with JointMechanicsTool
 
@@ -161,9 +163,12 @@ jnt_mech.set_use_visualizer(useVisualizer)
 jnt_mech.printToXML("./inputs/joint_mechanics_settings.xml")
 
 print('Running JointMechanicsTool...')
-# jnt_mech.run()
+jnt_mech.run()
 
-m = osim.Model()
-c = osim.Smith2018ContactMesh('test_mesh','C:\\Users\\csmith\\github\\jam-resources\\models\\knee_healthy\\lenhart2015\\Geometry\lenhart2015-R-femur-cartilage.stl',m.getGround())
+#model_file = "C:\\OpenSim 4.3\\resources\\Models\\Gait2354_Simbody\\gait2354_simbody.osim";
+m = osim.Model(model_file)
+#c = osim.Smith2018ContactMesh('test_mesh','C:\\Users\\csmith\\github\\jam-resources\\models\\knee_healthy\\lenhart2015\\Geometry\lenhart2015-R-femur-cartilage.stl',m.getGround())
 
-m.addComponent(c)
+#m.addComponent(c)
+state = m.initSystem()
+m.realizeDynamics(state)

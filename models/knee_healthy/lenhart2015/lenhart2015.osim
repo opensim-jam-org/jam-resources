@@ -22,9 +22,9 @@
 		<!--Acceleration due to gravity, expressed in ground.-->
 		<gravity>0 -9.8066499999999994 0</gravity>
 		<!--Credits (e.g., model author names) associated with the model.-->
-		<credits>Lenhart, R. L., Kaiser, J., Smith, C. R.,  Thelen, D. G. Details of the model development are listed in the publication. A knee model with 6 DOF tibiofemoral and patellofemoral joints was built from MRI. Ligaments and cartilage contact are explicitly represented with force components. The knee model is integrated into a full body model based on the Arnold, Ann Biomed Eng, 2011 model. Some modifications to the lower extremity muscle paths and properties were made to improve computaitonal performance and enable simulations of dynamic tasks. In the SIMM to OpenSim conversion, the two patella frames were replaced with a single frame located at the patella COM.</credits>
+		<credits>Lenhart, R. L., Kaiser, J., Smith, C. R., Thelen, D. G. Details of the model development are listed in the publication. A knee model with 6 DOF tibiofemoral and patellofemoral joints was built from MRI. Ligaments and cartilage contact are explicitly represented with force components. The knee model is integrated into a full body model based on the Arnold, Ann Biomed Eng, 2011 model. Some modifications to the lower extremity muscle paths and properties were made to improve computaitonal performance and enable simulations of dynamic tasks. In the SIMM to OpenSim conversion, the two patella frames were replaced with a single frame located at the patella COM.</credits>
 		<!--Publications and references associated with the model.-->
-		<publications>Lenhart, R. L., Kaiser, J., Smith, C. R.,  Thelen, D. G. (2015). Prediction and validation of load-dependent behavior of the tibiofemoral and patellofemoral joints during movement. Annals of biomedical engineering, 43(11), 2675-2685.</publications>
+		<publications>Lenhart, R. L., Kaiser, J., Smith, C. R., Thelen, D. G. (2015). Prediction and validation of load-dependent behavior of the tibiofemoral and patellofemoral joints during movement. Annals of biomedical engineering, 43(11), 2675-2685.</publications>
 		<!--Units for all lengths.-->
 		<length_units>m</length_units>
 		<!--Units for all forces.-->
@@ -7108,9 +7108,7 @@
 		</ControllerSet>
 		<!--Constraints in the model.-->
 		<ConstraintSet name="constraintset">
-			<objects>
-
-			</objects>
+			<objects />
 		</ConstraintSet>
 		<!--Forces in the model (includes Actuators).-->
 		<ForceSet name="forceset">
@@ -8090,7 +8088,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="gaslat_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="gaslat_r_TendonForceLengthCurve">
@@ -8166,7 +8165,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="gasmed_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="gasmed_r_TendonForceLengthCurve">
@@ -9684,7 +9684,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="recfem_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="recfem_r_TendonForceLengthCurve">
@@ -9968,7 +9969,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="soleus_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="soleus_r_TendonForceLengthCurve">
@@ -10273,7 +10275,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vasint_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vasint_r_TendonForceLengthCurve">
@@ -10353,7 +10356,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vaslat_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vaslat_r_TendonForceLengthCurve">
@@ -10433,7 +10437,8 @@
 					</ForceVelocityCurve>
 					<!--Passive-force-length curve.-->
 					<FiberForceLengthCurve name="vasmed_r_FiberForceLengthCurve">
-						<!--All properties of this object have their default values.-->
+						<!--Fiber strain at a tension of 1 normalized force-->
+						<strain_at_one_norm_force>2</strain_at_one_norm_force>
 					</FiberForceLengthCurve>
 					<!--Tendon-force-length curve.-->
 					<TendonForceLengthCurve name="vasmed_r_TendonForceLengthCurve">
@@ -13404,7 +13409,7 @@
 					<!--Coordinate value at which spring produces no force.-->
 					<rest_length>0</rest_length>
 					<!--Damping constant.-->
-					<viscosity>30</viscosity>
+					<viscosity>50</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_ty_r">
 					<!--List of components that this component owns and serializes.-->
@@ -13418,7 +13423,7 @@
 					<!--Coordinate value at which spring produces no force.-->
 					<rest_length>0</rest_length>
 					<!--Damping constant.-->
-					<viscosity>30</viscosity>
+					<viscosity>50</viscosity>
 				</SpringGeneralizedForce>
 				<SpringGeneralizedForce name="pf_tz_r">
 					<!--List of components that this component owns and serializes.-->
@@ -13432,7 +13437,7 @@
 					<!--Coordinate value at which spring produces no force.-->
 					<rest_length>0</rest_length>
 					<!--Damping constant.-->
-					<viscosity>30</viscosity>
+					<viscosity>50</viscosity>
 				</SpringGeneralizedForce>
 			</objects>
 			<groups>

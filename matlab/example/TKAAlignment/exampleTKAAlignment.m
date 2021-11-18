@@ -8,7 +8,7 @@ close all
 import org.opensim.modeling.*
 Logger.setLevelString('info');
 
-useVisualizer = false;
+useVisualizer = true;
 
 model_file = '../../../models/knee_tka/grand_challenge/DM/DM.osim';
 geometry_path='../../../models/knee_tka/grand_challenge/DM/Geometry';
@@ -24,6 +24,9 @@ end
 if(exist('./results/graphics','dir')~=7)
     mkdir('./results/graphics')
 end
+if(exist(['./results/ligament-balance' ],'dir')~=7)
+    mkdir(['./results/ligament-balance' ])
+end
 if(exist(['./results/comak-inverse-kinematics' ],'dir')~=7)
     mkdir(['./results/comak-inverse-kinematics' ])
 end
@@ -33,40 +36,152 @@ end
 if(exist('./results/joint-mechanics' ,'dir')~=7)
     mkdir('./results/joint-mechanics' )
 end
-sim_names = {'nominal','valgus_3','varus_3','valgus_6','varus_6',};
-femur_x_rot = [0 0 0 0 0] * pi/180;
-tibia_x_rot = [0 3 -3 6 -6] * pi/180;
-nSim = length(sim_names);
+% sim_names = {'nominal','valgus_3','varus_3','valgus_6','varus_6',};
+% femur_x_rot = [0 0 0 0 0] * pi/180;
+% tibia_x_rot = [0 3 -3 6 -6] * pi/180;
+sim_names = {'varus_6','valgus_6','nominal'};
+femur_x_rot = [-3 3 0 0] * pi/180;
+tibia_x_rot = [3 -3 0] * pi/180;
+nSim = 2;%length(sim_names);
+
+secondary_coordinates = {...
+    'knee_add_r',...
+    'knee_rot_r',...;
+    'knee_tx_r',...;
+    'knee_ty_r',...;
+    'knee_tz_r',...;
+    'pf_flex_r',...;
+    'pf_rot_r',...;
+    'pf_tilt_r',...;
+    'pf_tx_r',...;
+    'pf_ty_r',...;
+    'pf_tz_r',...;
+    };
+
+numSecondaryCoordinates = length(secondary_coordinates);
+secondary_joints ={...
+    'knee_r',...
+    'knee_r',...;
+    'knee_r',...;
+    'knee_r',...;
+    'knee_r',...;
+    'pf_r',...;
+    'pf_r',...;
+    'pf_r',...;
+    'pf_r',...;
+    'pf_r',...;
+    'pf_r',...;
+    };
 
 %% Setup outputs
 results_basename = 'walking_tka';
 for i = 1:nSim      
     model_name{i} = ['DM_' sim_names{i}];
+    lig_balance_result_dir{i} = ['./results/ligament-balance/' sim_names{i}];
     ik_result_dir{i} = ['./results/comak-inverse-kinematics/' sim_names{i}];
     comak_result_dir{i} = ['./results/comak/' sim_names{i}];
     jnt_mech_result_dir{i} = ['./results/joint-mechanics/' sim_names{i}];
 end
 
-%% Perform Simulations
-if(true)
-    for i = 1:nSim
-        % Change Alignment in Model
-        model = Model(model_file);
-        state = model.initSystem();
-        model.setName(model_name{i});
-        femur_mesh = Smith2018ContactMesh.safeDownCast(...
-            model.getComponent('/contactgeometryset/femur_implant'));
+%% Create Alignment Models and Perform Ligament Balancing
+model = Model(model_file);
+state = model.initSystem();
+frc_set = model.getForceSet();      
 
-        tibia_mesh = Smith2018ContactMesh.safeDownCast(...
-            model.getComponent('/contactgeometryset/tibia_implant'));
 
-        femur_mesh.set_orientation(Vec3(femur_x_rot(i),0,0));
-        tibia_mesh.set_orientation(Vec3(tibia_x_rot(i),0,0));
+numLigaments = 0;
+for i = 0:frc_set.getSize()-1
+   frc = frc_set.get(i);
+   if(strcmp(frc.getConcreteClassName(),'Blankevoort1991Ligament'))
+       lig = Blankevoort1991Ligament.safeDownCast(frc);
+       numLigaments = numLigaments + 1;
+       default_ref_strain(numLigaments) = lig.getStrain(state);
+   end
+   
+end
+    
+for i = 1:nSim
+    % Change Alignment in Model
+    model = Model(model_file);
+    state = model.initSystem();
+    model.setName(model_name{i});
+    
+    femur_mesh = Smith2018ContactMesh.safeDownCast(...
+        model.getComponent('/contactgeometryset/femur_implant'));
 
-        new_model_file =['./inputs/DM_' sim_names{i} '.osim'];
+    tibia_mesh = Smith2018ContactMesh.safeDownCast(...
+        model.getComponent('/contactgeometryset/tibia_implant'));
+
+    femur_mesh.set_orientation(Vec3(femur_x_rot(i),0,0));
+    tibia_mesh.set_orientation(Vec3(tibia_x_rot(i),0,0));
+    
+    % try to guess final alignment to improve contact at 1st time step
+    def_add_value = (tibia_x_rot(i) - femur_x_rot(i))/2;
+    model.getCoordinateSet().get('knee_add_r').setDefaultValue(def_add_value);
+
+    % Ligament Balancing
+    for j=1:2
+        basename = ['ligament_balance_' int2str(j)];
+
+        % Settle Knee into equilibrium position for new implant alignment
+        clear lig_forsim;
         
+        lig_forsim = ForsimTool();
+        lig_forsim.setModel(model);
+        lig_forsim.set_results_directory(lig_balance_result_dir{i});
+        lig_forsim.set_results_file_basename(basename);
         
-%         frc_set = model.getForceSet();
+        lig_forsim.set_start_time(0);
+        lig_forsim.set_stop_time(2);
+        lig_forsim.set_integrator_accuracy(1e-3); 
+        lig_forsim.set_constant_muscle_control(0.02); %Set all muscles to 2% activation to represent passive state
+        lig_forsim.set_use_activation_dynamics(true);
+        lig_forsim.set_use_tendon_compliance(false);
+        lig_forsim.set_use_muscle_physiology(true);
+        lig_forsim.set_equilibrate_muscles(true);
+
+        for s = 1:numSecondaryCoordinates
+            lig_forsim.set_unconstrained_coordinates(s-1,['/jointset/' secondary_joints{s} '/' secondary_coordinates{s}]);
+        end
+
+        lig_forsim.set_use_visualizer(useVisualizer);
+        lig_forsim.print('./inputs/ligament_balance_settings.xml');
+
+        disp('Running ForsimTool to settle knee. iteration: ')
+        lig_forsim.run();            
+
+        % Reset Ligament Reference Strains
+        lig_balance_states_sto = [lig_balance_result_dir{i} '/' basename '_states.sto'];
+        lig_balance_results = osimTableToStruct(TimeSeriesTable(lig_balance_states_sto));           
+
+        for s = 1:numSecondaryCoordinates
+            label = ['a_jointset_' secondary_joints{s} '_' secondary_coordinates{s} '_value'];
+            value = lig_balance_results.(label);
+            value = value(end);
+            coord = model.getCoordinateSet().get(secondary_coordinates{s});
+            coord.setValue(state,value);
+            coord.setDefaultValue(value);
+        end
+
+        
+        frc_set = model.getForceSet(); 
+        nLig = 0;
+        for f = 0:frc_set.getSize()-1
+           frc = frc_set.get(f);
+           if(strcmp(frc.getConcreteClassName(),'Blankevoort1991Ligament'))
+               lig = Blankevoort1991Ligament.safeDownCast(frc);
+               nLig = nLig + 1;
+               lig.setSlackLengthFromReferenceStrain(default_ref_strain(nLig),state);
+           end
+        end
+    end
+
+    model.finalizeConnections();
+    new_model_file =['./inputs/DM_' sim_names{i} '.osim'];
+    model.print(new_model_file); 
+end
+    
+    %         frc_set = model.getForceSet();
 %         for f = 0:frc_set.getSize()-1
 %             frc = frc_set.get(f);
 %             
@@ -78,12 +193,15 @@ if(true)
 %                 end
 %             end
 %         end
-        model.print(new_model_file);      
 
-
+%% Perform Simulations
+if(true)     
+    for i = 1:nSim        
+        new_model_file =['./inputs/DM_' sim_names{i} '.osim'];
+        
         % COMAK Inverse Kinematics
         comak_ik = COMAKInverseKinematicsTool();
-        comak_ik.setModel(model);
+        %comak_ik.setModel(model);
 
         comak_ik.set_model_file(new_model_file);
         comak_ik.set_results_directory(ik_result_dir{i});
@@ -179,7 +297,7 @@ if(true)
         comak_ik.print(['./inputs/comak_inverse_kinematics_settings.xml']);
 
         disp('Running COMAKInverseKinematicsTool...')
-          comak_ik.run();
+        comak_ik.run();
 
 
         jmt_sweep = JointMechanicsTool();        
@@ -198,7 +316,7 @@ if(true)
         jmt_sweep.set_ligament_outputs(1,'strain');
         jmt_sweep.set_muscles(0,'none');
         jmt_sweep.set_muscle_outputs(0,'all');
-        jmt_sweep.set_write_vtp_files(true);
+        jmt_sweep.set_write_vtp_files(false);
         jmt_sweep.set_h5_kinematics_data(true);
         jmt_sweep.set_h5_states_data(false);
         jmt_sweep.set_write_h5_file(true);
@@ -399,12 +517,12 @@ close all;
 
 for i = 1:nSim
     model_name{i} = ['DM_' sim_names{i}];
-    sweep_files{i} = [ik_result_dir{i} '/' results_basename '_secondary_constraint_sweep.h5'];
+%     sweep_files{i} = [ik_result_dir{i} '/' results_basename '_secondary_constraint_sweep.h5'];
     comak_files{i} = [ jnt_mech_result_dir{i} '/' results_basename '.h5'];    
 end
 
-sweep_results = jam_analysis(model_name,sweep_files);
-comak_results = jam_analysis(model_name,comak_files);
+% sweep_results = jam_analysis(sweep_files);
+comak_results = jam_analysis(comak_files);
 
 
 line_type = {'-','-.','-.','-*','-*'};
@@ -431,7 +549,7 @@ sec_coords = {...
 for i = 1:length(sec_coords)
     figure('name',sec_coords{i})
     hold on
-    for n=1:comak_results.nFiles
+    for n=1:comak_results.num_files
         plot(comak_results.coordinateset.(sec_coords{i}).value(:,n),line_type{n});
     end
 
@@ -455,7 +573,7 @@ for i = 1:length(ligament_names)
     fiber_names = fieldnames(comak_results.forceset.Blankevoort1991Ligament);
 
     fibers = fiber_names(contains(fiber_names,ligament_names{i}));
-    for n=1:comak_results.nFiles
+    for n=1:comak_results.num_files
         data = 0;
         for k = 1:length(fibers)
             data = data + comak_results.forceset.Blankevoort1991Ligament.(fibers{k}).total_force(:,n);
@@ -476,7 +594,7 @@ if true
     comp = {'X','Y','Z'};
     for i = 1:3
         subplot(1,3,i);hold on
-        for n=1:comak_results.nFiles
+        for n=1:comak_results.num_files
             plot(comak_results.forceset.Smith2018ArticularContactForce.pf_contact.patella_implant.total_contact_force(i,:,n),line_type{n});
         end
         title(['PF Contact ' comp{i}])
@@ -507,19 +625,19 @@ if true
 %     end
     for i = 2%1:3
         subplot(1,3,1);hold on
-        for n=1:comak_results.nFiles
-            plot(comak_results.forceset.Smith2018ArticularContactForce.knee_contact.tibia_implant.total_contact_force(i,:,n),line_type{n});
+        for n=1:comak_results.num_files
+            plot(comak_results.forceset.Smith2018ArticularContactForce.knee_contact.tibia_implant.total_contact_force(:,i,n),line_type{n});
         end
         title(['Total TF Contact ' comp{i}])
 
         subplot(1,3,2);hold on
-        for n=1:comak_results.nFiles
+        for n=1:comak_results.num_files
             plot(comak_results.forceset.Smith2018ArticularContactForce.knee_contact.tibia_implant.region(6).regional_contact_force(:,i,n),line_type{n});
         end
         title(['Medial TF Contact ' comp{i}])
 
         subplot(1,3,3);hold on
-        for n=1:comak_results.nFiles
+        for n=1:comak_results.num_files
             plot(comak_results.forceset.Smith2018ArticularContactForce.knee_contact.tibia_implant.region(5).regional_contact_force(:,i,n),line_type{n});
         end
         title(['Lateral TF Contact ' comp{i}])
@@ -529,13 +647,13 @@ if true
     % Plot COMAK Convergence
     figure('name','Comak Convergence')
     subplot(2,1,1);hold on
-    for n=1:comak_results.nFiles
+    for n=1:comak_results.num_files
         plot(comak_results.comak.max_udot_error(:,n),line_type{n});
     end
     title('max udot error')
 
     subplot(2,1,2);hold on
-    for n=1:comak_results.nFiles
+    for n=1:comak_results.num_files
         plot(comak_results.comak.iterations(:,n),line_type{n});
     end
     title('iterations')
