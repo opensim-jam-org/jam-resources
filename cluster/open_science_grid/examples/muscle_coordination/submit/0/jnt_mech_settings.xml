@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSimDocument Version="40000">
+	<JointMechanicsTool>
+		<!--Path to .osim file to use in analysis.-->
+		<model_file>./shared/smith2019.osim</model_file>
+		<!--Path to storage file (.sto) containing the model states vs time for the simulation to be analyzed. This can contain coordinate (values and speed) muscle states.-->
+		<input_states_file>./results/comak/walking_states.sto</input_states_file>
+		<!--Set whether muscle force-length and force-velocity properties should be used. If false, muscle force will be calculated using: Force = activation * max_isometric_force(). Thus, the value should be false if analyzing COMAK results. The default value is true.-->
+		<use_muscle_physiology>false</use_muscle_physiology>
+		<!--Path to storage file (.sto) containing activations vs time for muscles in the model. The overrideActuation function will be used to set the forces in the model for any actuator listed in this file, thus the states for these actuators listed in the input_states_file will be ignored. For muscles, the force-length-velocity is ignored and thus F = a * F_max_iso.-->
+		<input_activations_file>./results/comak/walking_activations.sto</input_activations_file>
+		<!--Path to storage file (.sto) convergence metrics vs time for comak results to be written to the .h5 file.-->
+		<input_comak_convergence_file>./results/comak/walking_convergence.sto</input_comak_convergence_file>
+		<!--Path to storage file (.sto) containing results from the inverse dynamics tool.-->
+		<input_inverse_dynamics_file>./results/inverse-dynamics/walking_inverse_dynamics.sto</input_inverse_dynamics_file>
+		<!--Path to folder where the results files will be written.-->
+		<results_directory>./results/joint-mechanics</results_directory>
+		<!--Prefix to each results file name.-->
+		<results_file_basename>walking</results_file_basename>
+		<!--Time to start the analysis. Set to -1 to use initial frame in states_file. The default value is -1.-->
+		<start_time>1.26</start_time>
+		<!--Time to stop the analysis. Set to -1 to use last frame in states_file. The default value is -1.-->
+		<stop_time>2.3199999999999998</stop_time>
+		<!--Time step size to report results, set to -1 to use steps directly from the states_file. The default value is -1.-->
+		<resample_step_size>-1</resample_step_size>
+		<!--Resample to 101 equally spaced time steps (percentage of activity cycle). Note: If true, this overrides resample_step_size. The default value is false.-->
+		<normalize_to_cycle>true</normalize_to_cycle>
+		<!--Apply IIR lowpass butterworth filter to the input Coordinate values. If set to -1, no filtering is applied. The default value is -1.-->
+		<lowpass_filter_frequency>-1</lowpass_filter_frequency>
+		<!--Print a .sto file with the processed (cut, resampled, normalized, and filtered) kinematics used for posing the model through out the analysis.-->
+		<print_processed_kinematics>false</print_processed_kinematics>
+		<!--Paths to Coordinate components to be recorded in .h5 files. Options: 'none','all', or a list of Coordinate component paths. The default value is 'all'.-->
+		<coordinates>all</coordinates>
+		<!--Coordinate outputs to be recorded in .h5 files. Options: 'none','all', 'value','speed', or 'id_generalized_force' if the input_inverse_dynamics_file is set. The default value is 'all'.-->
+		<coordinate_outputs>value id_generalized_force</coordinate_outputs>
+		<!--Paths to Smith2018ArticularContactForce components to be recorded. Options: 'none','all', or a list of Smith2018ArticularContactForce component paths. The default value is 'all'.-->
+		<contacts>all</contacts>
+		<!--Names of Smith2018ArticularContactForce outputs that will be written to the results files. Options: 'none','all', or list of individual output names.The default value is 'all'.-->
+		<contact_outputs>casting_regional_center_of_pressure casting_regional_contact_area casting_regional_contact_force casting_regional_contact_moment casting_regional_max_pressure casting_regional_mean_pressure casting_total_center_of_pressure casting_total_contact_area casting_total_contact_force casting_total_contact_moment casting_total_max_pressure casting_total_mean_pressure target_total_center_of_pressure target_total_contact_area target_total_contact_force target_total_contact_moment target_total_max_pressure target_total_mean_pressure</contact_outputs>
+		<!--Names of Smith2018ArticularContactForce properties whose value will be written for each triangle in the mesh to the results files. Options: 'none','thickness','elastic modulus','poisson ratio','area' or 'all'. The default value is 'none'.-->
+		<contact_mesh_properties>none</contact_mesh_properties>
+		<!--Paths of Blankevoort1991Ligament components to be recorded. Options: 'none','all', or a list of Blankevoort1991Ligament component paths. The default value is 'none'.-->
+		<ligaments>all</ligaments>
+		<!--Names of Blankevoort1991Ligament outputs that will be written to the results files. Options: 'none','all', or list of individual output names. The default value is 'all'.-->
+		<ligament_outputs>total_force strain</ligament_outputs>
+		<!--Paths to Muscle components to be recorded. Options: 'none','all', or a list of Muscle component paths. The default value is 'none'.-->
+		<muscles>all</muscles>
+		<!--Names of Muscle component outputs that will be written to the results files. Options: 'none','all', or list of individual output names. The default value is 'all'.-->
+		<muscle_outputs>activation actuation</muscle_outputs>
+		<!--Paths to the Body components that contain attached geometry Mesh components (i.e. bone meshes) to be recorded. Options: 'none','all', or a list of Frame component paths. The default value is 'none'.-->
+		<attached_geometry_bodies>none</attached_geometry_bodies>
+		<!--Body or Frame to use as reference frame for computing the model position in output results files (.vtp and .h5).Options: 'ground' or '/path/to/Frame-->
+		<output_position_frame>ground</output_position_frame>
+		<!--Body or Frame to use as reference frame for computing the model orientaton in output results files (.vtp and .h5).Options: 'ground' or '/path/to/Frame' -->
+		<output_orientation_frame>ground</output_orientation_frame>
+		<!--Write .vtp files for visualization. The default value is true.-->
+		<write_vtp_files>false</write_vtp_files>
+		<!--Write .vtp files in 'ascii' (can edit in text editor) or 'binary' (more compact and can be read faster) formats. The default value is binary-->
+		<vtp_file_format>binary</vtp_file_format>
+		<!--Write binary .h5 file-->
+		<write_h5_file>true</write_h5_file>
+		<!--Write states data to .h5 file-->
+		<h5_states_data>false</h5_states_data>
+		<!--Write kinematics data to .h5 file-->
+		<h5_kinematics_data>true</h5_kinematics_data>
+		<!--Write file containing the transformation matrix for each body relative to output_frame and output_origin.-->
+		<write_transforms_file>false</write_transforms_file>
+		<!--File type for transforms_file options are 'csv' or 'sto'.-->
+		<output_transforms_file_type>sto</output_transforms_file_type>
+		<!--Use the SimTK visualizer to display the model posed at each time step.  The default value is false.-->
+		<use_visualizer>false</use_visualizer>
+		<!--Define how detailed the output to console should be. 0 - silent. The default value is 0.-->
+		<verbose>0</verbose>
+	</JointMechanicsTool>
+</OpenSimDocument>

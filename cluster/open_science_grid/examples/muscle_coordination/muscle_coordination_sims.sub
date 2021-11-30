@@ -1,0 +1,28 @@
+# template.sub
+# starter submit file for CHTC jobs
+
+universe = vanilla
+#log = job_$(Cluster).log
+#error = job_$(Cluster)_$(Process).err
+#output = job_$(Cluster)_$(Process).out
+
+executable = ./submit/run_walking.sh
+arguments = 
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files =  comak_settings.xml,inverse_dynamics_settings.xml,jnt_mech_settings.xml, ../shared.tar.gz, ../run_walking.sh
+
+#transfer_output_remaps = "walking.h5.tar.gz = ../../results/$(Process)/walking.h5.tar.gz; results.tar.gz = ../../results/$(Process)/results.tar.gz; job_$(Cluster).log = ../../results/$(Process)/job.log; job_$(Cluster)_$(Process).err = ../../results/$(Process)/job.err; job_$(Cluster)_$(Process).out = ../../results/$(Process)/job.out"
+transfer_output_remaps = "walking.h5.tar.gz = ../../results/$(Process)/walking.h5.tar.gz"
+
+request_cpus = 1
+request_memory = 4GB
+request_disk = 4GB
+
+initialdir = ./submit/$(Process)
+
++WantFlocking = true
++WantGlideIn = true
+
+queue 10000

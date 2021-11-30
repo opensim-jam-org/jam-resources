@@ -1,0 +1,18 @@
+# Software build file
+
+universe = vanilla
+log = compile_opensim_jam.log
+#error = compile_opensim_jam.err
+#output = compile_opensim_jam.out
+
+# change the name of the file to be the name of your source code
+transfer_input_files = compile_opensim_jam.sh
+executable = compile_opensim_jam.sh
+
++IsBuildJob = true
+requirements = (OpSysMajorVer =?= 7)
+request_cpus = 8
+request_memory = 20GB
+request_disk = 100GB
+
+queue 
