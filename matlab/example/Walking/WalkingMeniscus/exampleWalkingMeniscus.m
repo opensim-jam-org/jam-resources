@@ -1,7 +1,7 @@
 %% Setup Environment and Folders
 clear;
 import org.opensim.modeling.*
-Logger.setLevelString('Debug');
+Logger.setLevelString('info');
 
 model_file = '../../../models/knee_healthy/smith2019/smith2019.osim';
 results_basename = 'walking_meniscus';
@@ -24,7 +24,7 @@ comak_ik = COMAKInverseKinematicsTool();
 comak_ik.set_model_file(model_file);
 comak_ik.set_results_directory(ik_result_dir);
 comak_ik.set_results_prefix(results_basename);
-comak_ik.set_perform_secondary_constraint_sim(true);
+comak_ik.set_perform_secondary_constraint_sim(false);
 comak_ik.set_secondary_coordinates(0,'/jointset/knee_r/knee_add_r');
 comak_ik.set_secondary_coordinates(1,'/jointset/knee_r/knee_rot_r');
 comak_ik.set_secondary_coordinates(2,'/jointset/knee_r/knee_tx_r');
@@ -61,7 +61,7 @@ comak_ik.set_constraint_function_num_interpolation_points(20);
 comak_ik.set_print_secondary_constraint_sim_results(true);
 comak_ik.set_constrained_model_file('./results/comak-inverse-kinematics/ik_constrained_model.osim');
 comak_ik.set_perform_inverse_kinematics(true);
-comak_ik.set_marker_file('../models/healthy/experimental_data/motion_analysis/overground_17.trc');
+comak_ik.set_marker_file('../../../models/healthy_knee/experimental_data/motion_analysis/overground_17.trc');
 comak_ik.set_output_motion_file('overground_17_ik.mot');
 comak_ik.set_time_range(0, 0);
 comak_ik.set_time_range(1, 2.36);
@@ -70,7 +70,7 @@ comak_ik.set_report_marker_locations(false);
 comak_ik.set_ik_constraint_weight(100);
 comak_ik.set_ik_accuracy(1e-5);
 comak_ik.set_use_visualizer(true);
-comak_ik.set_verbose(10);
+
 
 
 ik_task_set = IKTaskSet();

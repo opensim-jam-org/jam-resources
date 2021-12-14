@@ -38,6 +38,6 @@
 		<!--Write kinematics data to .h5 file-->
 		<h5_kinematics_data>true</h5_kinematics_data>
 		<!--Use the SimTK visualizer to display the model posed at each time step.  The default value is false.-->
-		<use_visualizer>true</use_visualizer>
+		<use_visualizer>false</use_visualizer>
 	</JointMechanicsTool>
 </OpenSimDocument>
