@@ -78,29 +78,27 @@ class JamAnalysis:
                             for region_idx, region in enumerate(regions):
                                 data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{group}/{region}'))
                                 n_rows, n_cols = data.shape
-                                if h5_file_idx == 0:
-                                    self.forceset[component][forceset][mesh_name][region_idx] = {group: np.zeros((n_rows, n_cols, self.num_files))}
+                                if region_idx not in self.forceset[component][forceset][mesh_name]:
+                                    self.forceset[component][forceset][mesh_name][region_idx] = {}
+                                if group not in self.forceset[component][forceset][mesh_name][region_idx]:
+                                    self.forceset[component][forceset][mesh_name][region_idx][group] = np.zeros((n_rows, n_cols, self.num_files))
                                 self.forceset[component][forceset][mesh_name][region_idx][group][:, :, h5_file_idx] = data                                                                     
                         
                         for dataset_idx, dataset in enumerate(datasets):
                             data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{dataset}'))
                             if 'regional' in dataset:
                                 for region_idx in range(6):
-                                    if h5_file_idx == 0:
-                                        # Make sure appropriate number of dimensions is found
-                                        # if len(data.shape) > 1:
-                                        #     print(data.shape)
-                                        #     raise Exception(f'Expected number of dims = 1, got {len(data.shape)} => {data.shape}')
+                                    if dataset not in self.forceset[component][forceset][mesh_name][region_idx]:
                                         n_rows = data.shape[0]
                                         self.forceset[component][forceset][mesh_name][region_idx][dataset] = np.zeros((n_rows, self.num_files))
                                     self.forceset[component][forceset][mesh_name][region_idx][dataset][:, h5_file_idx] = data[:, region_idx]
                             else:
                                 if len(data.shape) == 1:
-                                    if h5_file_idx == 0:
+                                    if dataset not in self.forceset[component][forceset][mesh_name]:
                                         self.forceset[component][forceset][mesh_name][dataset] = np.zeros((data.shape[0], self.num_files))
                                     self.forceset[component][forceset][mesh_name][dataset][:, h5_file_idx] = data
                                 else:
-                                    if h5_file_idx == 0:
+                                    if dataset not in self.forceset[component][forceset][mesh_name]:
                                         self.forceset[component][forceset][mesh_name][dataset] = np.zeros((data.shape[1], data.shape[0], self.num_files))
                                     self.forceset[component][forceset][mesh_name][dataset][:, :, h5_file_idx] = data.T
                 
@@ -157,7 +155,7 @@ class JamAnalysis:
                 )
                 for dataset_idx, dataset in enumerate(datasets):
                     data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}/{frame}/{outcome}/dataset'))
-                    if h5_file_idx == 0:
+                    if dataset not in self.frametransformsset[transform_type]:
                         self.frametransformsset[transform_type] = {
                             dataset: np.zeros((self.num_time_steps, self.num_files))
                         }
@@ -238,7 +236,7 @@ class JamAnalysis:
                     )
                     for dataset_idx, dataset in enumerate(datasets):
                         data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{group}/{dataset}'))
-                        if h5_file_idx == 0:
+                        if dataset not in self.comak:
                             self.comak[dataset] = np.zeros((data.shape[0], self.num_files))
                         self.comak[dataset][:, h5_file_idx] = data
     
