@@ -54,16 +54,19 @@ class JamAnalysis:
         # Get the components & iterate over them 
         components = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}')
         for component_idx, component in enumerate(components):
-            self.forceset[component] = {}
+            if component not in self.forceset:
+                self.forceset[component] = {}
             # Get the forcesets & iterate over them
             forcesets = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}')
             for forceset_idx, forceset in enumerate(forcesets):
-                self.forceset[component][forceset] = {} 
+                if forceset not in self.forceset[component]:
+                    self.forceset[component][forceset] = {} 
                 if component == self.SmithArticularContactName:
                     # Get mesh names & iterate over them
                     mesh_names = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}')
                     for mesh_idx, mesh_name in enumerate(mesh_names):
-                        self.forceset[component][forceset][mesh_name] = {x:{} for x in range(6)}
+                        if mesh_name not in self.forceset[component][forceset]:
+                            self.forceset[component][forceset][mesh_name] = {x:{} for x in range(6)}
                         # get params from mesh, break into "groups" and "datasets" & iterate over them as appropriate
                         params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}')
                         groups, datasets = get_h5_groups_datasets(
@@ -119,17 +122,25 @@ class JamAnalysis:
     def process_coordinateset(self, h5_filepath, h5_file_idx):
         coordinates = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}')
         for coord_idx, coord in enumerate(coordinates):
-            self.coordinateset[coord] = {}
+            print(f'{h5_file_idx} - {h5_filepath}')
+
+            print(f'coord: {coord}')
+            if coord not in self.coordinateset:
+                self.coordinateset[coord] = {}
             params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}')
             groups, datasets = get_h5_groups_datasets(
                 h5_filepath, 
                 f'/{self.base_name}/{self.coordset_name}/{coord}/',
                 params
             )
+            print(f'params:   {params}')
+            print(f'groups:   {groups}')
+            print(f'datasets: {datasets}')
+            print(f'coordinatset keys: {self.coordinateset[coord].keys()}')
             # Iteratve over the datasets
             for dataset_idx, dataset in enumerate(datasets):
                 data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}/{dataset}'))
-                if dataset not in self.coordinateset[coord]:
+                if h5_file_idx == 0:
                     self.coordinateset[coord][dataset] = np.zeros((self.num_time_steps, self.num_files))
                 self.coordinateset[coord][dataset][:, h5_file_idx] = data
     
