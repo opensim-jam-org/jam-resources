@@ -114,7 +114,7 @@ class JamAnalysis:
 
                     for dataset_idx, dataset in enumerate(datasets):
                         data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{dataset}'))
-                        if h5_file_idx == 0:
+                        if dataset not in self.forceset[component][forceset]:
                             self.forceset[component][forceset][dataset] = np.zeros((self.num_time_steps, self.num_files))
                         self.forceset[component][forceset][dataset][:, h5_file_idx] = data
     
@@ -131,7 +131,6 @@ class JamAnalysis:
             # Iteratve over the datasets
             for dataset_idx, dataset in enumerate(datasets):
                 data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}/{dataset}'))
-                # if h5_file_idx == 0:
                 if dataset not in self.coordinateset[coord]:
                     self.coordinateset[coord][dataset] = np.zeros((self.num_time_steps, self.num_files))
                 self.coordinateset[coord][dataset][:, h5_file_idx] = data
