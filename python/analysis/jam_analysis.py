@@ -102,8 +102,8 @@ class JamAnalysis:
                                     self.forceset[component][forceset][mesh_name][dataset][:, h5_file_idx] = data
                                 else:
                                     if dataset not in self.forceset[component][forceset][mesh_name]:
-                                        self.forceset[component][forceset][mesh_name][dataset] = np.zeros((data.shape[1], data.shape[0], self.num_files))
-                                    self.forceset[component][forceset][mesh_name][dataset][:, :, h5_file_idx] = data.T
+                                        self.forceset[component][forceset][mesh_name][dataset] = np.zeros((data.shape[0], data.shape[1], self.num_files))
+                                    self.forceset[component][forceset][mesh_name][dataset][:, :, h5_file_idx] = data
                 
                 else:
                     params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}')
