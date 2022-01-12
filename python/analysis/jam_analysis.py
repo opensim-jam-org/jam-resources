@@ -131,7 +131,8 @@ class JamAnalysis:
             # Iteratve over the datasets
             for dataset_idx, dataset in enumerate(datasets):
                 data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}/{dataset}'))
-                if h5_file_idx == 0:
+                # if h5_file_idx == 0:
+                if dataset not in self.coordinateset[coord]:
                     self.coordinateset[coord][dataset] = np.zeros((self.num_time_steps, self.num_files))
                 self.coordinateset[coord][dataset][:, h5_file_idx] = data
     
