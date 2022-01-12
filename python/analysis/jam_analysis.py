@@ -34,6 +34,7 @@ class JamAnalysis:
     ):
         self.h5_file_list = []
         self.num_files = 0
+        self.base_name = 'model'
         self.names = []
         self.num_missing_files = 0
         self.missing_files = []
@@ -51,38 +52,38 @@ class JamAnalysis:
     
     def process_forceset(self, h5_filepath, h5_file_idx):
         # Get the components & iterate over them 
-        components = get_h5_output(h5_filepath, f'/model/{self.forceset_name}')
+        components = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}')
         for component_idx, component in enumerate(components):
             self.forceset[component] = {}
             # Get the forcesets & iterate over them
-            forcesets = get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}')
+            forcesets = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}')
             for forceset_idx, forceset in enumerate(forcesets):
                 self.forceset[component][forceset] = {} 
                 if component == self.SmithArticularContactName:
                     # Get mesh names & iterate over them
-                    mesh_names = get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}')
+                    mesh_names = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}')
                     for mesh_idx, mesh_name in enumerate(mesh_names):
                         self.forceset[component][forceset][mesh_name] = {x:{} for x in range(6)}
                         # get params from mesh, break into "groups" and "datasets" & iterate over them as appropriate
-                        params = get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}/{mesh_name}')
+                        params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}')
                         groups, datasets = get_h5_groups_datasets(
                             h5_filepath, 
-                            f'/model/{self.forceset_name}/{component}/{forceset}/{mesh_name}/',
+                            f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/',
                             params
                         )
                         
                         for group_idx, group in enumerate(groups):
                             # Iterate over "groups" & store results data in dict
-                            regions = get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{group}')
+                            regions = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{group}')
                             for region_idx, region in enumerate(regions):
-                                data = np.asarray(get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{group}/{region}'))
+                                data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{group}/{region}'))
                                 n_rows, n_cols = data.shape
                                 if h5_file_idx == 0:
                                     self.forceset[component][forceset][mesh_name][region_idx] = {group: np.zeros((n_rows, n_cols, self.num_files))}
                                 self.forceset[component][forceset][mesh_name][region_idx][group][:, :, h5_file_idx] = data                                                                     
                         
                         for dataset_idx, dataset in enumerate(datasets):
-                            data = np.asarray(get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{dataset}'))
+                            data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{mesh_name}/{dataset}'))
                             if 'regional' in dataset:
                                 for region_idx in range(6):
                                     if h5_file_idx == 0:
@@ -104,32 +105,32 @@ class JamAnalysis:
                                     self.forceset[component][forceset][mesh_name][dataset][:, :, h5_file_idx] = data.T
                 
                 else:
-                    params = get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}')
+                    params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}')
                     groups, datasets = get_h5_groups_datasets(
                         h5_filepath, 
-                        f'/model/{self.forceset_name}/{component}/{forceset}/',
+                        f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/',
                         params
                     )
 
                     for dataset_idx, dataset in enumerate(datasets):
-                        data = np.asarray(get_h5_output(h5_filepath, f'/model/{self.forceset_name}/{component}/{forceset}/{dataset}'))
+                        data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.forceset_name}/{component}/{forceset}/{dataset}'))
                         if h5_file_idx == 0:
                             self.forceset[component][forceset][dataset] = np.zeros((self.num_time_steps, self.num_files))
                         self.forceset[component][forceset][dataset][:, h5_file_idx] = data
     
     def process_coordinateset(self, h5_filepath, h5_file_idx):
-        coordinates = get_h5_output(h5_filepath, f'/model/{self.coordset_name}')
+        coordinates = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}')
         for coord_idx, coord in enumerate(coordinates):
             self.coordinateset[coord] = {}
-            params = get_h5_output(h5_filepath, f'/model/{self.coordset_name}/{coord}')
+            params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}')
             groups, datasets = get_h5_groups_datasets(
                 h5_filepath, 
-                f'/model/{self.coordset_name}/{coord}/',
+                f'/{self.base_name}/{self.coordset_name}/{coord}/',
                 params
             )
             # Iteratve over the datasets
             for dataset_idx, dataset in enumerate(datasets):
-                data = np.asarray(get_h5_output(h5_filepath, f'/model/{self.coordset_name}/{coord}/{dataset}'))
+                data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}/{dataset}'))
                 if h5_file_idx == 0:
                     self.coordinateset[coord][dataset] = np.zeros((self.num_time_steps, self.num_files))
                 self.coordinateset[coord][dataset][:, h5_file_idx] = data
@@ -138,9 +139,9 @@ class JamAnalysis:
         ##### JAN.11.2022 - AAGATTI
         ##### HAVENT TESTED THE BELOW YET - THE EXAMPLE .h5 I USED DID NOT HAVE THIS DATATYPE
         print('PROCESSING FRAMETRANSFORMSET => THIS HAS NOT BEEN TESTED BEFORE, PLEASE VERIFY IF IT WORKS')
-        frames = get_h5_output(h5_filepath, f'/model/{self.frametransformsset_name}')
+        frames = get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}')
         for frame_idx, frame in enumerate(frames):
-            outcomes = get_h5_output(h5_filepath, f'/model/{self.frametransformsset_name}/{frame}')
+            outcomes = get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}/{frame}')
             for outcome_idx, outcome in enumerate(outcomes):
                 print(outcome)
                 if 'coordinates' in outcome:
@@ -148,14 +149,14 @@ class JamAnalysis:
                 elif 'transformation_matrix' in outcome:
                     transform_type = 'transformation_matrix'
 
-                params = get_h5_output(h5_filepath, f'/model/{self.frametransformsset_name}/{frame}/{outcome}')
+                params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}/{frame}/{outcome}')
                 groups, datasets = get_h5_groups_datasets(
                     h5_filepath, 
-                    f'/model/{self.frametransformsset_name}/{frame}/{outcome}/',
+                    f'/{self.base_name}/{self.frametransformsset_name}/{frame}/{outcome}/',
                     params
                 )
                 for dataset_idx, dataset in enumerate(datasets):
-                    data = np.asarray(get_h5_output(h5_filepath, f'/model/{self.frametransformsset_name}/{frame}/{outcome}/dataset'))
+                    data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}/{frame}/{outcome}/dataset'))
                     if h5_file_idx == 0:
                         self.frametransformsset[transform_type] = {
                             dataset: np.zeros((self.num_time_steps, self.num_files))
@@ -167,8 +168,12 @@ class JamAnalysis:
     def jam_analysis(
         self, 
         h5_file_list,
-        names=None
+        base_name=None,
+        names=None          # REMOVE? => WHAT IS THE "NAMES" variable used for? 
     ):
+        if base_name is not None:
+            self.base_name = base_name
+
         if type(h5_file_list) not in (list, tuple):
             raise Exception(f'`h5_file_list` is type: {type(h5_file_list)} and should be type `list` or `tuple`')
         else:
@@ -211,7 +216,7 @@ class JamAnalysis:
                 self.num_time_steps = len(self.time)
             
             # Get the data groups in the h5 file
-            h5_groups = get_h5_output(h5_filepath, '/model')
+            h5_groups = get_h5_output(h5_filepath, f'/{self.base_name}')
 
             for group_idx, group in enumerate(h5_groups):
                 # Forceset
@@ -225,14 +230,14 @@ class JamAnalysis:
                 if 'comak' in group:
                     # BELOW IS NOT TESTED - HAVE NOT RUN COMAK FILE THROUGH THIS YET
                     print('IF YOU ARE SEEING THIS IS MEANS THAT THIS PART OF THE CODE HAS NOT BEEN TESTED (if "comak" in group)')
-                    params = get_h5_output(h5_filepath, f'/model/{group}')
+                    params = get_h5_output(h5_filepath, f'/{self.base_name}/{group}')
                     groups, datasets = get_h5_groups_datasets(
                         h5_filepath, 
-                        f'/model/{group}/',
+                        f'/{self.base_name}/{group}/',
                         params
                     )
                     for dataset_idx, dataset in enumerate(datasets):
-                        data = np.asarray(get_h5_output(h5_filepath, f'/model/{group}/{dataset}'))
+                        data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{group}/{dataset}'))
                         if h5_file_idx == 0:
                             self.comak[dataset] = np.zeros((data.shape[0], self.num_files))
                         self.comak[dataset][:, h5_file_idx] = data
