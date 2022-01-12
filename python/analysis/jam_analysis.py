@@ -224,21 +224,21 @@ class JamAnalysis:
                     self.process_coordinateset(h5_filepath, h5_file_idx)
                 elif group == self.frametransformsset_name:
                     self.process_coordinateset(h5_filepath, h5_file_idx)
-                
-                if 'comak' in group:
-                    # BELOW IS NOT TESTED - HAVE NOT RUN COMAK FILE THROUGH THIS YET
-                    print('IF YOU ARE SEEING THIS IS MEANS THAT THIS PART OF THE CODE HAS NOT BEEN TESTED (if "comak" in group)')
-                    params = get_h5_output(h5_filepath, f'/{self.base_name}/{group}')
-                    groups, datasets = get_h5_groups_datasets(
-                        h5_filepath, 
-                        f'/{self.base_name}/{group}/',
-                        params
-                    )
-                    for dataset_idx, dataset in enumerate(datasets):
-                        data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{group}/{dataset}'))
-                        if dataset not in self.comak:
-                            self.comak[dataset] = np.zeros((data.shape[0], self.num_files))
-                        self.comak[dataset][:, h5_file_idx] = data
+            
+            # See if COMAK data exists. If it does, add its contents
+            base_h5_groups = get_h5_output(h5_filepath, '/')
+            if 'comak' in base_h5_groups:
+                params = get_h5_output(h5_filepath, '/comak')
+                groups, datasets = get_h5_groups_datasets(
+                    h5_filepath, 
+                    f'/comak/',
+                    params
+                )
+                for dataset_idx, dataset in enumerate(datasets):
+                    data = np.asarray(get_h5_output(h5_filepath, f'/comak/{dataset}'))
+                    if dataset not in self.comak:
+                        self.comak[dataset] = np.zeros((data.shape[0], self.num_files))
+                    self.comak[dataset][:, h5_file_idx] = data
     
     def plot_muscle_output(self, muscle_name, param_name, fontsize=20, linewidth=2, ax=None, label=None):
         for file_idx in range(self.num_files):
