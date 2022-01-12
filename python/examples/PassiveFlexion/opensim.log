@@ -7171,3 +7171,719 @@ Forsim Tool complete.
 [2022-01-12 01:22:33.776] [info] Finished in 77 second(s) (1 minute(s), 17 second(s))
 [2022-01-12 01:22:33.776] [info] Printed results to: ./results/joint-mechanics
 [2022-01-12 01:22:33.776] [info] 
+[2022-01-12 21:34:26.651] [critical] 
+[2022-01-12 21:34:26.651] [critical] ==========
+[2022-01-12 21:34:26.651] [critical] ForsimTool
+[2022-01-12 21:34:26.651] [critical] ==========
+[2022-01-12 21:34:26.651] [critical] 
+[2022-01-12 21:34:26.716] [info] Loaded model lenhart2015 from file ../../../models/knee_healthy/lenhart2015/lenhart2015.osim
+[2022-01-12 21:34:30.089] [info] Setting default muscle activation to: 0.02
+[2022-01-12 21:34:30.090] [info] use_activation_dynamics: true
+[2022-01-12 21:34:30.090] [info] use_tendon_compliance: true
+[2022-01-12 21:34:30.090] [info] use_muscle_physiology : true
+[2022-01-12 21:34:30.090] [info] 
+[2022-01-12 21:34:30.090] [info] Constant Muscle Control: 0.02
+[2022-01-12 21:34:30.090] [info] /forceset/addbrev_r
+[2022-01-12 21:34:30.090] [info] /forceset/addlong_r
+[2022-01-12 21:34:30.090] [info] /forceset/addmagProx_r
+[2022-01-12 21:34:30.090] [info] /forceset/addmagMid_r
+[2022-01-12 21:34:30.090] [info] /forceset/addmagDist_r
+[2022-01-12 21:34:30.090] [info] /forceset/addmagIsch_r
+[2022-01-12 21:34:30.090] [info] /forceset/bflh_r
+[2022-01-12 21:34:30.090] [info] /forceset/bfsh_r
+[2022-01-12 21:34:30.090] [info] /forceset/edl_r
+[2022-01-12 21:34:30.090] [info] /forceset/ehl_r
+[2022-01-12 21:34:30.090] [info] /forceset/fdl_r
+[2022-01-12 21:34:30.090] [info] /forceset/fhl_r
+[2022-01-12 21:34:30.090] [info] /forceset/gaslat_r
+[2022-01-12 21:34:30.090] [info] /forceset/gasmed_r
+[2022-01-12 21:34:30.090] [info] /forceset/gem_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmax1_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmax2_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmax3_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmed1_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmed2_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmed3_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmin1_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmin2_r
+[2022-01-12 21:34:30.090] [info] /forceset/glmin3_r
+[2022-01-12 21:34:30.090] [info] /forceset/grac_r
+[2022-01-12 21:34:30.090] [info] /forceset/iliacus_r
+[2022-01-12 21:34:30.090] [info] /forceset/pect_r
+[2022-01-12 21:34:30.090] [info] /forceset/perbrev_r
+[2022-01-12 21:34:30.090] [info] /forceset/perlong_r
+[2022-01-12 21:34:30.090] [info] /forceset/pertert_r
+[2022-01-12 21:34:30.090] [info] /forceset/piri_r
+[2022-01-12 21:34:30.090] [info] /forceset/psoas_r
+[2022-01-12 21:34:30.090] [info] /forceset/quadfem_r
+[2022-01-12 21:34:30.090] [info] /forceset/recfem_r
+[2022-01-12 21:34:30.090] [info] /forceset/sart_r
+[2022-01-12 21:34:30.090] [info] /forceset/semimem_r
+[2022-01-12 21:34:30.090] [info] /forceset/semiten_r
+[2022-01-12 21:34:30.090] [info] /forceset/soleus_r
+[2022-01-12 21:34:30.091] [info] /forceset/tfl_r
+[2022-01-12 21:34:30.091] [info] /forceset/tibant_r
+[2022-01-12 21:34:30.091] [info] /forceset/tibpost_r
+[2022-01-12 21:34:30.091] [info] /forceset/vasint_r
+[2022-01-12 21:34:30.091] [info] /forceset/vaslat_r
+[2022-01-12 21:34:30.091] [info] /forceset/vasmed_r
+[2022-01-12 21:34:30.091] [info] 
+[2022-01-12 21:34:30.121] [info] Unconstrained Coordinates:
+[2022-01-12 21:34:30.121] [info] /jointset/knee_r/knee_add_r
+[2022-01-12 21:34:30.121] [info] /jointset/knee_r/knee_rot_r
+[2022-01-12 21:34:30.121] [info] /jointset/knee_r/knee_tx_r
+[2022-01-12 21:34:30.121] [info] /jointset/knee_r/knee_ty_r
+[2022-01-12 21:34:30.121] [info] /jointset/knee_r/knee_tz_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_flex_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_rot_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_tilt_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_tx_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_ty_r
+[2022-01-12 21:34:30.121] [info] /jointset/pf_r/pf_tz_r
+[2022-01-12 21:34:30.121] [info] 
+[2022-01-12 21:34:30.123] [info] Prescribed Coordinates:
+[2022-01-12 21:34:30.123] [info] knee_flex_r
+[2022-01-12 21:34:30.123] [info] pelvis_tilt
+[2022-01-12 21:34:30.123] [info] 
+[2022-01-12 21:34:30.123] [info] No external loads will be applied (external_loads_file not specified).
+[2022-01-12 21:34:30.257] [info] start time: 0.0
+[2022-01-12 21:34:30.257] [info] stop time: 2.49
+[2022-01-12 21:34:30.257] [info] time: 0.01
+[2022-01-12 21:34:37.426] [info] time: 0.02
+[2022-01-12 21:34:37.981] [info] time: 0.03
+[2022-01-12 21:34:38.457] [info] time: 0.04
+[2022-01-12 21:34:38.927] [info] time: 0.05
+[2022-01-12 21:34:39.294] [info] time: 0.06
+[2022-01-12 21:34:39.634] [info] time: 0.07
+[2022-01-12 21:34:42.877] [info] time: 0.08
+[2022-01-12 21:34:43.086] [info] time: 0.09
+[2022-01-12 21:34:43.338] [info] time: 0.1
+[2022-01-12 21:34:43.542] [info] time: 0.11
+[2022-01-12 21:34:43.715] [info] time: 0.12
+[2022-01-12 21:34:43.981] [info] time: 0.13
+[2022-01-12 21:34:44.153] [info] time: 0.14
+[2022-01-12 21:34:44.325] [info] time: 0.15
+[2022-01-12 21:34:47.499] [info] time: 0.16
+[2022-01-12 21:34:47.714] [info] time: 0.17
+[2022-01-12 21:34:47.842] [info] time: 0.18
+[2022-01-12 21:34:47.984] [info] time: 0.19
+[2022-01-12 21:34:48.112] [info] time: 0.2
+[2022-01-12 21:34:48.350] [info] time: 0.21
+[2022-01-12 21:34:48.479] [info] time: 0.22
+[2022-01-12 21:34:48.621] [info] time: 0.23
+[2022-01-12 21:34:48.748] [info] time: 0.24
+[2022-01-12 21:34:48.969] [info] time: 0.25
+[2022-01-12 21:34:49.125] [info] time: 0.26
+[2022-01-12 21:34:49.252] [info] time: 0.27
+[2022-01-12 21:34:49.394] [info] time: 0.28
+[2022-01-12 21:34:49.524] [info] time: 0.29
+[2022-01-12 21:34:52.633] [info] time: 0.3
+[2022-01-12 21:34:52.759] [info] time: 0.31
+[2022-01-12 21:34:52.901] [info] time: 0.32
+[2022-01-12 21:34:53.116] [info] time: 0.33
+[2022-01-12 21:34:53.338] [info] time: 0.34
+[2022-01-12 21:34:53.466] [info] time: 0.35
+[2022-01-12 21:34:53.608] [info] time: 0.36
+[2022-01-12 21:34:53.734] [info] time: 0.37
+[2022-01-12 21:34:53.940] [info] time: 0.38
+[2022-01-12 21:34:54.080] [info] time: 0.39
+[2022-01-12 21:34:54.222] [info] time: 0.4
+[2022-01-12 21:34:54.348] [info] time: 0.41
+[2022-01-12 21:34:57.437] [info] time: 0.42
+[2022-01-12 21:34:57.564] [info] time: 0.43
+[2022-01-12 21:34:57.675] [info] time: 0.44
+[2022-01-12 21:34:57.787] [info] time: 0.45
+[2022-01-12 21:34:57.898] [info] time: 0.46
+[2022-01-12 21:34:58.073] [info] time: 0.47
+[2022-01-12 21:34:58.185] [info] time: 0.48
+[2022-01-12 21:34:58.281] [info] time: 0.49
+[2022-01-12 21:34:58.425] [info] time: 0.5
+[2022-01-12 21:34:58.537] [info] time: 0.51
+[2022-01-12 21:34:58.683] [info] time: 0.52
+[2022-01-12 21:34:58.749] [info] time: 0.53
+[2022-01-12 21:34:58.815] [info] time: 0.54
+[2022-01-12 21:34:58.961] [info] time: 0.55
+[2022-01-12 21:34:59.026] [info] time: 0.56
+[2022-01-12 21:34:59.092] [info] time: 0.57
+[2022-01-12 21:34:59.157] [info] time: 0.58
+[2022-01-12 21:34:59.223] [info] time: 0.59
+[2022-01-12 21:34:59.383] [info] time: 0.6
+[2022-01-12 21:34:59.449] [info] time: 0.61
+[2022-01-12 21:34:59.515] [info] time: 0.62
+[2022-01-12 21:34:59.581] [info] time: 0.63
+[2022-01-12 21:34:59.646] [info] time: 0.64
+[2022-01-12 21:34:59.891] [info] time: 0.65
+[2022-01-12 21:34:59.957] [info] time: 0.66
+[2022-01-12 21:35:03.044] [info] time: 0.67
+[2022-01-12 21:35:03.109] [info] time: 0.68
+[2022-01-12 21:35:03.175] [info] time: 0.69
+[2022-01-12 21:35:03.242] [info] time: 0.7
+[2022-01-12 21:35:03.308] [info] time: 0.71
+[2022-01-12 21:35:03.374] [info] time: 0.72
+[2022-01-12 21:35:03.442] [info] time: 0.73
+[2022-01-12 21:35:03.555] [info] time: 0.74
+[2022-01-12 21:35:03.622] [info] time: 0.75
+[2022-01-12 21:35:03.688] [info] time: 0.76
+[2022-01-12 21:35:03.754] [info] time: 0.77
+[2022-01-12 21:35:03.820] [info] time: 0.78
+[2022-01-12 21:35:03.886] [info] time: 0.79
+[2022-01-12 21:35:03.952] [info] time: 0.8
+[2022-01-12 21:35:07.033] [info] time: 0.81
+[2022-01-12 21:35:07.099] [info] time: 0.82
+[2022-01-12 21:35:07.165] [info] time: 0.83
+[2022-01-12 21:35:07.230] [info] time: 0.84
+[2022-01-12 21:35:07.296] [info] time: 0.85
+[2022-01-12 21:35:07.362] [info] time: 0.86
+[2022-01-12 21:35:07.429] [info] time: 0.87
+[2022-01-12 21:35:07.495] [info] time: 0.88
+[2022-01-12 21:35:07.593] [info] time: 0.89
+[2022-01-12 21:35:07.659] [info] time: 0.9
+[2022-01-12 21:35:07.726] [info] time: 0.91
+[2022-01-12 21:35:07.792] [info] time: 0.92
+[2022-01-12 21:35:07.858] [info] time: 0.93
+[2022-01-12 21:35:07.924] [info] time: 0.94
+[2022-01-12 21:35:07.990] [info] time: 0.95
+[2022-01-12 21:35:18.270] [info] time: 0.96
+[2022-01-12 21:35:18.564] [info] time: 0.97
+[2022-01-12 21:35:18.952] [info] time: 0.98
+[2022-01-12 21:35:22.069] [info] time: 0.99
+[2022-01-12 21:35:22.276] [info] time: 1.0
+[2022-01-12 21:35:22.452] [info] time: 1.01
+[2022-01-12 21:35:22.597] [info] time: 1.02
+[2022-01-12 21:35:22.693] [info] time: 1.03
+[2022-01-12 21:35:22.838] [info] time: 1.04
+[2022-01-12 21:35:22.904] [info] time: 1.05
+[2022-01-12 21:35:23.000] [info] time: 1.06
+[2022-01-12 21:35:23.083] [info] time: 1.07
+[2022-01-12 21:35:23.148] [info] time: 1.08
+[2022-01-12 21:35:23.214] [info] time: 1.09
+[2022-01-12 21:35:23.280] [info] time: 1.1
+[2022-01-12 21:35:23.363] [info] time: 1.11
+[2022-01-12 21:35:23.429] [info] time: 1.12
+[2022-01-12 21:35:23.496] [info] time: 1.13
+[2022-01-12 21:35:23.645] [info] time: 1.14
+[2022-01-12 21:35:23.710] [info] time: 1.15
+[2022-01-12 21:35:23.777] [info] time: 1.16
+[2022-01-12 21:35:23.846] [info] time: 1.17
+[2022-01-12 21:35:23.913] [info] time: 1.18
+[2022-01-12 21:35:23.981] [info] time: 1.19
+[2022-01-12 21:35:24.047] [info] time: 1.2
+[2022-01-12 21:35:24.163] [info] time: 1.21
+[2022-01-12 21:35:24.230] [info] time: 1.22
+[2022-01-12 21:35:24.296] [info] time: 1.23
+[2022-01-12 21:35:24.363] [info] time: 1.24
+[2022-01-12 21:35:24.430] [info] time: 1.25
+[2022-01-12 21:35:24.499] [info] time: 1.26
+[2022-01-12 21:35:27.577] [info] time: 1.27
+[2022-01-12 21:35:27.643] [info] time: 1.28
+[2022-01-12 21:35:28.065] [info] time: 1.29
+[2022-01-12 21:35:28.132] [info] time: 1.3
+[2022-01-12 21:35:28.200] [info] time: 1.31
+[2022-01-12 21:35:28.268] [info] time: 1.32
+[2022-01-12 21:35:28.335] [info] time: 1.33
+[2022-01-12 21:35:31.465] [info] time: 1.34
+[2022-01-12 21:35:31.531] [info] time: 1.35
+[2022-01-12 21:35:31.598] [info] time: 1.36
+[2022-01-12 21:35:31.665] [info] time: 1.37
+[2022-01-12 21:35:31.732] [info] time: 1.38
+[2022-01-12 21:35:31.799] [info] time: 1.39
+[2022-01-12 21:35:31.866] [info] time: 1.4
+[2022-01-12 21:35:31.933] [info] time: 1.41
+[2022-01-12 21:35:32.000] [info] time: 1.42
+[2022-01-12 21:35:32.067] [info] time: 1.43
+[2022-01-12 21:35:35.138] [info] time: 1.44
+[2022-01-12 21:35:35.205] [info] time: 1.45
+[2022-01-12 21:35:35.271] [info] time: 1.46
+[2022-01-12 21:35:35.339] [info] time: 1.47
+[2022-01-12 21:35:35.405] [info] time: 1.48
+[2022-01-12 21:35:35.474] [info] time: 1.49
+[2022-01-12 21:35:35.541] [info] time: 1.5
+[2022-01-12 21:35:35.608] [info] time: 1.51
+[2022-01-12 21:35:35.675] [info] time: 1.52
+[2022-01-12 21:35:35.743] [info] time: 1.53
+[2022-01-12 21:35:38.830] [info] time: 1.54
+[2022-01-12 21:35:38.898] [info] time: 1.55
+[2022-01-12 21:35:38.965] [info] time: 1.56
+[2022-01-12 21:35:39.032] [info] time: 1.57
+[2022-01-12 21:35:39.100] [info] time: 1.58
+[2022-01-12 21:35:39.167] [info] time: 1.59
+[2022-01-12 21:35:39.235] [info] time: 1.6
+[2022-01-12 21:35:39.302] [info] time: 1.61
+[2022-01-12 21:35:39.370] [info] time: 1.62
+[2022-01-12 21:35:39.438] [info] time: 1.63
+[2022-01-12 21:35:45.480] [info] time: 1.64
+[2022-01-12 21:35:45.546] [info] time: 1.65
+[2022-01-12 21:35:45.613] [info] time: 1.66
+[2022-01-12 21:35:45.714] [info] time: 1.67
+[2022-01-12 21:35:45.780] [info] time: 1.68
+[2022-01-12 21:35:45.868] [info] time: 1.69
+[2022-01-12 21:35:45.935] [info] time: 1.7
+[2022-01-12 21:35:46.002] [info] time: 1.71
+[2022-01-12 21:35:46.154] [info] time: 1.72
+[2022-01-12 21:35:46.221] [info] time: 1.73
+[2022-01-12 21:35:46.288] [info] time: 1.74
+[2022-01-12 21:35:46.355] [info] time: 1.75
+[2022-01-12 21:35:49.492] [info] time: 1.76
+[2022-01-12 21:35:49.558] [info] time: 1.77
+[2022-01-12 21:35:49.626] [info] time: 1.78
+[2022-01-12 21:35:49.693] [info] time: 1.79
+[2022-01-12 21:35:49.760] [info] time: 1.8
+[2022-01-12 21:35:49.827] [info] time: 1.81
+[2022-01-12 21:35:49.895] [info] time: 1.82
+[2022-01-12 21:35:53.005] [info] time: 1.83
+[2022-01-12 21:35:53.072] [info] time: 1.84
+[2022-01-12 21:35:53.141] [info] time: 1.85
+[2022-01-12 21:35:53.210] [info] time: 1.86
+[2022-01-12 21:35:53.278] [info] time: 1.87
+[2022-01-12 21:35:53.345] [info] time: 1.88
+[2022-01-12 21:35:56.406] [info] time: 1.89
+[2022-01-12 21:35:56.475] [info] time: 1.9
+[2022-01-12 21:35:56.543] [info] time: 1.91
+[2022-01-12 21:35:56.610] [info] time: 1.92
+[2022-01-12 21:35:56.678] [info] time: 1.93
+[2022-01-12 21:35:56.745] [info] time: 1.94
+[2022-01-12 21:35:56.813] [info] time: 1.95
+[2022-01-12 21:36:05.999] [info] time: 1.96
+[2022-01-12 21:36:06.175] [info] time: 1.97
+[2022-01-12 21:36:06.401] [info] time: 1.98
+[2022-01-12 21:36:06.604] [info] time: 1.99
+[2022-01-12 21:36:06.750] [info] time: 2.0
+[2022-01-12 21:36:06.862] [info] time: 2.01
+[2022-01-12 21:36:07.025] [info] time: 2.02
+[2022-01-12 21:36:07.140] [info] time: 2.03
+[2022-01-12 21:36:07.207] [info] time: 2.04
+[2022-01-12 21:36:10.359] [info] time: 2.05
+[2022-01-12 21:36:10.426] [info] time: 2.06
+[2022-01-12 21:36:10.494] [info] time: 2.07
+[2022-01-12 21:36:10.609] [info] time: 2.08
+[2022-01-12 21:36:10.676] [info] time: 2.09
+[2022-01-12 21:36:10.743] [info] time: 2.1
+[2022-01-12 21:36:10.858] [info] time: 2.11
+[2022-01-12 21:36:10.925] [info] time: 2.12
+[2022-01-12 21:36:13.990] [info] time: 2.13
+[2022-01-12 21:36:14.056] [info] time: 2.14
+[2022-01-12 21:36:14.123] [info] time: 2.15
+[2022-01-12 21:36:14.238] [info] time: 2.16
+[2022-01-12 21:36:14.305] [info] time: 2.17
+[2022-01-12 21:36:14.371] [info] time: 2.18
+[2022-01-12 21:36:17.385] [info] time: 2.19
+[2022-01-12 21:36:17.453] [info] time: 2.2
+[2022-01-12 21:36:17.566] [info] time: 2.21
+[2022-01-12 21:36:17.632] [info] time: 2.22
+[2022-01-12 21:36:17.698] [info] time: 2.23
+[2022-01-12 21:36:20.704] [info] time: 2.24
+[2022-01-12 21:36:20.769] [info] time: 2.25
+[2022-01-12 21:36:20.834] [info] time: 2.26
+[2022-01-12 21:36:20.948] [info] time: 2.27
+[2022-01-12 21:36:21.012] [info] time: 2.28
+[2022-01-12 21:36:21.078] [info] time: 2.29
+[2022-01-12 21:36:30.666] [info] time: 2.3
+[2022-01-12 21:36:31.023] [info] time: 2.31
+[2022-01-12 21:36:31.238] [info] time: 2.32
+[2022-01-12 21:36:31.529] [info] time: 2.33
+[2022-01-12 21:36:34.583] [info] time: 2.34
+[2022-01-12 21:36:34.751] [info] time: 2.35
+[2022-01-12 21:36:34.905] [info] time: 2.36
+[2022-01-12 21:36:35.137] [info] time: 2.37
+[2022-01-12 21:36:35.262] [info] time: 2.38
+[2022-01-12 21:36:35.387] [info] time: 2.39
+[2022-01-12 21:36:35.655] [info] time: 2.4
+[2022-01-12 21:36:38.726] [info] time: 2.41
+[2022-01-12 21:36:38.823] [info] time: 2.42
+[2022-01-12 21:36:38.934] [info] time: 2.43
+[2022-01-12 21:36:39.016] [info] time: 2.44
+[2022-01-12 21:36:39.127] [info] time: 2.45
+[2022-01-12 21:36:39.224] [info] time: 2.46
+[2022-01-12 21:36:39.337] [info] time: 2.47
+[2022-01-12 21:36:39.451] [info] time: 2.48
+[2022-01-12 21:36:42.486] [info] time: 2.49
+[2022-01-12 21:36:42.584] [info] time: 2.5
+[2022-01-12 21:36:42.733] [info] Printed results to: ./results/forsim
+[2022-01-12 21:36:42.733] [info] 
+Forsim Tool complete.
+[2022-01-12 21:36:42.733] [info] Finished in 136 second(s) (2 minute(s), 16 second(s))
+[2022-01-12 21:36:42.733] [info] 
+[2022-01-12 21:36:42.807] [critical] 
+[2022-01-12 21:36:42.807] [critical] ====================
+[2022-01-12 21:36:42.807] [critical] Joint Mechanics Tool
+[2022-01-12 21:36:42.807] [critical] ====================
+[2022-01-12 21:36:42.807] [critical] 
+[2022-01-12 21:36:42.875] [info] Loaded model lenhart2015 from file ../../../models/knee_healthy/lenhart2015/lenhart2015.osim
+[2022-01-12 21:36:58.590] [info] Time: 0.0
+[2022-01-12 21:36:59.689] [info] Time: 0.01
+[2022-01-12 21:36:59.807] [info] Time: 0.02
+[2022-01-12 21:36:59.925] [info] Time: 0.03
+[2022-01-12 21:37:00.043] [info] Time: 0.04
+[2022-01-12 21:37:00.161] [info] Time: 0.05
+[2022-01-12 21:37:00.279] [info] Time: 0.06
+[2022-01-12 21:37:00.397] [info] Time: 0.07
+[2022-01-12 21:37:00.516] [info] Time: 0.08
+[2022-01-12 21:37:00.633] [info] Time: 0.09
+[2022-01-12 21:37:00.750] [info] Time: 0.1
+[2022-01-12 21:37:00.868] [info] Time: 0.11
+[2022-01-12 21:37:00.985] [info] Time: 0.12
+[2022-01-12 21:37:01.102] [info] Time: 0.13
+[2022-01-12 21:37:01.220] [info] Time: 0.14
+[2022-01-12 21:37:01.338] [info] Time: 0.15
+[2022-01-12 21:37:01.455] [info] Time: 0.16
+[2022-01-12 21:37:01.573] [info] Time: 0.17
+[2022-01-12 21:37:01.690] [info] Time: 0.18
+[2022-01-12 21:37:01.808] [info] Time: 0.19
+[2022-01-12 21:37:01.925] [info] Time: 0.2
+[2022-01-12 21:37:02.042] [info] Time: 0.21
+[2022-01-12 21:37:02.160] [info] Time: 0.22
+[2022-01-12 21:37:02.278] [info] Time: 0.23
+[2022-01-12 21:37:02.395] [info] Time: 0.24
+[2022-01-12 21:37:02.513] [info] Time: 0.25
+[2022-01-12 21:37:02.631] [info] Time: 0.26
+[2022-01-12 21:37:02.748] [info] Time: 0.27
+[2022-01-12 21:37:02.865] [info] Time: 0.28
+[2022-01-12 21:37:02.983] [info] Time: 0.29
+[2022-01-12 21:37:03.100] [info] Time: 0.3
+[2022-01-12 21:37:03.218] [info] Time: 0.31
+[2022-01-12 21:37:03.335] [info] Time: 0.32
+[2022-01-12 21:37:03.453] [info] Time: 0.33
+[2022-01-12 21:37:03.570] [info] Time: 0.34
+[2022-01-12 21:37:03.688] [info] Time: 0.35
+[2022-01-12 21:37:03.805] [info] Time: 0.36
+[2022-01-12 21:37:03.923] [info] Time: 0.37
+[2022-01-12 21:37:04.041] [info] Time: 0.38
+[2022-01-12 21:37:04.158] [info] Time: 0.39
+[2022-01-12 21:37:04.275] [info] Time: 0.4
+[2022-01-12 21:37:04.392] [info] Time: 0.41
+[2022-01-12 21:37:04.511] [info] Time: 0.42
+[2022-01-12 21:37:04.628] [info] Time: 0.43
+[2022-01-12 21:37:04.745] [info] Time: 0.44
+[2022-01-12 21:37:04.863] [info] Time: 0.45
+[2022-01-12 21:37:04.981] [info] Time: 0.46
+[2022-01-12 21:37:05.099] [info] Time: 0.47
+[2022-01-12 21:37:05.216] [info] Time: 0.48
+[2022-01-12 21:37:05.335] [info] Time: 0.49
+[2022-01-12 21:37:05.453] [info] Time: 0.5
+[2022-01-12 21:37:05.570] [info] Time: 0.51
+[2022-01-12 21:37:05.688] [info] Time: 0.52
+[2022-01-12 21:37:05.805] [info] Time: 0.53
+[2022-01-12 21:37:05.923] [info] Time: 0.54
+[2022-01-12 21:37:06.040] [info] Time: 0.55
+[2022-01-12 21:37:06.158] [info] Time: 0.56
+[2022-01-12 21:37:06.277] [info] Time: 0.57
+[2022-01-12 21:37:06.395] [info] Time: 0.58
+[2022-01-12 21:37:06.513] [info] Time: 0.59
+[2022-01-12 21:37:06.631] [info] Time: 0.6
+[2022-01-12 21:37:06.748] [info] Time: 0.61
+[2022-01-12 21:37:06.866] [info] Time: 0.62
+[2022-01-12 21:37:06.985] [info] Time: 0.63
+[2022-01-12 21:37:07.102] [info] Time: 0.64
+[2022-01-12 21:37:07.220] [info] Time: 0.65
+[2022-01-12 21:37:07.338] [info] Time: 0.66
+[2022-01-12 21:37:07.456] [info] Time: 0.67
+[2022-01-12 21:37:07.574] [info] Time: 0.68
+[2022-01-12 21:37:07.691] [info] Time: 0.69
+[2022-01-12 21:37:07.808] [info] Time: 0.7
+[2022-01-12 21:37:07.927] [info] Time: 0.71
+[2022-01-12 21:37:08.044] [info] Time: 0.72
+[2022-01-12 21:37:08.162] [info] Time: 0.73
+[2022-01-12 21:37:08.279] [info] Time: 0.74
+[2022-01-12 21:37:08.397] [info] Time: 0.75
+[2022-01-12 21:37:08.515] [info] Time: 0.76
+[2022-01-12 21:37:08.632] [info] Time: 0.77
+[2022-01-12 21:37:08.750] [info] Time: 0.78
+[2022-01-12 21:37:08.869] [info] Time: 0.79
+[2022-01-12 21:37:08.987] [info] Time: 0.8
+[2022-01-12 21:37:09.106] [info] Time: 0.81
+[2022-01-12 21:37:09.223] [info] Time: 0.82
+[2022-01-12 21:37:09.340] [info] Time: 0.83
+[2022-01-12 21:37:09.459] [info] Time: 0.84
+[2022-01-12 21:37:09.576] [info] Time: 0.85
+[2022-01-12 21:37:09.694] [info] Time: 0.86
+[2022-01-12 21:37:09.812] [info] Time: 0.87
+[2022-01-12 21:37:09.930] [info] Time: 0.88
+[2022-01-12 21:37:10.047] [info] Time: 0.89
+[2022-01-12 21:37:10.165] [info] Time: 0.9
+[2022-01-12 21:37:10.282] [info] Time: 0.91
+[2022-01-12 21:37:10.400] [info] Time: 0.92
+[2022-01-12 21:37:10.519] [info] Time: 0.93
+[2022-01-12 21:37:10.637] [info] Time: 0.94
+[2022-01-12 21:37:10.755] [info] Time: 0.95
+[2022-01-12 21:37:10.872] [info] Time: 0.96
+[2022-01-12 21:37:10.990] [info] Time: 0.97
+[2022-01-12 21:37:11.107] [info] Time: 0.98
+[2022-01-12 21:37:11.225] [info] Time: 0.99
+[2022-01-12 21:37:11.343] [info] Time: 1.0
+[2022-01-12 21:37:11.461] [info] Time: 1.01
+[2022-01-12 21:37:11.579] [info] Time: 1.02
+[2022-01-12 21:37:11.696] [info] Time: 1.03
+[2022-01-12 21:37:11.814] [info] Time: 1.04
+[2022-01-12 21:37:11.931] [info] Time: 1.05
+[2022-01-12 21:37:12.049] [info] Time: 1.06
+[2022-01-12 21:37:12.167] [info] Time: 1.07
+[2022-01-12 21:37:12.284] [info] Time: 1.08
+[2022-01-12 21:37:12.402] [info] Time: 1.09
+[2022-01-12 21:37:12.521] [info] Time: 1.1
+[2022-01-12 21:37:12.638] [info] Time: 1.11
+[2022-01-12 21:37:12.756] [info] Time: 1.12
+[2022-01-12 21:37:12.873] [info] Time: 1.13
+[2022-01-12 21:37:12.991] [info] Time: 1.14
+[2022-01-12 21:37:13.108] [info] Time: 1.15
+[2022-01-12 21:37:13.226] [info] Time: 1.16
+[2022-01-12 21:37:13.344] [info] Time: 1.17
+[2022-01-12 21:37:13.462] [info] Time: 1.18
+[2022-01-12 21:37:13.580] [info] Time: 1.19
+[2022-01-12 21:37:13.698] [info] Time: 1.2
+[2022-01-12 21:37:13.815] [info] Time: 1.21
+[2022-01-12 21:37:13.933] [info] Time: 1.22
+[2022-01-12 21:37:14.051] [info] Time: 1.23
+[2022-01-12 21:37:14.169] [info] Time: 1.24
+[2022-01-12 21:37:14.287] [info] Time: 1.25
+[2022-01-12 21:37:14.404] [info] Time: 1.26
+[2022-01-12 21:37:14.523] [info] Time: 1.27
+[2022-01-12 21:37:14.641] [info] Time: 1.28
+[2022-01-12 21:37:14.758] [info] Time: 1.29
+[2022-01-12 21:37:14.876] [info] Time: 1.3
+[2022-01-12 21:37:14.994] [info] Time: 1.31
+[2022-01-12 21:37:15.111] [info] Time: 1.32
+[2022-01-12 21:37:15.229] [info] Time: 1.33
+[2022-01-12 21:37:15.346] [info] Time: 1.34
+[2022-01-12 21:37:15.464] [info] Time: 1.35
+[2022-01-12 21:37:15.582] [info] Time: 1.36
+[2022-01-12 21:37:15.700] [info] Time: 1.37
+[2022-01-12 21:37:15.817] [info] Time: 1.38
+[2022-01-12 21:37:15.935] [info] Time: 1.39
+[2022-01-12 21:37:16.052] [info] Time: 1.4
+[2022-01-12 21:37:16.170] [info] Time: 1.41
+[2022-01-12 21:37:16.288] [info] Time: 1.42
+[2022-01-12 21:37:16.405] [info] Time: 1.43
+[2022-01-12 21:37:16.525] [info] Time: 1.44
+[2022-01-12 21:37:16.643] [info] Time: 1.45
+[2022-01-12 21:37:16.761] [info] Time: 1.46
+[2022-01-12 21:37:16.878] [info] Time: 1.47
+[2022-01-12 21:37:16.997] [info] Time: 1.48
+[2022-01-12 21:37:17.115] [info] Time: 1.49
+[2022-01-12 21:37:17.233] [info] Time: 1.5
+[2022-01-12 21:37:17.351] [info] Time: 1.51
+[2022-01-12 21:37:17.469] [info] Time: 1.52
+[2022-01-12 21:37:17.587] [info] Time: 1.53
+[2022-01-12 21:37:17.706] [info] Time: 1.54
+[2022-01-12 21:37:17.823] [info] Time: 1.55
+[2022-01-12 21:37:17.941] [info] Time: 1.56
+[2022-01-12 21:37:18.058] [info] Time: 1.57
+[2022-01-12 21:37:18.177] [info] Time: 1.58
+[2022-01-12 21:37:18.295] [info] Time: 1.59
+[2022-01-12 21:37:18.412] [info] Time: 1.6
+[2022-01-12 21:37:18.531] [info] Time: 1.61
+[2022-01-12 21:37:18.649] [info] Time: 1.62
+[2022-01-12 21:37:18.766] [info] Time: 1.63
+[2022-01-12 21:37:18.884] [info] Time: 1.64
+[2022-01-12 21:37:19.004] [info] Time: 1.65
+[2022-01-12 21:37:19.122] [info] Time: 1.66
+[2022-01-12 21:37:19.240] [info] Time: 1.67
+[2022-01-12 21:37:19.358] [info] Time: 1.68
+[2022-01-12 21:37:19.476] [info] Time: 1.69
+[2022-01-12 21:37:19.594] [info] Time: 1.7
+[2022-01-12 21:37:19.713] [info] Time: 1.71
+[2022-01-12 21:37:19.830] [info] Time: 1.72
+[2022-01-12 21:37:19.948] [info] Time: 1.73
+[2022-01-12 21:37:20.066] [info] Time: 1.74
+[2022-01-12 21:37:20.184] [info] Time: 1.75
+[2022-01-12 21:37:20.302] [info] Time: 1.76
+[2022-01-12 21:37:20.420] [info] Time: 1.77
+[2022-01-12 21:37:20.539] [info] Time: 1.78
+[2022-01-12 21:37:20.657] [info] Time: 1.79
+[2022-01-12 21:37:20.775] [info] Time: 1.8
+[2022-01-12 21:37:20.893] [info] Time: 1.81
+[2022-01-12 21:37:21.011] [info] Time: 1.82
+[2022-01-12 21:37:21.129] [info] Time: 1.83
+[2022-01-12 21:37:21.247] [info] Time: 1.84
+[2022-01-12 21:37:21.365] [info] Time: 1.85
+[2022-01-12 21:37:21.484] [info] Time: 1.86
+[2022-01-12 21:37:21.601] [info] Time: 1.87
+[2022-01-12 21:37:21.719] [info] Time: 1.88
+[2022-01-12 21:37:21.837] [info] Time: 1.89
+[2022-01-12 21:37:21.955] [info] Time: 1.9
+[2022-01-12 21:37:22.073] [info] Time: 1.91
+[2022-01-12 21:37:22.191] [info] Time: 1.92
+[2022-01-12 21:37:22.309] [info] Time: 1.93
+[2022-01-12 21:37:22.427] [info] Time: 1.94
+[2022-01-12 21:37:22.545] [info] Time: 1.95
+[2022-01-12 21:37:22.662] [info] Time: 1.96
+[2022-01-12 21:37:22.780] [info] Time: 1.97
+[2022-01-12 21:37:22.898] [info] Time: 1.98
+[2022-01-12 21:37:23.016] [info] Time: 1.99
+[2022-01-12 21:37:23.135] [info] Time: 2.0
+[2022-01-12 21:37:23.252] [info] Time: 2.01
+[2022-01-12 21:37:23.370] [info] Time: 2.02
+[2022-01-12 21:37:23.488] [info] Time: 2.03
+[2022-01-12 21:37:23.606] [info] Time: 2.04
+[2022-01-12 21:37:23.723] [info] Time: 2.05
+[2022-01-12 21:37:23.841] [info] Time: 2.06
+[2022-01-12 21:37:23.959] [info] Time: 2.07
+[2022-01-12 21:37:24.077] [info] Time: 2.08
+[2022-01-12 21:37:24.196] [info] Time: 2.09
+[2022-01-12 21:37:24.316] [info] Time: 2.1
+[2022-01-12 21:37:24.435] [info] Time: 2.11
+[2022-01-12 21:37:24.554] [info] Time: 2.12
+[2022-01-12 21:37:24.674] [info] Time: 2.13
+[2022-01-12 21:37:24.821] [info] Time: 2.14
+[2022-01-12 21:37:24.939] [info] Time: 2.15
+[2022-01-12 21:37:25.057] [info] Time: 2.16
+[2022-01-12 21:37:25.175] [info] Time: 2.17
+[2022-01-12 21:37:25.293] [info] Time: 2.18
+[2022-01-12 21:37:25.411] [info] Time: 2.19
+[2022-01-12 21:37:25.531] [info] Time: 2.2
+[2022-01-12 21:37:25.648] [info] Time: 2.21
+[2022-01-12 21:37:25.766] [info] Time: 2.22
+[2022-01-12 21:37:25.884] [info] Time: 2.23
+[2022-01-12 21:37:26.002] [info] Time: 2.24
+[2022-01-12 21:37:26.119] [info] Time: 2.25
+[2022-01-12 21:37:26.238] [info] Time: 2.26
+[2022-01-12 21:37:26.356] [info] Time: 2.27
+[2022-01-12 21:37:26.474] [info] Time: 2.28
+[2022-01-12 21:37:26.592] [info] Time: 2.29
+[2022-01-12 21:37:26.710] [info] Time: 2.3
+[2022-01-12 21:37:26.828] [info] Time: 2.31
+[2022-01-12 21:37:26.946] [info] Time: 2.32
+[2022-01-12 21:37:27.064] [info] Time: 2.33
+[2022-01-12 21:37:27.182] [info] Time: 2.34
+[2022-01-12 21:37:27.300] [info] Time: 2.35
+[2022-01-12 21:37:27.418] [info] Time: 2.36
+[2022-01-12 21:37:27.537] [info] Time: 2.37
+[2022-01-12 21:37:27.655] [info] Time: 2.38
+[2022-01-12 21:37:27.773] [info] Time: 2.39
+[2022-01-12 21:37:27.892] [info] Time: 2.4
+[2022-01-12 21:37:28.009] [info] Time: 2.41
+[2022-01-12 21:37:28.128] [info] Time: 2.42
+[2022-01-12 21:37:28.246] [info] Time: 2.43
+[2022-01-12 21:37:28.364] [info] Time: 2.44
+[2022-01-12 21:37:28.483] [info] Time: 2.45
+[2022-01-12 21:37:28.601] [info] Time: 2.46
+[2022-01-12 21:37:28.719] [info] Time: 2.47
+[2022-01-12 21:37:28.838] [info] Time: 2.48
+[2022-01-12 21:37:28.956] [info] Time: 2.49
+[2022-01-12 21:37:29.076] [info] Time: 2.5
+[2022-01-12 21:37:29.195] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_tibia_cartilage
+[2022-01-12 21:37:30.695] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_femur_cartilage
+[2022-01-12 21:37:38.030] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_patella_cartilage
+[2022-01-12 21:37:51.715] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLd1
+[2022-01-12 21:37:51.746] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLd2
+[2022-01-12 21:37:51.781] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLd3
+[2022-01-12 21:37:51.814] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLd4
+[2022-01-12 21:37:51.847] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLd5
+[2022-01-12 21:37:51.880] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs1
+[2022-01-12 21:37:51.916] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs2
+[2022-01-12 21:37:51.951] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs3
+[2022-01-12 21:37:51.987] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs4
+[2022-01-12 21:37:52.022] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs5
+[2022-01-12 21:37:52.057] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLs6
+[2022-01-12 21:37:52.096] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl1
+[2022-01-12 21:37:52.133] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl2
+[2022-01-12 21:37:52.166] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl3
+[2022-01-12 21:37:52.199] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl4
+[2022-01-12 21:37:52.236] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl5
+[2022-01-12 21:37:52.269] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLpl6
+[2022-01-12 21:37:52.301] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam1
+[2022-01-12 21:37:52.333] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam2
+[2022-01-12 21:37:52.366] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam3
+[2022-01-12 21:37:52.399] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam4
+[2022-01-12 21:37:52.433] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam5
+[2022-01-12 21:37:52.477] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ACLam6
+[2022-01-12 21:37:52.514] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLal1
+[2022-01-12 21:37:52.548] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLal2
+[2022-01-12 21:37:52.594] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLal3
+[2022-01-12 21:37:52.627] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLal4
+[2022-01-12 21:37:52.660] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLal5
+[2022-01-12 21:37:52.693] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLpm1
+[2022-01-12 21:37:52.724] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLpm2
+[2022-01-12 21:37:52.756] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLpm3
+[2022-01-12 21:37:52.788] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLpm4
+[2022-01-12 21:37:52.820] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PCLpm5
+[2022-01-12 21:37:52.852] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_LCL1
+[2022-01-12 21:37:52.885] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_LCL2
+[2022-01-12 21:37:52.917] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_LCL3
+[2022-01-12 21:37:52.948] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_LCL4
+[2022-01-12 21:37:52.980] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT1
+[2022-01-12 21:37:53.012] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT2
+[2022-01-12 21:37:53.044] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT3
+[2022-01-12 21:37:53.077] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT4
+[2022-01-12 21:37:53.133] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT5
+[2022-01-12 21:37:53.170] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PT6
+[2022-01-12 21:37:53.203] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL1
+[2022-01-12 21:37:53.235] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL2
+[2022-01-12 21:37:53.276] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL3
+[2022-01-12 21:37:53.311] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL4
+[2022-01-12 21:37:53.344] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL5
+[2022-01-12 21:37:53.378] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL6
+[2022-01-12 21:37:53.411] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL7
+[2022-01-12 21:37:53.445] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_lPFL8
+[2022-01-12 21:37:53.478] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL1
+[2022-01-12 21:37:53.516] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL2
+[2022-01-12 21:37:53.545] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL3
+[2022-01-12 21:37:53.574] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL4
+[2022-01-12 21:37:53.603] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL5
+[2022-01-12 21:37:53.632] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_mPFL6
+[2022-01-12 21:37:53.661] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLp1
+[2022-01-12 21:37:53.690] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLp2
+[2022-01-12 21:37:53.718] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLp3
+[2022-01-12 21:37:53.748] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLp4
+[2022-01-12 21:37:53.778] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_MCLp5
+[2022-01-12 21:37:53.809] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PFL1
+[2022-01-12 21:37:53.858] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PFL2
+[2022-01-12 21:37:53.889] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PFL3
+[2022-01-12 21:37:53.920] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PFL4
+[2022-01-12 21:37:53.950] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_PFL5
+[2022-01-12 21:37:53.981] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP1
+[2022-01-12 21:37:54.012] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP2
+[2022-01-12 21:37:54.043] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP3
+[2022-01-12 21:37:54.074] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP4
+[2022-01-12 21:37:54.106] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP5
+[2022-01-12 21:37:54.137] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP6
+[2022-01-12 21:37:54.168] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP7
+[2022-01-12 21:37:54.198] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pCAP8
+[2022-01-12 21:37:54.228] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ITB1
+[2022-01-12 21:37:54.258] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addbrev_r
+[2022-01-12 21:37:54.324] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addlong_r
+[2022-01-12 21:37:54.390] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addmagProx_r
+[2022-01-12 21:37:54.457] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addmagMid_r
+[2022-01-12 21:37:54.521] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addmagDist_r
+[2022-01-12 21:37:54.586] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_addmagIsch_r
+[2022-01-12 21:37:54.651] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_bflh_r
+[2022-01-12 21:37:54.718] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_bfsh_r
+[2022-01-12 21:37:54.783] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_edl_r
+[2022-01-12 21:37:54.850] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_ehl_r
+[2022-01-12 21:37:54.920] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_fdl_r
+[2022-01-12 21:37:54.990] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_fhl_r
+[2022-01-12 21:37:55.059] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_gaslat_r
+[2022-01-12 21:37:55.132] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_gasmed_r
+[2022-01-12 21:37:55.209] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_gem_r
+[2022-01-12 21:37:55.273] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmax1_r
+[2022-01-12 21:37:55.354] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmax2_r
+[2022-01-12 21:37:55.424] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmax3_r
+[2022-01-12 21:37:55.490] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmed1_r
+[2022-01-12 21:37:55.580] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmed2_r
+[2022-01-12 21:37:55.660] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmed3_r
+[2022-01-12 21:37:55.737] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmin1_r
+[2022-01-12 21:37:55.814] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmin2_r
+[2022-01-12 21:37:55.891] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_glmin3_r
+[2022-01-12 21:37:55.978] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_grac_r
+[2022-01-12 21:37:56.075] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_iliacus_r
+[2022-01-12 21:37:56.185] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pect_r
+[2022-01-12 21:37:56.261] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_perbrev_r
+[2022-01-12 21:37:56.335] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_perlong_r
+[2022-01-12 21:37:56.416] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_pertert_r
+[2022-01-12 21:37:56.487] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_piri_r
+[2022-01-12 21:37:56.565] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_psoas_r
+[2022-01-12 21:37:56.654] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_quadfem_r
+[2022-01-12 21:37:56.722] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_recfem_r
+[2022-01-12 21:37:56.794] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_sart_r
+[2022-01-12 21:37:56.866] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_semimem_r
+[2022-01-12 21:37:56.933] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_semiten_r
+[2022-01-12 21:37:57.013] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_soleus_r
+[2022-01-12 21:37:57.080] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_tfl_r
+[2022-01-12 21:37:57.148] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_tibant_r
+[2022-01-12 21:37:57.231] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_tibpost_r
+[2022-01-12 21:37:57.299] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_vasint_r
+[2022-01-12 21:37:57.368] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_vaslat_r
+[2022-01-12 21:37:57.437] [info] Writing .vtp files: ./results/joint-mechanics/passive_flexion_vasmed_r
+[2022-01-12 21:38:04.701] [info] JointMechanicsTool complete.
+[2022-01-12 21:38:04.701] [info] Finished in 82 second(s) (1 minute(s), 22 second(s))
+[2022-01-12 21:38:04.701] [info] Printed results to: ./results/joint-mechanics
+[2022-01-12 21:38:04.701] [info] 
