@@ -2,7 +2,7 @@
 <OpenSimDocument Version="40000">
 	<ForsimTool>
 		<!--Path to .osim model file to use in the forward simulation.-->
-		<model_file>../../../models/knee_healthy/lenhart2015/lenhart2015_test.osim</model_file>
+		<model_file>../../../models/knee_healthy/lenhart2015/lenhart2015.osim</model_file>
 		<!--Path to folder where all results files will be written.-->
 		<results_directory>./results/forsim</results_directory>
 		<!--Prefix to each results file name.-->
@@ -15,11 +15,19 @@
 		<integrator_accuracy>0.01</integrator_accuracy>
 		<!--Constant value (between 0 and 1) input as control to all muscles not listed in the actuator_input_file. Set to -1 to ignore. Default is 0.01.-->
 		<constant_muscle_control>0.02</constant_muscle_control>
+		<!--Set whether activation dynamics should be used. If false, control (i.e. excitation) = activation.The default value is true.-->
+		<use_activation_dynamics>true</use_activation_dynamics>
+		<!--Set whether a compliant or rigid tendon is used in should be used in the contraction dynamics model. If false, the fiber length is removed as a state variableand simulation performance is improved.The default value is true.-->
+		<use_tendon_compliance>true</use_tendon_compliance>
+		<!--Set whether activation dynamics, muscle force-length-velocity and pennation properties should be used. If false, use_activation_dynamics and use_tendon_compliance are ignored and muscle-tendon force is calculated using: Force = activation * max_isometric_force(). The value should be false if analyzing COMAK results. The default value is true.-->
+		<use_muscle_physiology>true</use_muscle_physiology>
+		<!--Override the default muscle activation value in the model. This is useful to avoid transients at the beginning of passive simulations.If the value is negative, then the default activation in the model file is used The default value is -1.-->
+		<override_default_muscle_activation>0.02</override_default_muscle_activation>
 		<!--Paths to the Coordinates that will be unconstrained (unlocked and not prescribed) in the simulation. All Coordinates that are not listed here or in the prescribed_coordinates_file will be locked. Note coordinates listed here will override the 'locked' and 'prescribed' properties in the .osim file.-->
 		<unconstrained_coordinates>/jointset/knee_r/knee_add_r /jointset/knee_r/knee_rot_r /jointset/knee_r/knee_tx_r /jointset/knee_r/knee_ty_r /jointset/knee_r/knee_tz_r /jointset/pf_r/pf_flex_r /jointset/pf_r/pf_rot_r /jointset/pf_r/pf_tilt_r /jointset/pf_r/pf_tx_r /jointset/pf_r/pf_ty_r /jointset/pf_r/pf_tz_r</unconstrained_coordinates>
 		<!--Path to storage file (.sto) containing the time varying values of the Coordinates that will be prescribed in the forward simulation. The locked and prescribed properties in the model will be overriden for any Coordinates listed in this file. The columns labels must be formatted as 'time' and '/Path/To/Coordinate'-->
 		<prescribed_coordinates_file>./inputs/prescribed_coordinates.sto</prescribed_coordinates_file>
 		<!--Use the SimTK visualizer to display the simulation. The default value is false.-->
-		<use_visualizer>true</use_visualizer>
+		<use_visualizer>false</use_visualizer>
 	</ForsimTool>
 </OpenSimDocument>
