@@ -122,9 +122,6 @@ class JamAnalysis:
     def process_coordinateset(self, h5_filepath, h5_file_idx):
         coordinates = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}')
         for coord_idx, coord in enumerate(coordinates):
-            print(f'{h5_file_idx} - {h5_filepath}')
-
-            print(f'coord: {coord}')
             if coord not in self.coordinateset:
                 self.coordinateset[coord] = {}
             params = get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}')
@@ -133,10 +130,6 @@ class JamAnalysis:
                 f'/{self.base_name}/{self.coordset_name}/{coord}/',
                 params
             )
-            print(f'params:   {params}')
-            print(f'groups:   {groups}')
-            print(f'datasets: {datasets}')
-            print(f'coordinatset keys: {self.coordinateset[coord].keys()}')
             # Iteratve over the datasets
             for dataset_idx, dataset in enumerate(datasets):
                 data = np.asarray(get_h5_output(h5_filepath, f'/{self.base_name}/{self.coordset_name}/{coord}/{dataset}'))
@@ -152,7 +145,6 @@ class JamAnalysis:
         for frame_idx, frame in enumerate(frames):
             outcomes = get_h5_output(h5_filepath, f'/{self.base_name}/{self.frametransformsset_name}/{frame}')
             for outcome_idx, outcome in enumerate(outcomes):
-                print(outcome)
                 if 'coordinates' in outcome:
                     transform_type = 'coordinates'
                 elif 'transformation_matrix' in outcome:
