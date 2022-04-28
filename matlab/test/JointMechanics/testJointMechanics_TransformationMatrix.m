@@ -11,6 +11,8 @@ model_file = "C:\Users\csmith\github\jam-resources\matlab\example\VisualizeMeasu
 geometry_dir = '../../../models/knee_healthy/lenhart2015/Geometry/';
 local_geometry_dir = './inputs/Geometry/';
 
+if(exist(local_geometry_dir)~=7); mkdir(local_geometry_dir);end
+
 femur_bone_mesh_file = 'lenhart2015-R-femur-bone.stl';
 tibia_bone_mesh_file = 'lenhart2015-R-tibia-bone.stl';
 patella_bone_mesh_file = 'lenhart2015-R-patella-bone.stl';
@@ -158,17 +160,17 @@ knee_rot.set_range(0,-30*pi/180);
 knee_rot.set_range(1,30*pi/180);
 knee_rot.set_clamped(true)
 
-knee_tx = model.getCoordinateSet().get('knee_tx_r');
+knee_tx = model.getCoordinateSet().get('knee_ant_r');
 knee_tx.set_range(0,-0.2);
 knee_tx.set_range(1,0.2);
 knee_tx.set_clamped(true);
 
-knee_ty = model.getCoordinateSet().get('knee_ty_r');
+knee_ty = model.getCoordinateSet().get('knee_sup_r');
 knee_ty.set_range(0,-0.2);
 knee_ty.set_range(1,0.2);
 knee_ty.set_clamped(true);
 
-knee_tz = model.getCoordinateSet().get('knee_tz_r');
+knee_tz = model.getCoordinateSet().get('knee_lat_r');
 knee_tz.set_range(0,-0.2);
 knee_tz.set_range(1,0.2);
 knee_tz.set_clamped(true);
@@ -210,15 +212,15 @@ pf_transform.get_rotation3().set_coordinates(0,'pf_tilt_r');
 pf_transform.get_rotation3().set_axis(Vec3(0,1,0));
 pf_transform.get_rotation3().set_function(LinearFunction());
 
-pf_transform.get_translation1().set_coordinates(0,'pf_tx_r');
+pf_transform.get_translation1().set_coordinates(0,'pf_ant_r');
 pf_transform.get_translation1().set_axis(Vec3(1,0,0));
 pf_transform.get_translation1().set_function(LinearFunction());
 
-pf_transform.get_translation2().set_coordinates(0,'pf_ty_r');
+pf_transform.get_translation2().set_coordinates(0,'pf_sup_r');
 pf_transform.get_translation2().set_axis(Vec3(0,1,0));
 pf_transform.get_translation2().set_function(LinearFunction());
 
-pf_transform.get_translation3().set_coordinates(0,'pf_tz_r');
+pf_transform.get_translation3().set_coordinates(0,'pf_lat_r');
 pf_transform.get_translation3().set_axis(Vec3(0,0,1));
 pf_transform.get_translation3().set_function(LinearFunction());
 

@@ -1,10 +1,10 @@
 %% Setup Environment and Folders
 clear; close all;
 import org.opensim.modeling.*
-Logger.setLevelString('Debug');
+Logger.setLevelString('Info');
 
 
-model_file = '../../../models/knee_tka/grand_challenge/DM/DM.osim';
+model_file = '../../../../models/knee_tka/grand_challenge/DM/DM.osim';
 results_basename = 'tka_passive_flexion';
 forsim_result_dir = './results/forsim';
 jnt_mech_result_dir = './results/joint-mechanics';
@@ -26,7 +26,7 @@ end
 useVisualizer = true;
 
 useActivationDynamics = true;
-useMusclePhysiology = true;
+useMusclePhysiology = false;
 useTendonCompliance = true;
 
 %% Create Input Files
@@ -96,7 +96,7 @@ forsim.set_results_directory(forsim_result_dir);
 forsim.set_results_file_basename(results_basename);
 forsim.set_start_time(-1);
 forsim.set_stop_time(-1);
-forsim.set_integrator_accuracy(1e-3); %Note this should be 1e-6 for research
+forsim.set_integrator_accuracy(1e-2); %Note this should be 1e-6 for research
 forsim.set_constant_muscle_control(0.02); %Set all muscles to 2% activation to represent passive state
 forsim.set_use_activation_dynamics(true);
 forsim.set_use_tendon_compliance(true);
@@ -119,7 +119,7 @@ forsim.set_use_visualizer(useVisualizer);
 forsim.print('./inputs/forsim_settings.xml');
 
 disp('Running Forsim Tool...')
-% forsim.run();
+forsim.run();
 %% Perform Analysis with JointMechanicsTool
 jnt_mech = JointMechanicsTool();
 jnt_mech.set_model_file(model_file);
@@ -146,11 +146,11 @@ jnt_mech.set_use_visualizer(useVisualizer);
 jnt_mech.print('./inputs/joint_mechanics_settings.xml');
 
 disp('Running JointMechanicsTool...');
-% jnt_mech.run();
+jnt_mech.run();
 
 %% Plot Results
 
-jam = jam_analysis('DM',{[jnt_mech_result_dir '/' results_basename '.h5']});
+jam = jam_analysis({[jnt_mech_result_dir '/' results_basename '.h5']});
 
 % Secondary Kinematics
 
