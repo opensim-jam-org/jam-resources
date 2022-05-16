@@ -17,16 +17,18 @@ close all; clear
 Logger.setLevelString('Debug');
 
 useVisualizer = true;
+integratorAccuracy=1e-2; %Note this should be 1e-6 for research
+
 model_file = '../../../models/knee_healthy/smith2019/smith2019.osim';
 
 time.step = 0.01;
-time.settle1_duration = 0.01;
-time.flex_duration = 0.1;
-time.settle2_duration = 0.01;
-time.force_duration = 0.01;
+time.settle1_duration = 0.25;
+time.flex_duration = 0.5;
+time.settle2_duration = 0.25;
+time.force_duration = 0.5;
 
-inputs.max_hip_flex = 0;
-inputs.max_knee_flex = 0;
+inputs.max_hip_flex = 30;
+inputs.max_knee_flex = 30;
 
 inputs.max_control = 0.25;
 inputs.max_activation = 0.25;
@@ -163,7 +165,7 @@ forsim.setModel(model);
 forsim.set_results_directory(forsim_result_dir);
 forsim.set_results_file_basename(basename);
 forsim.set_stop_time(-1);
-forsim.set_integrator_accuracy(1e-2);%Note this should be 1e-6 for research
+forsim.set_integrator_accuracy(integratorAccuracy);
 %Set all muscles to 2% activation to represent passive state
 forsim.set_constant_muscle_control(0.02); 
 forsim.set_use_activation_dynamics(true);
@@ -213,7 +215,7 @@ forsim.set_AnalysisSet(analysis_set);
 
 forsim.print('./inputs/healthy_forsim_settings.xml');
 disp('Running Forsim Tool...')
-forsim.run();
+% forsim.run();
 
 jnt_mech = JointMechanicsTool();
 jnt_mech.setModel(model);
@@ -251,7 +253,7 @@ jnt_mech.set_use_visualizer(useVisualizer);
 jnt_mech.print('./inputs/healthy_joint_mechanics_settings.xml');
 
 disp('Running JointMechanicsTool...');
-jnt_mech.run();
+% jnt_mech.run();
 
 %% Analyze Results
 states_sto = [forsim_result_dir '/' basename '_states.sto'];
@@ -283,7 +285,7 @@ results.msl.FiberLength = osimTableToStruct(TimeSeriesTable(results.msl_FiberLen
 results.msl.NormalizedFiberLength = osimTableToStruct(TimeSeriesTable(results.msl_NormalizedFiberLength_sto));
 results.msl.Length = osimTableToStruct(TimeSeriesTable(results.msl_Length_sto));
 
-jam = jam_analysis('smith2019',{[jnt_mech_result_dir '/' basename '.h5']});
+jam = jam_analysis([jnt_mech_result_dir '/' basename '.h5']);
 %%
 % Muscle Results
 figure('name','Results: Muscles')
