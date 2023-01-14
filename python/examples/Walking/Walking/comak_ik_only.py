@@ -28,18 +28,15 @@ os.makedirs('./results/graphics', exist_ok=True)
 with open('./marker_weights.json', 'r') as f:
     marker_weights = json.load(f)
 
-# with open('./prescribed_coordinates.json', 'r') as f:
-#     prescribed_coordinates = json.load(f)
-
-# with open('./primary_coordinates.json', 'r') as f:
-#     primary_coordinates = json.load(f)
-
 with open('./secondary_coordinates.json', 'r') as f:
     secondary_coordinates = json.load(f)
 
 
-
 # Settings
+start_time = 1.16
+start_pad = 0.0
+stop_time = 2.36
+
 perform_secondary_constraint_sim = True
 secondary_constraint_sim_settle_threshold = 1e-4
 secondary_constraint_sim_sweep_time = 3.0
@@ -88,8 +85,8 @@ comak_ik.set_perform_inverse_kinematics(perform_inverse_kinematics);
 comak_ik.set_marker_file(markerset_file);
 
 comak_ik.set_output_motion_file('overground_17_ik.mot');
-comak_ik.set_time_range(0, 0);
-comak_ik.set_time_range(1, 2.36);
+comak_ik.set_time_range(0, start_time-start_pad);
+comak_ik.set_time_range(1, stop_time);
 comak_ik.set_report_errors(report_errors);
 comak_ik.set_report_marker_locations(report_marker_locations);
 comak_ik.set_ik_constraint_weight(ik_constraint_weight);

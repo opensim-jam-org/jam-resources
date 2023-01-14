@@ -1,3 +1,21 @@
 *.vtp
 /cluster/open_science_grid/compile_opensim_jam/opensim-jam.tar.gz
 /python/examples/PassiveFlexion/results/joint-mechanics/passive_flexion.h5
+
+/python/examples/Walking/Walking/results
+
+COMAKInverseKinematicsTool.java
+InverseKinematicsSolver.java
+InverseKinematicsTool.java
+InverseKinematicsToolBase.java
+
+jam.py
+
+cpp/
+
+*.ipynb_checkpoints
+
+models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-femur-cartilage copy.stl
+models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-femur-cartilage_short.stl
+models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-patella-cartilage_short.stl
+models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-tibia-cartilage_short.stl

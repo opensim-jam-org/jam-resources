@@ -1,0 +1,13 @@
+{
+    "knee_add_r": {"max_change": 0.01, "coordinate": "/jointset/knee_r/knee_add_r"},
+    "knee_rot_r": {"max_change": 0.01, "coordinate": "/jointset/knee_r/knee_rot_r"},
+    "knee_tx_r": {"max_change": 0.05, "coordinate": "/jointset/knee_r/knee_tx_r"},
+    "knee_ty_r": {"max_change": 0.05, "coordinate": "/jointset/knee_r/knee_ty_r"},
+    "knee_tz_r": {"max_change": 0.05, "coordinate": "/jointset/knee_r/knee_tz_r"},
+    "pf_flex_r": {"max_change": 0.01, "coordinate": "/jointset/pf_r/pf_flex_r"},
+    "pf_rot_r": {"max_change": 0.01, "coordinate": "/jointset/pf_r/pf_rot_r"},
+    "pf_tilt_r": {"max_change": 0.01, "coordinate": "/jointset/pf_r/pf_tilt_r"},
+    "pf_tx_r": {"max_change": 0.005, "coordinate": "/jointset/pf_r/pf_tx_r"},
+    "pf_ty_r": {"max_change": 0.005, "coordinate": "/jointset/pf_r/pf_ty_r"},
+    "pf_tz_r": {"max_change": 0.005, "coordinate": "/jointset/pf_r/pf_tz_r"}
+}

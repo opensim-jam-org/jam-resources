@@ -4,7 +4,6 @@ import opensim as osim
 models_path = os.path.abspath('../../../../models')
 model_file = os.path.join(models_path, 'knee_healthy', 'lenhart2015', 'lenhart2015.osim')
 
-comak_result_dir = "/root/jam-resources/python/examples/Walking/Walking/results/comak";
 results_basename = "walking";
 save_xml_path = "/root/jam-resources/python/examples/Walking/Walking/inputs/comak_settings.xml";
 
@@ -12,15 +11,22 @@ results_basename = 'walking'
 comak_result_dir = './results/comak'
 jnt_mech_result_dir = './results/joint-mechanics'
 
+# Settings
+start_time = 1.16
+start_pad = 0.0
+stop_time = 2.36
+
 ## Perform Joint Mechanics Analysis
 jnt_mech = osim.JointMechanicsTool();
 jnt_mech.set_model_file(model_file);
 jnt_mech.set_input_states_file(os.path.join(comak_result_dir, results_basename + '_states.sto'));
+jnt_mech.set_input_forces_file(os.path.join(comak_result_dir, results_basename + '_force.sto'))
+jnt_mech.set_input_activations_file(os.path.join(comak_result_dir, results_basename + '_activations.sto'))
 jnt_mech.set_use_muscle_physiology(False);
 jnt_mech.set_results_file_basename(results_basename);
 jnt_mech.set_results_directory(jnt_mech_result_dir);
-jnt_mech.set_start_time(1.16);
-jnt_mech.set_stop_time(-1);
+jnt_mech.set_start_time(start_time);
+jnt_mech.set_stop_time(stop_time);
 jnt_mech.set_resample_step_size(-1);
 jnt_mech.set_normalize_to_cycle(True);
 jnt_mech.set_lowpass_filter_frequency(-1);
@@ -39,7 +45,7 @@ jnt_mech.set_output_orientation_frame('ground');
 jnt_mech.set_output_position_frame('ground');
 jnt_mech.set_write_vtp_files(True);
 jnt_mech.set_vtp_file_format('binary');
-jnt_mech.set_write_h5_file(False);
+jnt_mech.set_write_h5_file(True);
 jnt_mech.set_h5_kinematics_data(True);
 jnt_mech.set_h5_states_data(True);
 jnt_mech.set_write_transforms_file(False);
