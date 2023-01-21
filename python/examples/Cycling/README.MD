@@ -16,5 +16,8 @@ Run simulation pipelines
 Then can view all of the results
 - plot_comak_simulation_results.ipynb
 
+Can recreate figure 2 from abstrct with: 
+- create_Figure_2_WuTsai_Abstract_2023.ipynb
+
 Finally, can load the meshes from `./results/joint-mechanics` 
-into paraview to visualize cartilate pressures. 
+into paraview to visualize cartilate pressures.

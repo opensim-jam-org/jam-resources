@@ -19,3 +19,8 @@ models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-femur-cartilage copy.stl
 models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-femur-cartilage_short.stl
 models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-patella-cartilage_short.stl
 models/knee_healthy/lenhart2015/Geometry/lenhart2015-R-tibia-cartilage_short.stl
+
+/python/examples/Cycling/inputs/
+/python/examples/Cycling/
+/python/examples/Cycling/results/
+/python/examples/Cycling/debug_*
