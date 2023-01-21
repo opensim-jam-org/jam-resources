@@ -1,0 +1,7 @@
+{
+    "0": "/jointset/hip_r/hip_flex_r",
+    "1": "/jointset/hip_r/hip_add_r",
+    "2": "/jointset/hip_r/hip_rot_r",
+    "3": "/jointset/knee_r/knee_flex_r",
+    "4": "/jointset/ankle_r/ankle_flex_r"
+}
