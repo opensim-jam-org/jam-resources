@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSimDocument Version="40600">
+	<JointMechanicsTool>
+		<!--Path to .osim file to use in analysis.-->
+		<model_file>../../../../models/knee_healthy/lenhart2015/lenhart2015.osim</model_file>
+		<!--Path to storage file (.sto) containing the model states vs time for the simulation to be analyzed. This can contain coordinate (values and speed) muscle states.-->
+		<input_states_file>./results/forsim/passive_flexion_states.sto</input_states_file>
+		<!--Path to folder where the results files will be written.-->
+		<results_directory>./results/joint-mechanics</results_directory>
+		<!--Prefix to each results file name.-->
+		<results_file_basename>passive_flexion</results_file_basename>
+		<!--Time to start the analysis. Set to -1 to use initial frame in states_file. The default value is -1.-->
+		<start_time>-1</start_time>
+		<!--Time to stop the analysis. Set to -1 to use last frame in states_file. The default value is -1.-->
+		<stop_time>-1</stop_time>
+		<!--Resample to 101 equally spaced time steps (percentage of activity cycle). Note: If true, this overrides resample_step_size. The default value is false.-->
+		<normalize_to_cycle>false</normalize_to_cycle>
+		<!--Set whether activation dynamics should be used. If false, control (i.e. excitation) = activation.The default value is true.-->
+		<use_activation_dynamics>true</use_activation_dynamics>
+		<!--Set whether a compliant or rigid tendon is used in should be used in the contraction dynamics model. If false, the fiber length is removed as a state variableand simulation performance is improved.The default value is true.-->
+		<use_tendon_compliance>true</use_tendon_compliance>
+		<!--Set whether activation dynamics, muscle force-length-velocity and pennation properties should be used. If false, use_activation_dynamics and use_tendon_compliance are ignored and muscle-tendon force is calculated using: Force = activation * max_isometric_force(). The value should be false if analyzing COMAK results. The default value is true.-->
+		<use_muscle_physiology>true</use_muscle_physiology>
+		<!--Paths to Smith2018ArticularContactForce components to be recorded. Options: 'none','all', or a list of Smith2018ArticularContactForce component paths. The default value is 'all'.-->
+		<contacts>all</contacts>
+		<!--Paths of Blankevoort1991Ligament components to be recorded. Options: 'none','all', or a list of Blankevoort1991Ligament component paths. The default value is 'none'.-->
+		<ligaments>all</ligaments>
+		<!--Paths to Muscle components to be recorded. Options: 'none','all', or a list of Muscle component paths. The default value is 'none'.-->
+		<muscles>all</muscles>
+		<!--Names of Muscle component outputs that will be written to the results files. Options: 'none','all', or list of individual output names. The default value is 'all'.-->
+		<muscle_outputs>all</muscle_outputs>
+		<!--Paths to the Body components that contain attached geometry Mesh components (i.e. bone meshes) to be recorded. Options: 'none','all', or a list of Frame component paths. The default value is 'none'.-->
+		<attached_geometry_bodies>/bodyset/femur_distal_r /bodyset/tibia_proximal_r /bodyset/patella_r</attached_geometry_bodies>
+		<!--Body or Frame to use as reference frame for computing the model position in output results files (.vtp and .h5).Options: 'ground' or '/path/to/Frame-->
+		<output_position_frame>ground</output_position_frame>
+		<!--Body or Frame to use as reference frame for computing the model orientaton in output results files (.vtp and .h5).Options: 'ground' or '/path/to/Frame' -->
+		<output_orientation_frame>ground</output_orientation_frame>
+		<!--Write .vtp files for visualization. The default value is true.-->
+		<write_vtp_files>true</write_vtp_files>
+		<!--Write binary .h5 file-->
+		<write_h5_file>true</write_h5_file>
+		<!--Write states data to .h5 file-->
+		<h5_states_data>true</h5_states_data>
+		<!--Write kinematics data to .h5 file-->
+		<h5_kinematics_data>true</h5_kinematics_data>
+		<!--Use the SimTK visualizer to display the model posed at each time step.  The default value is false.-->
+		<use_visualizer>true</use_visualizer>
+	</JointMechanicsTool>
+</OpenSimDocument>
