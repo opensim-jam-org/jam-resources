@@ -152,17 +152,28 @@ classdef jam_analysis
                                                     obj.forceset.(comp).(force).(mesh).region(r).(param)(:,n) = data(r,:);
                                                 end
                                             else
-                                                [nCol, nRow] = size(h5read(h5_file,data_set_name));
+                                                data_set_size = size(h5read(h5_file,data_set_name));
+
+                                                data_dim = length(data_set_size);
+
+                                                nCol = data_set_size(1);
+                                                nRow = data_set_size(2);
                                                 if nRow ==1
                                                     if(n==1)                                                    
                                                         obj.forceset.(comp).(force).(mesh).(param) = nan(nCol,obj.num_files);
                                                     end
                                                     obj.forceset.(comp).(force).(mesh).(param)(:,n) = h5read(h5_file,data_set_name)';
-                                                else
+                                                elseif (data_dim ==2)
                                                     if(n==1)                                                    
                                                         obj.forceset.(comp).(force).(mesh).(param) = nan(nRow,nCol,obj.num_files);
                                                     end
                                                     obj.forceset.(comp).(force).(mesh).(param)(:,:,n) = h5read(h5_file,data_set_name)';
+                                                elseif (data_dim==3)
+                                                    nLayer = data_set_size(3);
+                                                    if(n==1)                                                    
+                                                        obj.forceset.(comp).(force).(mesh).(param) = nan(nCol,nRow,nLayer,obj.num_files);
+                                                    end
+                                                    obj.forceset.(comp).(force).(mesh).(param)(:,:,:,n) = h5read(h5_file,data_set_name);
                                                 end
                                             end
                                         end
@@ -221,38 +232,40 @@ classdef jam_analysis
                             %frame_transform_info = h5info(h5_file,[frametransformsset_path '/' info.Groups(i).Name]);
                             frame_transform_info = h5info(h5_file, info.Groups(i).Name); 
                             %frame_transform = length(info.Groups);
-                            
+                            transform_name = strsplit(frame_transform_info.Name,'/');
+                            transform_name = transform_name{end};
+
                             for j = 1:length(frame_transform_info.Groups)
                                 % Coordinates
-                                if(contains(frame_transform_info.Groups(i).Name, 'coordinates'))
-                                    nDataSet = length(frame_transform_info.Groups(i).Datasets);
+                                if(contains(frame_transform_info.Groups.Name, 'coordinates'))
+                                    nDataSet = length(frame_transform_info.Groups.Datasets);
 
                                     for k=1:nDataSet
-                                        coord = frame_transform_info.Groups(i).Datasets(k).Name;
-                                        data_set_name = [ frame_transform_info.Groups(i).Name '/' coord];
+                                        coord = frame_transform_info.Groups.Datasets(k).Name;
+                                        data_set_name = [ frame_transform_info.Groups.Name '/' coord];
 
                                         if(n==1)
-                                            obj.frametransformsset.coordinates.(coord) = nan(obj.num_time_steps,obj.num_files);%h5read(h5_file,data_set_name);
+                                            obj.frametransformsset.(transform_name).coordinates.(coord) = nan(obj.num_time_steps,obj.num_files);%h5read(h5_file,data_set_name);
                                         end
 
-                                        obj.frametransformsset.coordinates.(coord)(:,n) = h5read(h5_file,data_set_name);
+                                        obj.frametransformsset.(transform_name).coordinates.(coord)(:,n) = h5read(h5_file,data_set_name);
 
                                     end
                                 end
                                 
                                 % Tranformation Matrix 
-                                if(contains(frame_transform_info.Groups(i).Name, 'transformation_matrix'))
-                                    nDataSet = length(frame_transform_info.Groups(i).Datasets);
+                                if(contains(frame_transform_info.Groups.Name, 'transformation_matrix'))
+                                    nDataSet = length(frame_transform_info.Groups.Datasets);
 
                                     for k=1:nDataSet
-                                        coord = frame_transform_info.Groups(i).Datasets(k).Name;
+                                        coord = frame_transform_info.Groups.Datasets(k).Name;
                                         data_set_name = [ frame_transform_info.Groups(i).Name '/' coord];
 
                                         if(n==1)
-                                            obj.frametransformsset.transformation_matrix.(coord) = nan(obj.num_time_steps,obj.num_files);%h5read(h5_file,data_set_name);
+                                            obj.frametransformsset.(transform_name).transformation_matrix.(coord) = nan(obj.num_time_steps,obj.num_files);%h5read(h5_file,data_set_name);
                                         end
 
-                                        obj.frametransformsset.transformation_matrix.(coord)(:,n) = h5read(h5_file,data_set_name);
+                                        obj.frametransformsset.(transform_name).transformation_matrix.(coord)(:,n) = h5read(h5_file,data_set_name);
 
                                     end
                                 end
